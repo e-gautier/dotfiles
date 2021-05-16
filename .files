@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+FOLDER=dotfiles
+URL=https://github.com/e-gautier/dotfiles.git
+
+if [ ! -d "$FOLDER" ] ; then
+    git clone "$URL" "$FOLDER"
+fi
+
+cd $FOLDER && INSTALL_MODE=$1 ./install

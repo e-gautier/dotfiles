@@ -1,0 +1,31 @@
+## This set of rules is to suppress the performance effects of the
+## audit system. The result is that you only get hardwired events.
+-D
+
+## This suppresses syscall auditing for all tasks started
+## with this rule in effect.  Remove it if you need syscall
+## auditing.
+-a task,never
+
+# auditd
+-w /var/log/audit/ -p ra -k auditauditd
+-w /etc/audit/ -p wa -k auditauditd
+-w /etc/libaudit.conf -p wa -k auditauditd
+-w /usr/sbin/auditctl -p xa -k auditauditd
+-w /usr/sbin/auditd -p xa -k auditauditd
+
+# kernel configuration
+-w /etc/sysctl.conf -p wa -k auditkernel
+-w /etc/sysctl.d/ -p wa -k auditkernel
+
+# mount operations
+-a always,exit -F -S mount -S umount2 -S umount -F -k auditmount
+
+# user,group,password modification
+-w /etc/group -p raw -k auditgroup
+-w /etc/passwd -p raw -k auditpasswd
+-w /etc/gshadow -p raw -k auditgroup
+-w /etc/shadow -p raw -k auditpasswd
+-w /etc/sudoers -p raw -k auditsudoers
+-w /etc/sudoers.d/ -p raw -k auditsudoers
+-w /usr/bin/passwd -p xa -k auditpasswd

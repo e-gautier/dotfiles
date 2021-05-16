@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+# Author: Dolores Portalatin <hello@doloresportalatin.info>
+# Dependencies: imagemagick, i3lock-color-git, scrot, wmctrl (optional)
+set -o errexit -o noclobber -o nounset
+
+hue=(-level "0%,100%,0.6")
+effect=(-filter Gaussian -resize 20% -define "filter:sigma=1.5" -resize 500.5%)
+image=$(mktemp --suffix=.png)
+shot=(import -window root)
+desktop=""
+i3lock_cmd=(i3lock -i "$image")
+shot_custom=false
+
+options="Options:
+    -h, --help       This help menu.
+
+    -d, --desktop    Attempt to minimize all windows before locking.
+
+    -g, --greyscale  Set background to greyscale instead of color.
+
+    -p, --pixelate   Pixelate the background instead of blur, runs faster.
+
+    -n, --nofork     Do not fork i3lock after starting.
+
+    --               Must be last option. Set command to use for taking a
+                     screenshot. Default is 'import -window root'. Using 'scrot'
+                     or 'maim' will increase script speed and allow setting
+                     custom flags like having a delay."
+
+trap 'rm -f "$image"' EXIT
+temp="$(getopt -o :hdnpglt:f: -l desktop,help,nofork,pixelate,greyscale:, -- "$@")"
+eval set -- "$temp"
+
+while true ; do
+    case "$1" in
+        -h|--help)
+            printf "Usage: %s [options]\n\n%s\n\n" "${0##*/}" "$options"; exit 1 ;;
+        -d|--desktop) desktop=$(command -V wmctrl) ; shift ;;
+        -g|--greyscale) hue=(-level "0%,100%,0.6" -set colorspace Gray -average) ; shift ;;
+        -p|--pixelate) effect=(-scale 10% -scale 1000%) ; shift ;;
+	      -n|--nofork) i3lock_cmd+=(--nofork) ; shift ;;
+        --) shift; shot_custom=true; break ;;
+        *) echo "error" ; exit 1 ;;
+    esac
+done
+
+if "$shot_custom" && [[ $# -gt 0 ]]; then
+    shot=("$@");
+fi
+
+command -- "${shot[@]}" "$image"
+
+icon="$HOME/SYNC/MAIN/Wallpapers/i3lock/lock-icon_128x128.png"
+
+convert "$image" "${hue[@]}" "${effect[@]}" -pointsize 26 -gravity center \
+    "$icon" -gravity center -composite "$image"
+
+# If invoked with -d/--desktop, we'll attempt to minimize all windows (ie. show
+# the desktop) before locking.
+${desktop} ${desktop:+-k on}
+
+# try to use i3lock with prepared parameters
+if ! "${i3lock_cmd[@]}" "${param[@]}" >/dev/null 2>&1; then
+    # We have failed, lets get back to stock one
+    "${i3lock_cmd[@]}"
+fi
+
+# As above, if we were passed -d/--desktop, we'll attempt to restore all windows
+# after unlocking.
+${desktop} ${desktop:+-k off}

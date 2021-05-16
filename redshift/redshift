@@ -1,0 +1,14 @@
+[redshift]
+temp-day=6500
+temp-night=3500
+
+fade=1
+
+dawn-time=8:30-9:00
+dusk-time=19:30-21:0
+
+adjustment-method=randr
+
+[randr]
+screen=0
+

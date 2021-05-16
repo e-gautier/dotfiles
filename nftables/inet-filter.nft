@@ -1,0 +1,30 @@
+#!/usr/sbin/nft -f
+
+table inet filter {
+	chain INPUT {
+		type filter hook input priority 0
+		policy drop
+
+		# lo accept all
+		iifname lo accept
+
+		# accept connection states established, related
+		ct state established,related accept
+
+		log prefix "[netfilter] INPUT " level debug
+	}
+
+	chain FORWARD {
+		type filter hook forward priority 0
+		policy drop
+
+		log prefix "[netfilter] FORWARD " level debug
+	}
+
+	chain OUTPUT {
+		type filter hook output priority 0
+		policy accept
+
+		log prefix "[netfilter] OUTPUT " level debug
+	}
+}

@@ -1,0 +1,66 @@
+# Vagrant
+alias vp="vagrant up && vagrant ssh"
+alias vd="vagrant destroy -f"
+
+# Docker
+alias d="docker"
+alias dc="docker-compose"
+alias docker-prune="docker system prune -af --volumes"
+alias docker-top="ctop"
+
+# Bash
+alias ..="cd .."
+alias ...="cd ../.."
+alias simplehttpserver="python -m http.server"
+alias mkdir="mkdir -pv"
+alias wget="wget -c"
+alias df="echo 'You may prefer du -csh | sort -rh, ncdu or pydf...' && df -Tha"
+alias du-size-sort="du -csh * | sort -rh"
+alias historyclear="> ~/.bash_history && history -c && exit"
+alias tailf="tail -F || tail -f"
+alias ls="ls -h"
+alias ll="ls -lh"
+alias tmuxattach="tmux attach"
+alias randomstring="cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1"
+alias selfsignedcertificate="openssl req -x509 -nodes -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365"
+if ip >/dev/null 2>&1; then
+	alias nmapthis="nmap -sn $(ip route | tail -n 1 | sed -r 's/^(((25[0-5]|2[0-4][[:digit:]]|1[[:digit:]][[:digit:]]|[1-9][[:digit:]]|[[:digit:]])\.){3}(25[0-5]|2[0-4][[:digit:]]|1[[:digit:]][[:digit:]]|[1-9][[:digit:]]|[[:digit:]])\/[[:digit:]]+).+$/\1/')"
+fi
+alias vi="vim -u NONE"
+
+# Create a dirctory and move into it.
+function mkcd {
+  mkdir -vp -- "$1" &&
+  cd -P -- "$1"
+}
+
+# feh
+alias feh="feh --scale-down"
+
+# iptables related
+openporttcp() {
+  sudo iptables -A INPUT -p tcp --dport $1 -j ACCEPT
+}
+closeporttcp() {
+  sudo iptables -D INPUT -p tcp --dport $1 -j ACCEPT
+}
+openportudp() {
+  sudo iptables -A INPUT -p udp --dport $1 -j ACCEPT
+}
+closeportudp() {
+  sudo iptables -D INPUT -p udp --dport $1 -j ACCEPT
+}
+
+# xorg related
+alias xrandrreset="xrandr -s 0"
+
+# I usually like to have a 2nd backup luks encrypted disk
+alias sdbdecrypt="sudo cryptsetup open /dev/sdb HDD; sudo mount -v /dev/mapper/HDD ~/HDD"
+alias sdbencrypt="sudo umount ~/HDD; sudo cryptsetup close HDD"
+
+# disk related
+alias sdbsleep="sudo hdparm -Y /dev/sdb"
+
+# misc
+alias hacknasa="sudo docker run --rm -t jess/hollywood"
+alias historypercent="history | awk '{CMD[\$2]++;count++;}END { for (a in CMD)print CMD[a] \" \" CMD[a]/count*100 \"% \" a; }' | grep -v \"./\" | column -c3 -s \" \" -t | sort -nr | nl |  head -n10"

@@ -1,0 +1,96 @@
+[submodule "vim/bundle/auto-pairs"]
+	path = vim/bundle/auto-pairs
+	url = https://github.com/jiangmiao/auto-pairs
+[submodule "vim/bundle/ctrlp.vim"]
+	path = vim/bundle/ctrlp.vim
+	url = https://github.com/ctrlpvim/ctrlp.vim
+[submodule "vim/bundle/gist-vim"]
+	path = vim/bundle/gist-vim
+	url = https://github.com/mattn/gist-vim
+[submodule "vim/bundle/matchit"]
+	path = vim/bundle/matchit
+	url = https://github.com/tmhedberg/matchit
+[submodule "vim/bundle/nerdcommenter"]
+	path = vim/bundle/nerdcommenter
+	url = https://github.com/scrooloose/nerdcommenter
+[submodule "vim/bundle/syntastic"]
+	path = vim/bundle/syntastic
+	url = https://github.com/vim-syntastic/syntastic
+[submodule "vim/bundle/vim-airline"]
+	path = vim/bundle/vim-airline
+	url = https://github.com/vim-airline/vim-airline
+[submodule "vim/bundle/vim-easymotion"]
+	path = vim/bundle/vim-easymotion
+	url = https://github.com/easymotion/vim-easymotion
+[submodule "vim/bundle/vim-indent-guides"]
+	path = vim/bundle/vim-indent-guides
+	url = https://github.com/nathanaelkane/vim-indent-guides
+[submodule "vim/bundle/vim-preview"]
+	path = vim/bundle/vim-preview
+	url = https://github.com/greyblake/vim-preview
+[submodule "vim/bundle/vim-twig"]
+	path = vim/bundle/vim-twig
+	url = https://github.com/lumiliet/vim-twig
+[submodule "lib/dotbot"]
+	path = lib/dotbot
+	url = https://github.com/anishathalye/dotbot
+[submodule "vim/bundle/vim-pathogen"]
+	path = vim/bundle/vim-pathogen
+	url = https://github.com/tpope/vim-pathogen
+[submodule "tmux/vendor/tmux-mem-cpu-load"]
+	path = tmux/vendor/tmux-mem-cpu-load
+	url = https://github.com/thewtex/tmux-mem-cpu-load.git
+[submodule "tmux/plugins/tmp"]
+	path = tmux/plugins/tmp
+	url = https://github.com/tmux-plugins/tpm
+[submodule "tmux/plugins/tpm"]
+	path = tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
+[submodule "vim/bundle/vim-airline-themes"]
+	path = vim/bundle/vim-airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes
+[submodule "vim/bundle/editorconfig-vim"]
+	path = vim/bundle/editorconfig-vim
+	url = https://github.com/editorconfig/editorconfig-vim.git
+[submodule "vim/bundle/vim-cool"]
+	path = vim/bundle/vim-cool
+	url = https://github.com/romainl/vim-cool.git
+[submodule "vim/bundle/Colorizer"]
+	path = vim/bundle/Colorizer
+	url = https://github.com/chrisbra/Colorizer.git
+[submodule "vim/bundle/vim-code-dark"]
+	path = vim/bundle/vim-code-dark
+	url = https://github.com/tomasiser/vim-code-dark.git
+[submodule "vim/bundle/tmuxline.vim"]
+	path = vim/bundle/tmuxline.vim
+	url = https://github.com/edkolev/tmuxline.vim.git
+[submodule "vim/bundle/nerdtree-git-plugin"]
+	path = vim/bundle/nerdtree-git-plugin
+	url = https://github.com/Xuyuanp/nerdtree-git-plugin.git
+[submodule "vim/bundle/nerdtree"]
+	path = vim/bundle/nerdtree
+	url = https://github.com/preservim/nerdtree.git
+[submodule "vim/bundle/vim-nerdtree-tabs"]
+	path = vim/bundle/vim-nerdtree-tabs
+	url = https://github.com/jistr/vim-nerdtree-tabs
+[submodule "vim/bundle/youcompleteme"]
+	path = vim/bundle/youcompleteme
+	url = https://github.com/valloric/youcompleteme
+[submodule "vim/bundle/vim-fugitive"]
+	path = vim/bundle/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive
+[submodule "vim/bundle/vim-surround"]
+	path = vim/bundle/vim-surround
+	url = https://github.com/tpope/vim-surround
+[submodule "vim/bundle/vim-autoformat"]
+	path = vim/bundle/vim-autoformat
+	url = https://github.com/chiel92/vim-autoformat
+[submodule "vim/bundle/vim-auto-save"]
+	path = vim/bundle/vim-auto-save
+	url = https://github.com/907th/vim-auto-save
+[submodule "vim/bundle/vim-smooth-scroll"]
+	path = vim/bundle/vim-smooth-scroll
+	url = https://github.com/terryma/vim-smooth-scroll.git
+[submodule "vim/bundle/DrawIt"]
+	path = vim/bundle/DrawIt
+	url = https://github.com/vim-scripts/DrawIt

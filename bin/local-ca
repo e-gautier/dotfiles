@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+
+if [ -z "$1" ]
+then
+	echo "domain name not supplied ex: ./local-ca my-app.local exiting."
+	exit
+fi
+
+# generate local private key
+openssl genrsa -out local-ca.key 4096
+
+# create local root certificate
+openssl req -x509 -key local-ca.key -out local-ca.pem
+
+# generate private key
+openssl genrsa -out $1.key 4096
+
+# generate new certificate request from private key
+openssl req -new -key $1.key -out $1.csr
+
+# create certificate from local private key, local root certificate and certificate request
+openssl x509 -req -in $1.csr -CA local-ca.pem -CAkey local-ca.key -CAcreateserial -out $1.pem
+
+echo "done"

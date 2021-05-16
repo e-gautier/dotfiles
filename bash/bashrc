@@ -1,0 +1,55 @@
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+HISTCONTROL=ignoreboth
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+
+# aliases
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# locales
+if [ -f ~/.profile  ]; then
+    . ~/.profile
+fi
+
+# completion
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+# local bin
+PATH=$PATH:~/.local/bin
+
+# git prompt
+. ~/.git-prompt
+
+# umask
+umask 0077
+
+# caps lock to esc remaping
+if [ -x "$(command -v setxkbmap)" ]; then
+   setxkbmap -option caps:swapescape
+fi
+
+PROMPT_COMMAND=prompt
+
+prompt() {
+  # git integrated in PS1
+  PS1='\u@\h:\w$(__git_ps1 " [%s] ")[$?]\$ '
+
+  # save history at each prompt
+  PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+}
+
+# enable forward search with ctrl s
+stty -ixon

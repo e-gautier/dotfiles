@@ -1,0 +1,5 @@
+#!/bin/sh
+
+function ssh-forward {
+  ssh $1 -L $2:127.0.0.1:$2
+}
