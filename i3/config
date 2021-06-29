@@ -229,6 +229,7 @@ exec udiskie -at
 exec feh --bg-scale ~/SYNC/MAIN/Wallpapers/i3/wpp
 
 # set dual screen configuration
+# /!\ does not seem to work with compton
 # xrandr --output HDMI-1 --right-of LVDS-1
 
 # set vertical synchronization
