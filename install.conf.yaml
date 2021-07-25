@@ -44,8 +44,6 @@
     ~/.xscreensaver: xscreensaver/xscreensaver
     ~/.config/redshift: redshift/redshift
     ~/.config/polybar/config: polybar/config
-    ~/.config/wireshark/profiles/tcp/preferences: wireshark/profiles/tcp/preferences
-    ~/.config/wireshark/preferences: wireshark/preferences
     ~/.editorconfig: editorconfig/editorconfig
     ~/.shutter/settings.xml: shutter/settings.xml
 
