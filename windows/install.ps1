@@ -36,9 +36,13 @@ switch ($CHOICE) {
 }
 
 # symlinks
+# VSCodium
 New-Item -Force -Path $HOME\AppData\Roaming\VSCodium\User\settings.json -ItemType SymbolicLink -Value $HOME\dotfiles\vscodium\settings.json
 New-Item -Force -Path $HOME\AppData\Roaming\VSCodium\User\keybindings.json -ItemType SymbolicLink -Value $HOME\dotfiles\vscodium\keybindings.json
+# Powershell profile
 New-Item -Force -Path $HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1 -ItemType SymbolicLink -Value $HOME\dotfiles\windows\Microsoft.PowerShell_profile.ps1
+# Microsoft terminal
+New-Item -Force -Path $HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json -ItemType SymbolicLink -Value $HOME\dotfiles\windows\microsoft_terminal\settings.json
 
 # install vscode extensions
 Set-Variable -Name "VSCODE_EXTENSIONS_INSTALL" -Value 'Get-Content $HOME\dotfiles\vscode\extensions | ForEach-Object{($_ -split "\r\n")[0]} | ForEach-Object{codium --install-extension $_}'
