@@ -29,7 +29,6 @@
     "editor.fontLigatures": true,
     "editor.fontSize": 13,
     "editor.formatOnPaste": true,
-    "editor.formatOnSave": true,
     "editor.formatOnType": true,
     "files.autoGuessEncoding": true,
     "files.enableTrash": false,

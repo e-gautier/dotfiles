@@ -36,8 +36,8 @@ switch ($CHOICE) {
 }
 
 # symlinks
-New-Item -Force -Path $HOME\AppData\Roaming\VSCodium\User\settings.json -ItemType SymbolicLink -Value $HOME\dotfiles\vscode\settings.json
-New-Item -Force -Path $HOME\AppData\Roaming\VSCodium\User\keybindings.json -ItemType SymbolicLink -Value $HOME\dotfiles\vscode\keybindings.json
+New-Item -Force -Path $HOME\AppData\Roaming\VSCodium\User\settings.json -ItemType SymbolicLink -Value $HOME\dotfiles\vscodium\settings.json
+New-Item -Force -Path $HOME\AppData\Roaming\VSCodium\User\keybindings.json -ItemType SymbolicLink -Value $HOME\dotfiles\vscodium\keybindings.json
 New-Item -Force -Path $HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1 -ItemType SymbolicLink -Value $HOME\dotfiles\windows\Microsoft.PowerShell_profile.ps1
 
 # install vscode extensions
