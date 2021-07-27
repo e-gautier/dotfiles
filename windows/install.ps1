@@ -71,6 +71,11 @@ Set-ItemProperty -Path "HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVers
 ##################
 # explorer options
 # ----------------
+# set Quick access folders
+$o = new-object -com shell.application
+$o.Namespace("$HOME").Self.InvokeVerb("pintohome")
+$o.Namespace("C:\ProgramData\chocolatey\lib\sysinternals").Self.InvokeVerb("pintohome")
+$o.Namespace("C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools").Self.InvokeVerb("pintohome")
 Set-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState" -Name "HideFileExt" -Value 0 -ea SilentlyContinue
 Set-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState" -Name "FullPath" -Value 1 -ea SilentlyContinue
 Set-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "Hidden" -Value 1 -ea SilentlyContinue
