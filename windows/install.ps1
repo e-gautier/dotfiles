@@ -53,9 +53,6 @@ switch ($CHOICE) {
   Default { Invoke-Expression $VSCODE_EXTENSIONS_INSTALL; break }
 }
 
-# disable VSCodium firewall rule
-Disable-NetFirewallRule -DisplayName "VSCodium"
-
 # set run at startup registries
 # for userland execution:
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "SyncTrayzor" -Value """$env:ProgramFiles\SyncTrayzor\SyncTrayzor.exe"" -minimized"
@@ -64,11 +61,32 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Na
 Set-ItemProperty -Path "HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" -Name "Open Hardware Monitor" -Value "$env:ProgramFiles\OpenHardwareMonitor\OpenHardwareMonitor.exe"
 
 # create a terminator start menu shortcut that uses wsl and Xming server
-$shortcut = (New-Object -ComObject WScript.Shell).CreateShortcut("%APPDATA%\Microsoft\Windows\Start Menu\terminator.lnk")
-$shortcut.TargetPath = "%WINDIR%\System32\bash.exe"
-$shortcut.Arguments = "-c ""DISPLAY=:0 terminator"""
-$shortcut.WindowStyle = 7
-$shortcut.Hotkey = "CTRL+ALT+T"
-$shortcut.Save()
+# $shortcut = (New-Object -ComObject WScript.Shell).CreateShortcut("%APPDATA%\Microsoft\Windows\Start Menu\terminator.lnk")
+# $shortcut.TargetPath = "%WINDIR%\System32\bash.exe"
+# $shortcut.Arguments = "-c ""DISPLAY=:0 terminator"""
+# $shortcut.WindowStyle = 7
+# $shortcut.Hotkey = "CTRL+ALT+T"
+# $shortcut.Save()
+
+##################
+# explorer options
+# ----------------
+Set-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState" -Name "HideFileExt" -Value 0 -ea SilentlyContinue
+Set-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState" -Name "FullPath" -Value 1 -ea SilentlyContinue
+Set-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "Hidden" -Value 1 -ea SilentlyContinue
+Set-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "AutoCheckSelect" -Value 0 -ea SilentlyContinue
+Set-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideDrivesWithNoMedia" -Value 0
+# show preview pane
+Set-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Modules\GlobalSettings\DetailsContainer" -Name "DetailsContainer" -Value ([byte[]](0x02,0x00,0x00,0x00,0x01,0x00,0x00,0x00)) -ea SilentlyContinue
+Set-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Modules\GlobalSettings\Sizer" -Name "DetailsContainerSizer" -Value ([byte[]](0x3e,0x01,0x00,0x00,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x49,0x03,0x00,0x00)) -ea SilentlyContinue
+# set default view mode to detail
+Remove-Item -Path "HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" -recurse -force -ea SilentlyContinue
+Remove-Item -Path "HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\BagMRU" -recurse -force -ea SilentlyContinue
+New-Item -Path "HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" -ea SilentlyContinue | Out-Null
+New-Item -Path "HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders" -ea SilentlyContinue | Out-Null
+New-Item -Path "HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell" -ea SilentlyContinue | Out-Null
+New-Item -Path "HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell\{5C4F28B5-F869-4E84-8E60-F11DB97C5CC7}" -ea SilentlyContinue | Out-Null
+Set-ItemProperty -LiteralPath "HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell\{5C4F28B5-F869-4E84-8E60-F11DB97C5CC7}" -Name "Mode" -Value 4 -ea SilentlyContinue
+Stop-Process -ProcessName Explorer
 
 Write-Output "done."
