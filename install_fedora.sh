@@ -71,12 +71,12 @@ if [[ $INSTALL_MODE = "laptop" ]] || ! [[ $INSTALL_MODE  ]]; then
   # enable user services
   systemctl --user enable syncthing
 
+  # enable powertop comsumption optimzation
+  sudo -p "[sudo] password for %u in order to enable Powertop: " cp systemd/system/powertop.service /etc/systemd/system/
+  sudo systemctl enable --now powertop.service
+
   # enable system services
   sudo systemctl enable --now systemd-timesyncd.service systemd-resolved.service
-
-  # enable powertop comsumption optimzation
-  sudo powertop --auto-tune
-  sudo -p "[sudo] password for %u in order to enable Powertop: " systemctl enable --now  powertop
 
   # disable some unwanted services
   sudo systemctl disable --now rsyslog pmcd pmie pmlogger sshd atd sssd firewalld crond chronyd
