@@ -1,14 +1,6 @@
-set history=900
+set history=10000
 
-filetype plugin on
-filetype indent on
 syntax on
-
-" subfolders search and tab completion
-set path+=**
-
-" display matching file list on tab
-set wildmenu
 
 " update file is modified
 set autoread
@@ -18,21 +10,21 @@ set ignorecase
 set smartcase
 set incsearch
 set hlsearch
-set magic
-
-" brackets
-set showmatch
 
 " colors
 set background=dark
 
 " tab
 set expandtab
-set shiftwidth=2
-set tabstop=2
+set shiftwidth=4
+set tabstop=4
 
 " line width limit
 set colorcolumn=120
+
+set number
+set showcmd
+set mouse=a
 
 " Return to last edit position when opening files
 autocmd BufReadPost *
@@ -40,21 +32,17 @@ autocmd BufReadPost *
      \   exe "normal! g`\"" |
      \ endif
 
-" viminfo keeping
-set viminfo=%,<800,'10,/50,:100,h
+" vim statusbar
 set laststatus=2
 
 " Airline theme
 let g:airline_theme = 'codedark'
 
-set number
-set showcmd
-set mouse=a
-set lazyredraw
-
 " Load Pathogen
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
+
+" indent visual indicator
 let g:indent_guides_enable_on_vim_startup = 1
 
 " autorun ColorHighlight after bundles load
@@ -62,6 +50,7 @@ autocmd VimEnter * ColorHighlight
 
 " colorsheme from https://github.com/tomasiser/vim-code-dark
 colorscheme codedark
+
 " override search highlight color
 hi Search ctermfg=black ctermbg=yellow
 
@@ -71,24 +60,8 @@ let g:tmuxline_powerline_separators = 0
 " allow to save with sudo
 cmap w!! w !sudo tee > /dev/null %
 
-" always focus to file opened
-let g:nerdtree_tabs_open_on_gui_startup = 2
-
-" NERDTree tab support
-let g:nerdtree_tabs_open_on_console_startup = 1
-
-" focus opened window
-let g:nerdtree_tabs_smart_startup_focus = 2
-
-" command shortcut to fzf
-map <S-C-a> :FZF<Enter>
-
 " enable auto save
 let g:auto_save = 1
-
-" enable common shortcut
-source $VIMRUNTIME/mswin.vim
-behave mswin
 
 " smoothscroll
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
