@@ -33,9 +33,7 @@
     ~/.config/rofi/config: rofi/config
     ~/.config/systemd/user/tmux.service: systemd/user/tmux.service
     ~/.config/systemd/user/syncthing.service: systemd/user/syncthing.service
-    ~/.config/systemd/user/xscreensaver.service: systemd/user/xscreensaver.service
     ~/.xinitrc: x/xinitrc
-    ~/.startx: x/startx
     ~/.config/dunst/dunstrc: dunst/dunstrc
     ~/.config/terminator/config: terminator/config
     ~/.config/VSCodium/User/keybindings.json: vscodium/keybindings.json
