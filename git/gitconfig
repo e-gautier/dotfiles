@@ -2,11 +2,9 @@
   	name = Etienne G.
   	email = etienne.gautier@outlook.com
   	username = e-gautier
-
 [core]
   	editor = vim
 	  fileMode = false
-
 [alias]
     aliases = !git config -l | grep alias | cut -c 7-
     plog = log --graph  --pretty=format:'%C(auto)%h %ad %an %d %s %gn' --abbrev-commit --all --date=format:'%H:%M %d/%m/%Y'
@@ -20,18 +18,15 @@
     ck = checkout
     ps = push
     pl = pull
-	
 [winUpdater]
     recentlySeenVersion = 2.22.0.windows.1
-
 [merge]
     tool = vimdiff
-
 [diff]
     tool = vimdiff
-
 [rebase]
     autoStash = true
-	
 [pull]
     rebase = true
+[rerere]
+    enabled = true

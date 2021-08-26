@@ -31,7 +31,7 @@ git rm vim/bundle/PLUGIN_NAME
 ```
 ## Update git submodules
 ```
-git submodule update --remote --init --recursive
+git submodule update --remote --recursive
 ```
 ## Install Tmux plugins
 Download and install
