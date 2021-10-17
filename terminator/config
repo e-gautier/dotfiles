@@ -4,6 +4,10 @@
   title_transmit_bg_color = "#2e3436"
   title_receive_bg_color = "#e84545"
 [keybindings]
+  resize_up = <Shift><Alt>Up
+  resize_down = <Shift><Alt>Down
+  resize_left = <Shift><Alt>Left
+  resize_right = <Shift><Alt>Right
   next_tab = <Shift>Right
   prev_tab = <Shift>Left
 [profiles]
