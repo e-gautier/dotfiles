@@ -11,12 +11,12 @@ table inet filter {
 		# accept connection states established, related
 		ct state established,related accept
 
-		log prefix "[netfilter] INPUT " level debug
+		log prefix "[netfilter] INPUT (drop) " level debug
 	}
 
 	chain FORWARD {
 		type filter hook forward priority 0
-		policy drop
+		policy accept
 
 		log prefix "[netfilter] FORWARD " level debug
 	}
@@ -24,7 +24,5 @@ table inet filter {
 	chain OUTPUT {
 		type filter hook output priority 0
 		policy accept
-
-		log prefix "[netfilter] OUTPUT " level debug
 	}
 }
