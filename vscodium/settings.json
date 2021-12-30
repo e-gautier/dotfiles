@@ -34,4 +34,8 @@
         "markdown"
     ],
     "terminal.integrated.defaultProfile.windows": "Debian (WSL)",
+    "redhat.telemetry.enabled": false,
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
 }

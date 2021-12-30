@@ -45,5 +45,4 @@
     ~/.shutter/settings.xml: shutter/settings.xml
 
 - shell:
-    - ["git submodule update --init --recursive", "Installing submodules"]
     - ["if hash fc-cache 2>/dev/null; then fc-cache -f; fi", "Install fonts"]
