@@ -1,0 +1,210 @@
+# ansible-galaxy install -r galaxy-roles.yml
+# ansible-playbook -K playbook.yml
+---
+- name: dotfiles
+  connection: local
+  hosts: localhost
+  vars:
+    ansible_core_version: 2.12
+  vars_files:
+    - binaries.yml
+    - symlinks.yml
+    - systemd-units.yml
+    - repositories.yml
+    - vscodium-extensions.yml
+    - snaps.yml
+  vars_prompt:
+    - name: install_binaries
+      prompt: install binaries? [y/N]
+      default: "N"
+      private: no
+    - name: install_vimyoucompleteme
+      prompt: install vimyoucompleteme? [y/N]
+      default: "N"
+      private: no
+    - name: install_snaps
+      prompt: install snaps? [y/N]
+      default: "N"
+      private: no
+  tasks:
+    - name: assert version
+      assert:
+        that: "{{ ansible_version.full is version(ansible_core_version, '>=') }}"
+        success_msg: "Ansible version >= {{ ansible_core_version }}"
+        fail_msg: "Ansible version < {{ ansible_core_version }}"
+    - name: ansible.services.facts
+      ansible.builtin.service_facts:
+    - name: dnf.repos
+      become: yes
+      ansible.builtin.dnf:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ dnf.repos }}"
+    - name: Microsoft.key
+      become: yes
+      ansible.builtin.rpm_key:
+        state: present
+        key: https://packages.microsoft.com/keys/microsoft.asc
+    - name: Microsoft.repo
+      become: yes
+      ansible.builtin.get_url:
+        url: https://packages.microsoft.com/config/rhel/7/prod.repo
+        dest: /etc/yum.repos.d/microsoft.repo
+        force: yes
+    - name: VSCode.key
+      become: yes
+      ansible.builtin.rpm_key:
+        state: present
+        key: https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
+    - name: VSCode.repo
+      become: yes
+      ansible.builtin.copy:
+        content: |
+          [gitlab.com_paulcarroty_vscodium_repo]
+          name=gitlab.com_paulcarroty_vscodium_repo
+          baseurl=https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/rpms/
+          enabled=1
+          gpgcheck=1
+          repo_gpgcheck=1
+          gpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
+        dest: /etc/yum.repos.d/vscodium.repo
+    - name: battery.low.threshold
+      become: yes
+      ansible.builtin.copy:
+        content: SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[0-10]", RUN+="/usr/bin/systemctl hybrid-sleep"
+        dest: /etc/udev/rules.d/99-low-battery.rules
+    - name: logind.configuration
+      become: yes
+      ansible.builtin.replace:
+        path: /etc/systemd/logind.conf
+        regexp: "^#{{ item }}(=.*)$"
+        replace: "{{ item }}\\1"
+      loop:
+        - HandlePowerKey
+        - HandleSuspendKey
+        - HandleHibernateKey
+        - HandleLidSwitch
+        - HandleLidSwitchExternalPower
+        - HandleLidSwitchDocked
+    - name: resolved.configuration
+      become: yes
+      ansible.builtin.replace:
+        path: /etc/systemd/resolved.conf
+        regexp: "{{ item.key }}"
+        replace: "{{ item.value }}"
+      loop: "{{ items | dict2items }}"
+      vars:
+        items:
+          ^DNS=.*$: DNS=1.1.1.1 2606:4700:4700::1111
+          ^#FallbackDNS=.*$: FallbackDNS=1.0.0.1 2606:4700:4700::1001
+    - name: dnf.plugins-core
+      become: yes
+      dnf:
+        name: dnf-plugins-core
+    - name: docker.repo
+      become: yes
+      shell: dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+    - name: docker.install
+      become: yes
+      dnf:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+    - name: zfs.swap
+      become: yes
+      shell: dnf swap -y zfs-fuse zfs
+    - name: dnf.security.install
+      become: yes
+      dnf:
+        name: dnf-automatic
+    - name: dnf.security.configure
+      become: yes
+      replace:
+        path: /etc/dnf/automatic.conf
+        regexp: "{{ item.key }}"
+        replace: "{{ item.value }}"
+      loop: "{{ items | dict2items }}"
+      vars:
+        items:
+          upgrade_type = default: upgrade_type = security
+          apply_updates = no: apply_updates = yes
+    - name: dnf.binaries
+      become: yes
+      when: install_binaries != "N"
+      dnf:
+        name: "{{ binaries.core }}"
+    - name: links
+      ansible.builtin.file:
+        src: "{{ playbook_dir }}/{{ item.value }}"
+        dest: "{{ item.key }}"
+        state: link
+      loop: "{{ links | dict2items }}"
+    - name: install font
+      ansible.builtin.shell: if hash fc-cache 2>/dev/null; then fc-cache -f; fi
+    - name: nft.inet.filter.copy
+      become: yes
+      ansible.builtin.copy:
+        src: nftables/inet-filter.nft
+        dest: /etc/nftables/inet-filter.nft
+    - name: nft.inet.filter.uncomment
+      become: yes
+      ansible.builtin.lineinfile:
+        path: /etc/sysconfig/nftables.conf
+        regexp: ^# include "\/etc\/nftables\/inet\-filter.nft"$
+        line: include "/etc/nftables/inet-filter.nft"
+    - name: install.vimyoucompleteme
+      ansible.builtin.shell:
+        cmd: "{{ playbook_dir }}/vim/bundle/youcompleteme/install.py"
+      when: install_vimyoucompleteme != "N"
+    - name: VSCode.extensions
+      ansible.builtin.shell:
+        cmd: "codium --install-extension {{ item }} ||:"
+      loop: "{{ vscodium_extensions }}"
+    - name: snaps
+      community.general.snap:
+        name: "{{ snaps }}"
+      when: install_snaps != "N"
+    - name: powertop.unit
+      become: yes
+      template:
+        src: "{{ playbook_dir }}/systemd/system/unit.service.template"
+        dest: /etc/systemd/system/powertop.service
+      vars:
+        description: powertop autotune
+        type: oneshot
+        exec_start: /usr/sbin/powertop --auto-tune
+        wanted_by: multi-user.target
+    - name: systemd.user.enable
+      ansible.builtin.systemd:
+        name: "{{ item }}"
+        scope: user
+        state: restarted
+        enabled: yes
+        daemon_reload: yes
+      loop: "{{ units.user.enabled }}"
+    - name: systemd.system.enable
+      become: yes
+      ansible.builtin.systemd:
+        name: "{{ item }}"
+        state: restarted
+        enabled: yes
+        daemon_reload: yes
+      loop: "{{ units.system.enabled }}"
+    - name: systemd.system.disable
+      become: yes
+      ansible.builtin.systemd:
+        name: "{{ item }}"
+        state: stopped
+        enabled: no
+        daemon_reload: yes
+      when: "'{{ item }}.service' in {{ ansible_facts.services }}"
+      loop: "{{ units.system.disabled }}"
+    - name: user.groups
+      become: yes
+      user:
+        name: etienne
+        groups:
+          - docker
+          - wireshark
+        append: yes

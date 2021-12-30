@@ -1,0 +1,26 @@
+---
+units:
+  user:
+    enabled:
+      - tmux
+      - syncthing
+  system:
+    enabled:
+      - systemd-resolved
+      - systemd-timesyncd
+      - nftables
+      - docker
+      - containerd
+      - dnf-automatic.timer
+      - powertop
+    disabled:
+      - rsyslog
+      - pmcd
+      - pmie
+      - pmlogger
+      - sshd
+      - atd
+      - sssd
+      - firewalld
+      - crond
+      - chronyd
