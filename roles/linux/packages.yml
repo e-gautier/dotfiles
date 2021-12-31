@@ -1,11 +1,12 @@
 ---
-binaries:
+packages:
   core:
     - coreutils
     - progress
     - vim
     - wget
     - htop
+    - curl
     - tmux
     - ranger
     - man
@@ -17,7 +18,10 @@ binaries:
     - nftables
     - iotop
     - rsync
+    - dnf-plugin-system-upgrade
+    - dnf-automatic
   dev:
+    - ShellCheck
     - git
     - make
     - cmake
@@ -181,6 +185,3 @@ binaries:
     - neofetch
     - cmatrix
     - youtube-dl
-  dnf:
-    - dnf-plugin-system-upgrade
-    - dnf-automatic

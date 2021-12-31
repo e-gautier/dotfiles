@@ -1,10 +1,24 @@
 #!/usr/bin/env sh
 
-FOLDER=.dotfiles
-URL=https://github.com/e-gautier/dotfiles.git
+set -e
+set -v
 
-if [ ! -d "$FOLDER" ] ; then
+FOLDER=~/.dotfiles
+URL=https://github.com/e-gautier/dotfiles.git
+if ! command -v python; then
+    echo "python required"
+    exit 1
+fi
+if ! command -v git; then
+    echo "git required"
+    exit 1
+fi
+if ! python -m ensurepip --upgrade; then
+    sudo -p "sudo pwd to ensure pip: " python -m ensurepip --upgrade
+fi
+python -m pip install --user ansible
+if [ ! -d "$FOLDER" ]; then
     git clone --recursive "$URL" "$FOLDER"
 fi
-
-cd $FOLDER && INSTALL_MODE=$1 ./install
+cd $FOLDER
+ansible-playbook -K ${FOLDER}/playbook.yml

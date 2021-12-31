@@ -6,12 +6,7 @@ units:
       - syncthing
   system:
     enabled:
-      - systemd-resolved
       - systemd-timesyncd
-      - nftables
-      - docker
-      - containerd
-      - dnf-automatic.timer
       - powertop
     disabled:
       - rsyslog

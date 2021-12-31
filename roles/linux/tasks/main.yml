@@ -1,0 +1,127 @@
+---
+- name: ansible.requirements
+  import_tasks: requirements.yml
+- name: rpm.keys
+  become: yes
+  rpm_key:
+    key: "{{ item }}"
+  loop: "{{ rpm_keys }}"
+- name: dnf.repos
+  become: yes
+  dnf:
+    name: "{{ item }}"
+  loop: "{{ dnf.repos }}"
+- name: Microsoft.repo
+  become: yes
+  get_url:
+    url: https://packages.microsoft.com/config/rhel/7/prod.repo
+    dest: /etc/yum.repos.d/microsoft.repo
+    force: yes
+- name: VSCode.repo
+  become: yes
+  copy:
+    content: |
+      [gitlab.com_paulcarroty_vscodium_repo]
+      name=gitlab.com_paulcarroty_vscodium_repo
+      baseurl=https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/rpms/
+      enabled=1
+      gpgcheck=1
+      repo_gpgcheck=1
+      gpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
+    dest: /etc/yum.repos.d/vscodium.repo
+- name: battery.low.threshold
+  become: yes
+  copy:
+    content: SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[0-10]", RUN+="/usr/bin/systemctl hybrid-sleep"
+    dest: /etc/udev/rules.d/99-low-battery.rules
+- name: logind.configuration
+  become: yes
+  replace:
+    path: /etc/systemd/logind.conf
+    regexp: "^#{{ item }}(=.*)$"
+    replace: "{{ item }}\\1"
+  loop:
+    - HandlePowerKey
+    - HandleSuspendKey
+    - HandleHibernateKey
+    - HandleLidSwitch
+    - HandleLidSwitchExternalPower
+    - HandleLidSwitchDocked
+- name: dns
+  import_tasks: dns.yml
+  become: yes
+- name: docker
+  import_tasks: docker.yml
+  become: yes
+- name: updates.security
+  import_tasks: security-updates.yml
+  become: yes
+- name: packages
+  become: yes
+  when: install_packages != "N"
+  package:
+    name: "{{ packages[item] }}"
+    state: present
+  loop: "{{ install_packages.split(',') }}"
+- name: symlinks
+  import_tasks: symlinks.yml
+- name: install font
+  shell: if hash fc-cache 2>/dev/null; then fc-cache -f; fi
+- name: nftables
+  import_tasks: nftables.yml
+  become: yes
+- name: vimyoucompleteme
+  import_tasks: vimyoucompleteme.yml
+  when: install_vimyoucompleteme != "N"
+- name: VSCode.extensions
+  shell:
+    cmd: "codium --install-extension {{ item }} ||:"
+  loop: "{{ vscodium_extensions }}"
+- name: snaps
+  community.general.snap:
+    name: "{{ snaps }}"
+  when: install_snaps != "N"
+- name: powertop.unit
+  become: yes
+  template:
+    src: unit.service.j2
+    dest: /etc/systemd/system/powertop.service
+  vars:
+    description: powertop autotune
+    type: oneshot
+    exec_start: /usr/sbin/powertop --auto-tune
+    wanted_by: multi-user.target
+- name: systemd.user.enable
+  systemd:
+    name: "{{ item }}"
+    scope: user
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+  loop: "{{ units.user.enabled }}"
+- name: systemd.system.enable
+  become: yes
+  systemd:
+    name: "{{ item }}"
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+  loop: "{{ units.system.enabled }}"
+- name: systemd.system.disable
+  become: yes
+  systemd:
+    name: "{{ item }}"
+    state: stopped
+    enabled: no
+    daemon_reload: yes
+  when: item ~ ".service" in ansible_facts.services
+  loop: "{{ units.system.disabled }}"
+  ignore_errors: yes
+- name: user.groups
+  become: yes
+  user:
+    name: etienne
+    groups:
+      - docker
+      - wireshark
+    append: yes

@@ -1,23 +1,17 @@
 # .files
-full binaries (laptop mode, i3 and all my personnal required crappy binaries):
 ```
-bash <(curl -L https://git.io/fhAyY)
-```
-minimal binaries (server  mode):
-```
-bash <(curl -L https://git.io/fhAyY) minimal
+sh <(curl -L https://git.io/fhAyY)
 ```
 Windows (Administrator Powershell prompt required):
 ```ps
 Invoke-Expression((New-Object System.Net.WebClient).DownloadString('https://git.io/fjd3F'))
 ```
-This script is idempotent, it can be safely run multiple times.
 ## Requirements
+- python
 - git
 - curl
 ## Dependencies
 - [Pathogen.vim](https://github.com/tpope/vim-pathogen)
-- [Dotbot](https://github.com/anishathalye/dotbot)
 ## Install a Vim plugin
 ```
 git submodule add PLUGIN_GIT_REPO vim/bundle/PLUGIN_NAME
@@ -54,7 +48,7 @@ In the profile folder do:
 ```
 cat > chrome/userChrome.css
 
-browser[type="content-primary"], 
+browser[type="content-primary"],
 browser[type="content"] {
   background: #000000 !important;
 }

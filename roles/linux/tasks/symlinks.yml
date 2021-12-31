@@ -1,0 +1,15 @@
+---
+- name: symlinks
+  block:
+  - name: symlink.subdirs # hacky way to create symlinks parent subdirectories (since Ansible does not do it)
+    file:
+      path: "{{ item.key | regex_replace('(.+)\/.*', '\\1') }}"
+      state: directory
+    loop: "{{ links | dict2items }}"
+  - name: symlink
+    file:
+      src: "{{ playbook_dir }}/{{ item.value }}"
+      dest: "{{ item.key }}"
+      state: link
+      force: yes
+    loop: "{{ links | dict2items }}"
