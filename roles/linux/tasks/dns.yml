@@ -1,0 +1,23 @@
+---
+- name: resolved.configuration
+  replace:
+    path: /etc/systemd/resolved.conf
+    regexp: "{{ item.key }}"
+    replace: "{{ item.value }}"
+  loop: "{{ items | dict2items }}"
+  vars:
+    items:
+      ^DNS=.*$: DNS=1.1.1.1 2606:4700:4700::1111
+      ^#FallbackDNS=.*$: FallbackDNS=1.0.0.1 2606:4700:4700::1001
+- name: resolved.resolv
+  file:
+    src: /run/systemd/resolve/resolv.conf
+    dest: /etc/resolv.conf
+    state: link
+    force: yes
+- name: systemd-resolved.service
+  systemd:
+    name: systemd-resolved
+    state: restarted
+    enabled: yes
+    daemon_reload: yes

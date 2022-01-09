@@ -1,0 +1,31 @@
+# ansible-galaxy install -r galaxy-roles.yml
+# ansible-playbook -K playbook.yml
+---
+- name: dotfiles
+  connection: local
+  hosts: localhost
+  vars_prompt:
+    - name: install_packages
+      prompt: install what packages? [core,dev,ui,apps,misc/N]
+      default: "N"
+      private: no
+    - name: install_vimyoucompleteme
+      prompt: install vimyoucompleteme? [y/N]
+      default: "N"
+      private: no
+    - name: install_snaps
+      prompt: install snaps? [y/N]
+      default: "N"
+      private: no
+  tasks:
+    - name: assert.version
+      assert:
+        that: "{{ ansible_version.full is version(ansible_core_version, '>=') }}"
+        success_msg: "Ansible version >= {{ ansible_core_version }}"
+        fail_msg: "Ansible version < {{ ansible_core_version }}"
+      vars:
+        ansible_core_version: 2.12
+    - name: role.linux
+      include_role:
+        name: linux
+      when: ansible_system == "Linux"

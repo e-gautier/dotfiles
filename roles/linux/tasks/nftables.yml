@@ -1,0 +1,16 @@
+---
+- name: nft.inet.filter.copy
+  copy:
+    src: nftables/inet-filter.nft
+    dest: /etc/nftables/inet-filter.nft
+- name: nft.inet.filter.uncomment
+  lineinfile:
+    path: /etc/sysconfig/nftables.conf
+    regexp: ^# include "\/etc\/nftables\/inet\-filter.nft"$
+    line: include "/etc/nftables/inet-filter.nft"
+- name: nft.service
+  systemd:
+    name: nftables
+    state: restarted
+    enabled: yes
+    daemon_reload: yes

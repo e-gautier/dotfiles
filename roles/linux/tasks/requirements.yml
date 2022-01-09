@@ -1,0 +1,20 @@
+---
+- name: lsb.install
+  become: yes
+  package:
+    name:
+      - redhat-lsb-core
+      - fedora-release
+    state: present
+- name: vars.files
+  include_vars: "{{ role_path }}/{{ item }}"
+  loop:
+    - packages.yml
+    - symlinks.yml
+    - systemd-units.yml
+    - repositories.yml
+    - vscodium-extensions.yml
+    - snaps.yml
+    - rpm-keys.yml
+- name: ansible.services.facts
+  ansible.builtin.service_facts:

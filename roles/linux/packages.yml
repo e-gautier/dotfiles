@@ -1,0 +1,187 @@
+---
+packages:
+  core:
+    - coreutils
+    - progress
+    - vim
+    - wget
+    - htop
+    - curl
+    - tmux
+    - ranger
+    - man
+    - multitail
+    - sysstat # system performance tools suite https://github.com/sysstat/sysstat (sar, iostat etc)
+    - tree
+    - dstat # system resource statistics
+    - perf # performance analysis tools
+    - nftables
+    - iotop
+    - rsync
+    - dnf-plugin-system-upgrade
+    - dnf-automatic
+  dev:
+    - ShellCheck
+    - git
+    - make
+    - cmake
+    - automake
+    - gcc
+    - gcc-c++
+    - kernel-devel
+    - glibc
+    - glibc-langpack-fr
+    - glibc-all-langpacks
+    - libcgroup
+    - libcgroup-tools
+    - gdb
+    - edb
+    - jq
+    - socat
+    - pandoc # markup converter
+    - kexec-tools # kernel restarter/executor (eg. kexec -e)
+    - gnupg2
+    - strace
+    - pgrep
+    - ngrep
+    - tcpdump
+    - stunnel
+    - rlwrap
+    - systemtap # performance analysis tools
+    - bison
+    - flex # fast lexical analyzer
+    - p0f # passive OS detection based on SYN packets
+    - ctop # container top
+    - atop # performance analysis
+    - lsof
+    - iptraf # network statistics
+    - iperf # network performance analysis
+    - stress
+    - alien
+    - ImageMagick # image converter
+    - tig
+    - udisks2
+    - udiskie
+    - powershell
+    - fzf
+    - iproute-tc
+    - sshfs
+    - nmap
+    - nodejs
+    - samba-client
+    - cifs-utils
+    - proxychains
+    - smartmontools
+    - qemu
+    - graphviz
+    - VirtualBox
+    - fatrace # FS trace
+    - extrace # exe trace
+    - net-tools
+    - tcpflow
+    - tcptraceroute
+    - dbus
+    - snapd
+    - libvirt-daemon-kvm
+    - virt-manager
+    - virt-top
+    - virt-install
+    - libvirt-client
+    - btrfs-progs
+    - flamegraph
+    - flamegraph-stackcollapse
+    - flamegraph-stackcollapse-perf
+    - ioping
+    - wireguard-tools
+    - 3proxy
+    - ddrutility
+    - gns3-server
+    - gns3-gui
+    - podman
+    - mlocate
+    - tesseract
+    - whois
+    - clustershell
+  ui:
+    - xorg
+    - i3
+    - xev # X events printer
+    - rofi
+    - i3lock
+    - pavucontrol # gtk pulse audio gui
+    - arandr
+    - lxappearance # gtk theme manager
+    - breeze-gtk # gtk theme
+    - qt5-qtstyleplugins # qt theme manager
+    - gtk-v4l # Video4Linux
+    - yad # gtk dialog
+    - xss-lock
+    - tlp
+    - powertop
+    - xbindkeys
+    - lm_sensors
+    - acpi
+    - xdotool # keyboard/mouse simulation
+    - compton
+    - dunst # notifications
+    - system-config-printer
+    - usbguard
+    - usbguard-applet-qt
+    - pasystray # PulseAudio tray
+    - blueman # bluetooth manager
+    - brightnessctl
+    - xcalib # monitor calibration
+    - redshift
+    - xscreensaver
+    - network-manager-applet
+    - alsa-utils
+    - NetworkManager-wifi
+    - fuse
+    - polybar
+  apps:
+    - feh
+    - caja
+    - dolphin
+    - terminator
+    - steam
+    - syncthing
+    - discord
+    - copyq
+    - shutter
+    - gimp
+    - cmus # terminal music player
+    - vlc
+    - gnome-calculator
+    - tor
+    - onionshare
+    - gnuradio
+    - gqrx
+    - firefox
+    - obs-studio
+    - wireshark
+    - openshot
+    - audacity
+    - libreoffice
+    - chromium
+    - deadbeef # music player
+    - transmission
+    - unetbootin
+    - codium
+    - gnuplot
+    - rkhunter
+    - clamav
+    - clamav-update
+    - asciio # draw in ascii
+    - p7zip
+    - p7zip-plugins
+    - keepass
+  misc:
+    - audit
+    - w3m # browser in terminal
+    - lzip # alternative compressor
+    - rsyslog
+    - downtimed # downtime reporting tool
+    - gettext # translator
+    - neofetch
+    - cmatrix
+    - youtube-dl

@@ -1,0 +1,21 @@
+---
+units:
+  user:
+    enabled:
+      - tmux
+      - syncthing
+  system:
+    enabled:
+      - systemd-timesyncd
+      - powertop
+    disabled:
+      - rsyslog
+      - pmcd
+      - pmie
+      - pmlogger
+      - sshd
+      - atd
+      - sssd
+      - firewalld
+      - crond
+      - chronyd
