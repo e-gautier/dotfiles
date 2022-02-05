@@ -185,3 +185,4 @@ packages:
     - neofetch
     - cmatrix
     - youtube-dl
+    - fancontrol # pwmconfig
