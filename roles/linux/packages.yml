@@ -102,6 +102,7 @@ packages:
     - tesseract
     - whois
     - clustershell
+    - zstd
   ui:
     - xorg
     - i3
