@@ -118,6 +118,9 @@ packages:
     - yad # gtk dialog
     - xss-lock
     - tlp
+    - tlp-rdw
+    - akmod-acpi_call # tlp suite
+    - akmod-tp_smapi # tlp suite
     - powertop
     - xbindkeys
     - lm_sensors

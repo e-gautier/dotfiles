@@ -3,4 +3,5 @@ dnf:
   repos:
    - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_lsb.major_release }}.noarch.rpm"
    - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_lsb.major_release }}.noarch.rpm"
+   - "https://repo.linrunner.de/fedora/tlp/repos/releases/tlp-release.fc{{ ansible_lsb.major_release }}.noarch.rpm"
   #  - "https://zfsonlinux.org/fedora/zfs-release.fc{{ ansible_lsb.major_release }}.noarch.rpm"
