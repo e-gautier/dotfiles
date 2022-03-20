@@ -18,6 +18,7 @@
     ck = checkout
     ps = push
     pl = pull
+    pull = pull --autostash
 [winUpdater]
     recentlySeenVersion = 2.22.0.windows.1
 [merge]
