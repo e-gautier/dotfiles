@@ -142,6 +142,7 @@ packages:
     - NetworkManager-wifi
     - fuse
     - polybar
+    - gucharmap # font preview
   apps:
     - feh
     - caja

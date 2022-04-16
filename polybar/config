@@ -12,9 +12,9 @@ foreground = ${colors.foreground}
 module-margin-right = 1
 module-margin-left = 1
 font-0 = fixed:pixelsize=10;1
-font-1 = Font Awesome 5 Free Regular:pixelsize=10;1
-font-2 = Font Awesome 5 Free Solid:pixelsize=10;1
-font-3 = Font Awesome 5 Brands:pixelsize=10;1
+font-1 = FontAwesome5Free:style=Solid:size=10;4
+font-2 = FontAwesome5Free:style=Regular:size=10;4
+font-3 = FontAwesome5Brands:style=Regular:size=10;4
 modules-left = i3 xwindow
 modules-center =
 modules-right = xkeyboard input output backlight filesystem wlan eth memory fan temperature load battery date powermenu
@@ -78,11 +78,12 @@ interface = wlp3s0
 interval = 10
 format-connected = <ramp-signal> <label-connected>
 label-connected = %ifname% 4:%local_ip% 6:%local_ip6%
-ramp-signal-0 = %{F#ff0000}1%{Fcolors.foreground}
-ramp-signal-1 = %{F#ff4d00}2%{Fcolors.foreground}
-ramp-signal-2 = %{F#ff4d00}3%{Fcolors.foreground}
-ramp-signal-3 = %{F#00ff00}4%{Fcolors.foreground}
-ramp-signal-4 = %{F#00ff00}5%{Fcolors.foreground}
+ramp-signal-0 = %{F#ff0000}1%{F-}
+ramp-signal-1 = %{F#ff4d00}2%{F-}
+ramp-signal-2 = %{F#ff4d00}3%{F-}
+ramp-signal-3 = %{F#00ff00}4%{F-}
+ramp-signal-4 = %{F#00ff00}5%{F-}
+ramp-signal-5 = %{F#00ff00}5%{F-}
 
 [module/eth]
 type = internal/network
