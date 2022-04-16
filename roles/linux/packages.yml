@@ -143,6 +143,7 @@ packages:
     - fuse
     - polybar
     - gucharmap # font preview
+    - nomacs # image viewer
   apps:
     - feh
     - caja
