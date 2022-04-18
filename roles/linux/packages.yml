@@ -37,6 +37,11 @@ packages:
     - gdb
     - edb
     - jq
+    - jo
+    - jc
+    - yq
+    - fq
+    - htmlq
     - socat
     - pandoc # markup converter
     - kexec-tools # kernel restarter/executor (eg. kexec -e)
@@ -98,11 +103,25 @@ packages:
     - gns3-server
     - gns3-gui
     - podman
-    - mlocate
+    - plocate
     - tesseract
     - whois
     - clustershell
     - zstd
+    - mosh # ssh client
+    - bat # better cat
+    - fd-find # find alternative
+    - fud # df alternative
+    - ncdu # du alternative
+    - glances # top alternative
+    - tldr # man for lazies
+    - sd # sed alternative
+    - ripgrep # grep alternative
+    - the_silver_searcher # grep alternative
+    - exa # ls alternative
+    - mtr # traceroute+ping alternative
+    - xxd # hex dump
+    - entr # file watcher
   ui:
     - xorg
     - i3
