@@ -10,6 +10,7 @@
   include_vars: "{{ role_path }}/{{ item }}"
   loop:
     - packages.yml
+    - homebrew.yml
     - symlinks.yml
     - systemd-units.yml
     - repositories.yml

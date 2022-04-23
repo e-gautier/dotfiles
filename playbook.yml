@@ -9,6 +9,10 @@
       prompt: install what packages? [core,dev,ui,apps,misc/N]
       default: "N"
       private: no
+    - name: install_homebrew
+      prompt: install Homebrew? [y/N]
+      default: "N"
+      private: no
     - name: install_vimyoucompleteme
       prompt: install vimyoucompleteme? [y/N]
       default: "N"

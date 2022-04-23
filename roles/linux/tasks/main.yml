@@ -63,6 +63,18 @@
     name: "{{ packages[item] }}"
     state: present
   loop: "{{ install_packages.split(',') }}"
+- name: Homebrew clone
+  git:
+    repo: https://github.com/Homebrew/brew
+    dest: ~/.homebrew
+  when: install_homebrew != "N"
+- name: Homebrew packages
+  community.general.homebrew:
+    path: ~/.homebrew/bin
+    name: "{{ homebrew }}"
+    update_homebrew: yes
+    upgrade_all: yes
+  when: install_homebrew != "N"
 - name: symlinks
   import_tasks: symlinks.yml
 - name: install font
