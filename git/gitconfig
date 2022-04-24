@@ -3,8 +3,9 @@
   	email = etienne.gautier@protonmail.com
   	username = e-gautier
 [core]
-  	editor = vim
-	  fileMode = false
+    editor = vim
+    fileMode = false
+    pager = delta
 [alias]
     aliases = !git config -l | grep alias | cut -c 7-
     plog = log --graph  --pretty=format:'%C(auto)%h %ad %an %d %s %gn' --abbrev-commit --all --date=format:'%H:%M %d/%m/%Y'
@@ -31,3 +32,11 @@
     rebase = true
 [rerere]
     enabled = true
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true
+    line-numbers = true
+    side-by-side = true
+    keep-plus-minus-markers = false
+    syntax-theme = none
