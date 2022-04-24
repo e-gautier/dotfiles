@@ -11,9 +11,6 @@ set smartcase
 set incsearch
 set hlsearch
 
-" colors
-set background=dark
-
 " tab
 set expandtab
 set shiftwidth=4
@@ -35,8 +32,8 @@ autocmd BufReadPost *
 " vim statusbar
 set laststatus=2
 
-" Airline theme
-let g:airline_theme = 'codedark'
+" Lightline theme
+let g:lightline = {'colorscheme': 'wombat'}
 
 " Load Pathogen
 runtime bundle/vim-pathogen/autoload/pathogen.vim
@@ -53,9 +50,6 @@ colorscheme codedark
 
 " override search highlight color
 hi Search ctermfg=black ctermbg=yellow
-
-" tmuxline disable arrow separators
-let g:tmuxline_powerline_separators = 0
 
 " allow to save with sudo
 cmap w!! w !sudo tee > /dev/null %
