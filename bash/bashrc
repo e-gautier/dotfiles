@@ -30,6 +30,9 @@ fi
 # local bin
 PATH=$PATH:~/.local/bin
 
+# local Homebrew
+PATH=$PATH:~/.homebrew/bin
+
 # git prompt
 . ~/.git-prompt
 
