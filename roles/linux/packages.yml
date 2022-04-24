@@ -122,6 +122,7 @@ packages:
     - mtr # traceroute+ping alternative
     - xxd # hex dump
     - entr # file watcher
+    - ldns-utils # drill = dig with DNSSEC
   ui:
     - xorg
     - i3
