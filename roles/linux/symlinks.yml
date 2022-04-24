@@ -34,4 +34,3 @@ links:
   ~/.config/redshift: redshift/redshift
   ~/.config/polybar/config: polybar/config
   ~/.editorconfig: editorconfig/editorconfig
-  ~/.shutter/settings.xml: shutter/settings.xml
