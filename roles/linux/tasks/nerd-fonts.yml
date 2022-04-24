@@ -1,0 +1,7 @@
+---
+- name: clone Nerd-fonts
+  git:
+    repo: https://github.com/ryanoasis/nerd-fonts.git
+    dest: ~/.nerdfonts
+- name: install Nerdfonts
+  shell: ~/.nerdfonts/install.sh

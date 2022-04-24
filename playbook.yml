@@ -17,6 +17,10 @@
       prompt: install vimyoucompleteme? [y/N]
       default: "N"
       private: no
+    - name: install_nerdfonts
+      prompt: install Nerdfonts? [y/N]
+      default: "N"
+      private: no
     - name: install_snaps
       prompt: install snaps? [y/N]
       default: "N"
