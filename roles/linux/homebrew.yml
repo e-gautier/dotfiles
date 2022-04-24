@@ -1,4 +1,5 @@
 ---
 homebrew:
-  - dog
-  - pgcli
+  - dog # dig alternative
+  - pgcli # psql alternative
+  - dust # du alternative
