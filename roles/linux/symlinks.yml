@@ -29,7 +29,6 @@ links:
   ~/.config/terminator/config: terminator/config
   ~/.config/VSCodium/User/keybindings.json: vscodium/keybindings.json
   ~/.config/VSCodium/User/settings.json: vscodium/settings.json
-  ~/.config/copyq/copyq.conf: copyq/copyq.conf
   ~/.xscreensaver: xscreensaver/xscreensaver
   ~/.config/redshift: redshift/redshift
   ~/.config/polybar/config: polybar/config
