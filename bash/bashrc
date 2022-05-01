@@ -6,7 +6,7 @@ esac
 HISTCONTROL=ignoreboth
 HISTSIZE=-1
 HISTFILESIZE=-1
-
+HISTTIMEFORMAT="%F %T "
 
 # aliases
 if [ -f ~/.bash_aliases ]; then
