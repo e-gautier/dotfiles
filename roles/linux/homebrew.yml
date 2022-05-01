@@ -3,3 +3,4 @@ homebrew:
   - dog # dig alternative
   - pgcli # psql alternative
   - dust # du alternative
+  - diff-so-fancy # diff interpreter
