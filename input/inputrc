@@ -1,0 +1,4 @@
+$include  /etc/inputrc
+
+# alt-z to replay 'cd -'
+"\ez": "cd -\015"

@@ -33,3 +33,4 @@ links:
   ~/.config/redshift: redshift/redshift
   ~/.config/polybar/config: polybar/config
   ~/.editorconfig: editorconfig/editorconfig
+  ~/.inputrc: input/inputrc
