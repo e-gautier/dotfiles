@@ -164,6 +164,7 @@ packages:
     - polybar
     - gucharmap # font preview
     - nomacs # image viewer
+    - inkscape # vector-based image editor
   apps:
     - feh
     - caja
