@@ -45,9 +45,9 @@ if [ -x "$(command -v setxkbmap)" ]; then
 fi
 
 # Ctrl-r remapping
-if [ -x "$(command -v fzf)" ]; then
-   bind -x '"\C-r": history | fzf --height=5 --layout=reverse +i --tac --prompt="search: " --color=bw --bind=tab:down,btab:up,change:top --no-multi --info=inline --tiebreak=index'
-fi
+#if [ -x "$(command -v fzf)" ]; then
+#   bind -x '"\C-r": history | fzf --height=5 --layout=reverse +i --tac --prompt="search: " --color=bw --bind=tab:down,btab:up,change:top --no-multi --info=inline --tiebreak=index'
+#fi
 
 PROMPT_COMMAND=prompt
 
