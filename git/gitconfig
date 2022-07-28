@@ -20,6 +20,7 @@
     ps = push
     pl = pull
     pull = pull --autostash
+    fom = fetch origin master:master
 [winUpdater]
     recentlySeenVersion = 2.22.0.windows.1
 [merge]
