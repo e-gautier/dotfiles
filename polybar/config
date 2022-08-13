@@ -129,29 +129,6 @@ type = internal/memory
 label = M:%percentage_used%%
 interval = 1
 
-[module/powermenu]
-type = custom/menu
-format-spacing = 1
-label-open = 
-label-close = cancel
-label-separator = |
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = poweroff
-menu-0-1-exec = menu-open-2
-menu-0-2 = hibernate
-menu-0-2-exec = menu-open-3
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = reboot
-menu-2-0 = poweroff
-menu-2-0-exec = poweroff
-menu-3-0 = hibernate
-menu-3-0-exec = systemctl hibernate
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
-
 [module/fan]
 type = custom/script
 exec = sensors | grep fan1 | awk '{print $2}'
