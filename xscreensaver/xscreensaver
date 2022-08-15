@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.44 for etienne on Sun Apr 26 00:42:06 2020.
+# Written by xscreensaver-settings 6.04-1.fc35 for etienne on Mon Aug 15 13:51:38 2022.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	4:00:00
@@ -10,18 +10,13 @@ passwdTimeout:	0:00:15
 visualID:	default
 installColormap:    True
 verbose:	False
-timestamp:	True
 splash:		False
 splashDuration:	0:00:05
 demoCommand:	xscreensaver-demo
-prefsCommand:	
 nice:		10
-memoryLimit:	0
 fade:		True
 unfade:		False
 fadeSeconds:	0:00:03
-fadeTicks:	20
-captureStderr:	False
 ignoreUninstalledPrograms:True
 font:		*-medium-r-*-140-*-m-*
 dpmsEnabled:	False
@@ -42,6 +37,7 @@ textLiteral:	XScreenSaver
 textFile:	/etc/fedora-release
 textProgram:	uname -a
 textURL:	http://planet.fedoraproject.org/rss20.xml
+dialogTheme:	default
 
 programs:								      \
 				maze -root				    \n\
@@ -282,15 +278,18 @@ programs:								      \
 -				scooter -root				    \n\
 - GL: 				etruscanvenus -root			    \n\
 - GL: 				gibson -root				    \n\
+- GL: 				beats -root				    \n\
+- GL: 				covid19 -root				    \n\
+- GL: 				headroom -root				    \n\
+- GL: 				sphereeversion -root			    \n\
+-				binaryhorizon -root			    \n\
+-				marbling -root				    \n\
+  GL: 				mapscroller -root			    \n\
+- GL: 				squirtorus -root			    \n\
+- GL: 				chompytower -root			    \n\
+- GL: 				nakagin -root				    \n\
 
 
-pointerPollTime:    0:00:05
 pointerHysteresis:  10
-windowCreationTimeout:0:00:30
-initialDelay:	0:00:00
-GetViewPortIsFullOfLies:False
-procInterrupts:	True
-xinputExtensionDev: False
-overlayStderr:	True
 authWarningSlack:   20
 
