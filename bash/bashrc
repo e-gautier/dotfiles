@@ -28,10 +28,13 @@ if ! shopt -oq posix; then
 fi
 
 # local bin
-PATH=$PATH:~/.local/bin
+PATH=$PATH:~/.local/bin:~/bin
 
 # local Homebrew
 PATH=$PATH:~/.homebrew/bin
+
+# go path
+PATH=$PATH:/usr/local/go/bin
 
 # git prompt
 . ~/.git-prompt
