@@ -21,6 +21,7 @@ packages:
     - rsync
     - dnf-plugin-system-upgrade
     - dnf-automatic
+    - exfatprogs # exfat support
   dev:
     - ShellCheck
     - git
