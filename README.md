@@ -71,15 +71,12 @@ systemctl enable --now nftables
 ```
 ### UBlock Origin filters
 ```
-! 5/16/2020 https://www.google.com
 ! block ad div
 www.google.com##div[id^="ed_"]
 
-! 6/7/2020 https://www.google.com
 ! block ppl searched for div
-www.google.com###eob_7 > .AUiS2
+google.com##.AUiS2
 
-! 5/25/2020 https://www.youtube.com
 ! block Youtube recommendations
 www.youtube.com##ytd-browse[page-subtype="home"] #primary
 
