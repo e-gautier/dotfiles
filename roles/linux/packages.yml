@@ -22,6 +22,7 @@ packages:
     - dnf-plugin-system-upgrade
     - dnf-automatic
     - exfatprogs # exfat support
+    - power-profiles-daemon # DBus-based power management
   dev:
     - ShellCheck
     - git
@@ -139,10 +140,6 @@ packages:
     - gtk-v4l # Video4Linux
     - yad # gtk dialog
     - xss-lock
-    - tlp
-    - tlp-rdw
-    - akmod-acpi_call # tlp suite
-    - akmod-tp_smapi # tlp suite
     - powertop
     - xbindkeys
     - lm_sensors

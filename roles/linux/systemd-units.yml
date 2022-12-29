@@ -8,7 +8,7 @@ units:
     enabled:
       - systemd-timesyncd
       - powertop
-      - tlp
+      - power-profiles-daemon
     disabled:
       - rsyslog
       - pmcd
@@ -20,5 +20,3 @@ units:
       - firewalld
       - crond
       - chronyd
-    masked:
-      - systemd-rfkill.socket # tlp requirement
