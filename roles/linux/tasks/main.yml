@@ -89,9 +89,6 @@
 - name: nftables
   import_tasks: nftables.yml
   become: yes
-- name: vimyoucompleteme
-  import_tasks: vimyoucompleteme.yml
-  when: install_vimyoucompleteme != "N"
 - name: Nerdfonts
   import_tasks: nerd-fonts.yml
   when: install_nerdfonts != "N"
