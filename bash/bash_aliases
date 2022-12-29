@@ -27,6 +27,7 @@ if ip >/dev/null 2>&1; then
 	alias nmapthis="nmap -sn $(ip route | tail -n 1 | sed -r 's/^(((25[0-5]|2[0-4][[:digit:]]|1[[:digit:]][[:digit:]]|[1-9][[:digit:]]|[[:digit:]])\.){3}(25[0-5]|2[0-4][[:digit:]]|1[[:digit:]][[:digit:]]|[1-9][[:digit:]]|[[:digit:]])\/[[:digit:]]+).+$/\1/')"
 fi
 alias vi="vim -u NONE"
+alias py="python"
 
 # Create a dirctory and move into it.
 function mkcd {
