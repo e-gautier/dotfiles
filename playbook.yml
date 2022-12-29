@@ -13,8 +13,8 @@
       prompt: install Homebrew? [y/N]
       default: "N"
       private: no
-    - name: install_vimyoucompleteme
-      prompt: install vimyoucompleteme? [y/N]
+    - name: install_pip_packages
+      prompt: install pip packages? [y/N]
       default: "N"
       private: no
     - name: install_nerdfonts
@@ -37,3 +37,4 @@
       include_role:
         name: linux
       when: ansible_system == "Linux"
+      tags: always

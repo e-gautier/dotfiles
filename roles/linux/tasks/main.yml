@@ -63,6 +63,13 @@
     name: "{{ packages[item] }}"
     state: present
   loop: "{{ install_packages.split(',') }}"
+- name: Pip packages
+  when: install_pip_packages != "N"
+  pip:
+    name: "{{ pip }}"
+    extra_args: --user
+      #loop: "{{ pip }}"
+  tags: pip
 - name: Homebrew clone
   git:
     repo: https://github.com/Homebrew/brew

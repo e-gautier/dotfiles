@@ -10,6 +10,7 @@
   include_vars: "{{ role_path }}/{{ item }}"
   loop:
     - packages.yml
+    - pip-packages.yml
     - homebrew.yml
     - symlinks.yml
     - systemd-units.yml
@@ -17,5 +18,6 @@
     - vscodium-extensions.yml
     - snaps.yml
     - rpm-keys.yml
+  tags: always
 - name: ansible.services.facts
   ansible.builtin.service_facts:
