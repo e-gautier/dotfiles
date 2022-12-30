@@ -68,8 +68,6 @@
   pip:
     name: "{{ pip }}"
     extra_args: --user
-      #loop: "{{ pip }}"
-  tags: pip
 - name: Homebrew clone
   git:
     repo: https://github.com/Homebrew/brew
