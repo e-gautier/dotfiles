@@ -1,0 +1,11 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: services facts loading
+      service_facts:
+    - name: assert required services are enabled
+      assert:
+        that:
+          - ansible_facts.services["systemd-resolved.service"]["status"] == "enabled"

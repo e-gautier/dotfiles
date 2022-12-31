@@ -1,5 +1,11 @@
 ---
-collections:
-  - community.general
-  - community.crypto
-  - ansible.posix
+namespace: main
+name: dotfiles
+version: 1.0.0
+readme: README.md
+authors:
+  - etienne
+dependencies:
+  "community.general": "*"
+  "community.crypto": "*"
+  "ansible.posix": "*"

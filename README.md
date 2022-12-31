@@ -12,6 +12,14 @@ Invoke-Expression((New-Object System.Net.WebClient).DownloadString('https://git.
 - curl
 ## Dependencies
 - [Pathogen.vim](https://github.com/tpope/vim-pathogen)
+## Tests
+```bash
+pip install -U --user pip molecule molecule-vagrant ansible ansible-core ansible-lint yamllint
+dnf install -y vagrant vagrant-libvirt
+vagrant plugin install vagrant-libvirt
+systemctl start libvirtd
+molecule test
+```
 ## Install a Vim plugin
 ```
 git submodule add PLUGIN_GIT_REPO vim/bundle/PLUGIN_NAME
