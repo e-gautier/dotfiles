@@ -16,7 +16,4 @@ provisioner:
     ANSIBLE_PLAYBOOK_DIR: "../.."
 verifier:
   name: ansible
-lint: |
-  set -e
-  yamllint .
-  ansible-lint
+lint: ansible-lint --project-dir roles

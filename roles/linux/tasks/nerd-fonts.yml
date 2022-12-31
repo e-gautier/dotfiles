@@ -1,7 +1,9 @@
 ---
-- name: clone Nerd-fonts
-  git:
+- name: Clone Nerd-fonts
+  ansible.builtin.git:
     repo: https://github.com/ryanoasis/nerd-fonts.git
     dest: ~/.nerdfonts
-- name: install Nerdfonts
-  shell: ~/.nerdfonts/install.sh
+- name: Install Nerdfonts
+  ansible.builtin.command: ~/.nerdfonts/install.sh
+  register: output
+  changed_when: output.rc != 0

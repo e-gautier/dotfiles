@@ -1,0 +1,13 @@
+---
+- name: Install dnf plugins-core
+  ansible.builtin.package:
+    name: dnf-plugins-core
+    state: present
+- name: Install Hashicorp repo
+  ansible.builtin.command: dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+  register: output
+  changed_when: output.rc != 0
+- name: Install Vagrant
+  ansible.builtin.package:
+    name: vagrant
+    state: present

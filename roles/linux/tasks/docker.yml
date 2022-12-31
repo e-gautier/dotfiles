@@ -1,23 +1,27 @@
 ---
-- name: dnf.plugins-core
-  package:
+- name: Install dnf plugins-core
+  ansible.builtin.package:
     name: dnf-plugins-core
     state: present
-- name: docker.repo
-  shell: dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
-- name: docker.install
-  package:
+- name: Install Docker repo
+  ansible.builtin.command: dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+  register: output
+  changed_when: output.rc != 0
+- name: Install Docker
+  ansible.builtin.package:
     name:
       - docker-ce
       - docker-ce-cli
       - containerd.io
     state: present
-- name: docker.service
-  systemd:
+- name: Restart Docker service
+  ansible.builtin.systemd:
     name: "{{ item }}"
     state: restarted
-    enabled: yes
-    daemon_reload: yes
+    enabled: true
+    daemon_reload: true
   loop:
-      - docker
-      - containerd
+    - docker
+    - containerd
+  register: output
+  changed_when: output.state != "started"

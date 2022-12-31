@@ -1,25 +1,25 @@
 ---
-- name: ansible.requirements
-  import_tasks: requirements.yml
-- name: rpm.keys
-  become: yes
-  rpm_key:
+- name: Run requirements
+  ansible.builtin.import_tasks: requirements.yml
+- name: Add RPM keys
+  become: true
+  ansible.builtin.rpm_key:
     key: "{{ item }}"
   loop: "{{ rpm_keys }}"
-- name: dnf.repos
-  become: yes
-  dnf:
+- name: Install dnf repos
+  become: true
+  ansible.builtin.dnf:
     name: "{{ item }}"
   loop: "{{ dnf.repos }}"
-- name: Microsoft.repo
-  become: yes
-  get_url:
+- name: Install Microsoft repo
+  become: true
+  ansible.builtin.get_url:
     url: https://packages.microsoft.com/config/rhel/7/prod.repo
     dest: /etc/yum.repos.d/microsoft.repo
-    force: yes
-- name: VSCode.repo
-  become: yes
-  copy:
+    force: true
+- name: Install VSCodium repo
+  become: true
+  ansible.builtin.copy:
     content: |
       [gitlab.com_paulcarroty_vscodium_repo]
       name=gitlab.com_paulcarroty_vscodium_repo
@@ -29,14 +29,14 @@
       repo_gpgcheck=1
       gpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
     dest: /etc/yum.repos.d/vscodium.repo
-- name: battery.low.threshold
-  become: yes
-  copy:
+- name: Configure battery low threshold
+  become: true
+  ansible.builtin.copy:
     content: SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[0-10]", RUN+="/usr/bin/systemctl hybrid-sleep"
     dest: /etc/udev/rules.d/99-low-battery.rules
-- name: logind.configuration
-  become: yes
-  replace:
+- name: Setup logind configuration
+  become: true
+  ansible.builtin.replace:
     path: /etc/systemd/logind.conf
     regexp: "^#{{ item }}(=.*)$"
     replace: "{{ item }}\\1"
@@ -47,60 +47,67 @@
     - HandleLidSwitch
     - HandleLidSwitchExternalPower
     - HandleLidSwitchDocked
-- name: dns
-  import_tasks: dns.yml
-  become: yes
-- name: docker
-  import_tasks: docker.yml
-  become: yes
-- name: updates.security
-  import_tasks: security-updates.yml
-  become: yes
-- name: packages
-  become: yes
+- name: Setup DNS configuration
+  ansible.builtin.import_tasks: dns.yml
+  become: true
+- name: Setup Docker
+  ansible.builtin.import_tasks: docker.yml
+  become: true
+- name: Setup Vagrant
+  ansible.builtin.import_tasks: vagrant.yml
+  become: true
+- name: Setup security updates
+  ansible.builtin.import_tasks: security-updates.yml
+  become: true
+- name: Install packages
+  become: true
   when: install_packages is defined and install_packages != "N"
-  package:
+  ansible.builtin.package:
     name: "{{ packages[item] }}"
     state: present
   loop: "{{ install_packages.split(',') }}"
-- name: Pip packages
+- name: Install Pip packages
   when: install_pip_packages is defined and install_pip_packages != "N"
-  pip:
+  ansible.builtin.pip:
     name: "{{ pip }}"
     extra_args: --user
-- name: Homebrew clone
-  git:
+- name: Homebrew clone repo
+  ansible.builtin.git:
     repo: https://github.com/Homebrew/brew
     dest: ~/.homebrew
   when: install_homebrew is defined and install_homebrew != "N"
-- name: Homebrew packages
+- name: Install Homebrew packages
   community.general.homebrew:
     path: ~/.homebrew/bin
     name: "{{ homebrew }}"
-    update_homebrew: yes
-    upgrade_all: yes
+    update_homebrew: true
+    upgrade_all: true
   when: install_homebrew is defined and  install_homebrew != "N"
-- name: symlinks
-  import_tasks: symlinks.yml
-- name: install font
-  shell: if hash fc-cache 2>/dev/null; then fc-cache -f; fi
-- name: nftables
-  import_tasks: nftables.yml
-  become: yes
-- name: Nerdfonts
-  import_tasks: nerd-fonts.yml
+- name: Setup symlinks
+  ansible.builtin.import_tasks: symlinks.yml
+- name: Install fonts
+  ansible.builtin.shell: if hash fc-cache 2>/dev/null; then fc-cache -f; fi
+  register: output
+  changed_when: output.rc != 0
+- name: Setup nftables
+  ansible.builtin.import_tasks: nftables.yml
+  become: true
+- name: Setup Nerdfonts
+  ansible.builtin.import_tasks: nerd-fonts.yml
   when: install_nerdfont is defined and install_nerdfonts != "N"
-- name: VSCode.extensions
-  shell:
+- name: Install VSCode extensions
+  ansible.builtin.shell:
     cmd: "codium --install-extension {{ item }} ||:"
   loop: "{{ vscodium_extensions }}"
-- name: snaps
+  register: output
+  changed_when: output.rc != 0
+- name: Install snaps
   community.general.snap:
     name: "{{ snaps }}"
   when: install_snaps is defined and install_snaps != "N"
-- name: powertop.unit
-  become: yes
-  template:
+- name: Setup powertop unit
+  become: true
+  ansible.builtin.template:
     src: unit.service.j2
     dest: /etc/systemd/system/powertop.service
   vars:
@@ -108,40 +115,42 @@
     type: oneshot
     exec_start: /usr/sbin/powertop --auto-tune
     wanted_by: multi-user.target
-- name: systemd.user.enable
-  systemd:
+- name: Enable systemd user services
+  ansible.builtin.systemd:
     name: "{{ item }}"
     scope: user
     state: restarted
-    enabled: yes
-    daemon_reload: yes
+    enabled: true
+    daemon_reload: true
   loop: "{{ units.user.enabled }}"
-  ignore_errors: yes
-- name: systemd.system.enable
-  become: yes
-  systemd:
+  ignore_errors: true
+- name: Enable systemd system services
+  become: true
+  ansible.builtin.systemd:
     name: "{{ item }}"
     state: restarted
-    enabled: yes
-    daemon_reload: yes
+    enabled: true
+    daemon_reload: true
   loop: "{{ units.system.enabled }}"
-  ignore_errors: yes
-- name: systemd.system.disable
-  become: yes
-  systemd:
+  ignore_errors: true
+  register: output
+  changed_when: output.enabled != true
+- name: Disable systemd system services
+  become: true
+  ansible.builtin.systemd:
     name: "{{ item }}"
     state: stopped
-    enabled: no
-    daemon_reload: yes
+    enabled: false
+    daemon_reload: true
   when: item ~ ".service" in ansible_facts.services
   loop: "{{ units.system.disabled }}"
-  ignore_errors: yes
-- name: user.groups
-  become: yes
-  user:
+  ignore_errors: true
+- name: Put user in groups
+  become: true
+  ansible.builtin.user:
     name: etienne
     groups:
       - docker
       - wireshark
-    append: yes
-  ignore_errors: yes
+    append: true
+  ignore_errors: true

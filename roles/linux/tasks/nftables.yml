@@ -1,20 +1,22 @@
 ---
-- name: install Nftables
-  become: yes
-  package:
+- name: Install Nftables
+  become: true
+  ansible.builtin.package:
     name: nftables
-- name: nft.inet.filter.copy
-  copy:
+- name: Setup nft.inet.filter rules
+  ansible.builtin.copy:
     src: "{{ role_path }}/../../nftables/inet-filter.nft"
     dest: /etc/nftables/inet-filter.nft
-- name: nft.inet.filter.uncomment
-  lineinfile:
+- name: Enable nft inet.filter rules
+  ansible.builtin.lineinfile:
     path: /etc/sysconfig/nftables.conf
     regexp: ^# include "\/etc\/nftables\/inet\-filter.nft"$
     line: include "/etc/nftables/inet-filter.nft"
-- name: nft.service
-  systemd:
+- name: Restart nft service
+  ansible.builtin.systemd:
     name: nftables
     state: restarted
-    enabled: yes
-    daemon_reload: yes
+    enabled: true
+    daemon_reload: true
+  register: output
+  changed_when: output.state != "started"

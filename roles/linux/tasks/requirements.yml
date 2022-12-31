@@ -1,13 +1,13 @@
 ---
-- name: lsb.install
-  become: yes
-  package:
+- name: Install lsb requirements
+  become: true
+  ansible.builtin.package:
     name:
       - redhat-lsb-core
       - fedora-release
     state: present
-- name: vars.files
-  include_vars: "{{ role_path }}/{{ item }}"
+- name: Source variables files
+  ansible.builtin.include_vars: "{{ role_path }}/{{ item }}"
   loop:
     - packages.yml
     - pip-packages.yml
@@ -19,5 +19,5 @@
     - snaps.yml
     - rpm-keys.yml
   tags: always
-- name: ansible.services.facts
+- name: Source Ansible services facts
   ansible.builtin.service_facts:

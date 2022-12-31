@@ -1,0 +1,4 @@
+skip_list:
+    - latest[git]
+    - ignore-errors
+    - risky-file-permissions

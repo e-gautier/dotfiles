@@ -1,10 +1,10 @@
 ---
-- name: dnf.security.install
-  package:
+- name: Install dnf security auto updates
+  ansible.builtin.package:
     name: dnf-automatic
     state: present
-- name: dnf.security.configure
-  replace:
+- name: Configure dnf security auto update
+  ansible.builtin.replace:
     path: /etc/dnf/automatic.conf
     regexp: "{{ item.key }}"
     replace: "{{ item.value }}"
@@ -13,9 +13,11 @@
     items:
       upgrade_type = default: upgrade_type = security
       apply_updates = no: apply_updates = yes
-- name: dnf.security.service
-  systemd:
+- name: Restart dnf security service
+  ansible.builtin.systemd:
     name: dnf-automatic.timer
     state: restarted
-    enabled: yes
-    daemon_reload: yes
+    enabled: true
+    daemon_reload: true
+  register: output
+  changed_when: output.state != "started"
