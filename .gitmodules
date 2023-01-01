@@ -124,3 +124,6 @@
 [submodule "vim/bundle/vim-auto-save"]
 	path = vim/bundle/vim-auto-save
 	url = https://github.com/907th/vim-auto-save.git
+[submodule "vim/bundle/fzf"]
+	path = vim/bundle/fzf
+	url = https://github.com/junegunn/fzf.vim.git

@@ -1,40 +1,40 @@
 # ansible-galaxy install -r galaxy-roles.yml
 # ansible-playbook -K playbook.yml
 ---
-- name: dotfiles
+- name: Dotfiles
   connection: local
   hosts: localhost
   vars_prompt:
     - name: install_packages
       prompt: install what packages? [core,dev,ui,apps,misc/N]
       default: "N"
-      private: no
+      private: false
     - name: install_homebrew
       prompt: install Homebrew? [y/N]
       default: "N"
-      private: no
+      private: false
     - name: install_pip_packages
       prompt: install pip packages? [y/N]
       default: "N"
-      private: no
+      private: false
     - name: install_nerdfonts
       prompt: install Nerdfonts? [y/N]
       default: "N"
-      private: no
+      private: false
     - name: install_snaps
       prompt: install snaps? [y/N]
       default: "N"
-      private: no
+      private: false
   tasks:
-    - name: assert.version
-      assert:
+    - name: Assert version
+      ansible.builtin.assert:
         that: "{{ ansible_version.full is version(ansible_core_version, '>=') }}"
         success_msg: "Ansible version >= {{ ansible_core_version }}"
         fail_msg: "Ansible version < {{ ansible_core_version }}"
       vars:
         ansible_core_version: 2.12
-    - name: role.linux
-      include_role:
+    - name: Include Linux role
+      ansible.builtin.include_role:
         name: linux
       when: ansible_system == "Linux"
       tags: always
