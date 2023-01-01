@@ -13,5 +13,8 @@ LC_TELEPHONE=fr_FR.UTF-8
 LC_MEASUREMENT=fr_FR.UTF-8
 LC_IDENTIFICATION=fr_FR.UTF-8
 
-# editor
+# editor, pagers, etc
 EDITOR=vim
+VISUAL=bat
+PAGER=bat
+MANPAGER=bat
