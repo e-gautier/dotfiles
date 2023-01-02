@@ -126,6 +126,10 @@ packages:
     - xxd # hex dump
     - entr # file watcher
     - ldns-utils # drill = dig with DNSSEC
+    - parallel # run multiple commands at the same time
+    - watchexec # file watcher
+    - the_silver_searcher # find alternative
+    - just # task runner
   ui:
     - xorg
     - i3
