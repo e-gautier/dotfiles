@@ -4,6 +4,11 @@ syntax on
 
 " update file is modified
 set autoread
+" map ; to reload buffer
+nmap ; :e <Enter>
+" notify on buffer reload
+autocmd FileChangedShellPost *
+    \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
 " search
 set ignorecase
@@ -17,11 +22,14 @@ set shiftwidth=4
 set tabstop=4
 
 " line width limit
-set colorcolumn=120
+set colorcolumn=100
 
 set number
 set showcmd
 set mouse=a
+
+" persistent hitory
+set undofile
 
 " Return to last edit position when opening files
 autocmd BufReadPost *
@@ -33,7 +41,7 @@ autocmd BufReadPost *
 set laststatus=2
 
 " Lightline theme
-let g:lightline = {'colorscheme': 'wombat'}
+let g:lightline = {"colorscheme": "deus"}
 
 " Load Pathogen
 runtime bundle/vim-pathogen/autoload/pathogen.vim
