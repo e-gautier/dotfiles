@@ -44,8 +44,19 @@ set laststatus=2
 let g:lightline = {"colorscheme": "deus"}
 
 " Load Pathogen
+let g:pathogen_disabled = ["vim-sensible"]
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
+
+" disable format options
+set formatoptions=
+
+" disable auto indent
+filetype indent off
+set autoindent&
+set cindent&
+set smartindent&
+set indentexpr&
 
 " indent visual indicator
 let g:indent_guides_enable_on_vim_startup = 1
@@ -73,4 +84,11 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
 " FZF shortcut
 nmap , :Files <Enter>
+
+" Nerdtree hidden files
+let NERDTreeShowHidden=1
+
+" move line up/down shortcuts
+map <C-k> :m-2 <Enter>
+map <C-j> :m+1 <Enter>
 
