@@ -18,26 +18,13 @@ if [ -f ~/.profile  ]; then
     . ~/.profile
 fi
 
-# completion
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
+# profile directory
+if [ -d ~/.profile.d ]; then
+    for file in ~/.profile.d/*; do source $file; done
 fi
 
 # local bin
-PATH=$PATH:~/.local/bin:~/bin
-
-# local Homebrew
-PATH=$PATH:~/.homebrew/bin
-
-# go path
-PATH=$PATH:/usr/local/go/bin
-
-# git prompt
-. ~/.git-prompt
+PATH=$PATH:~/.local/bin:~/.bin
 
 # umask
 umask 0077
@@ -46,11 +33,6 @@ umask 0077
 if [ -x "$(command -v setxkbmap)" ]; then
    setxkbmap -option caps:swapescape
 fi
-
-# Ctrl-r remapping
-#if [ -x "$(command -v fzf)" ]; then
-#   bind -x '"\C-r": history | fzf --height=5 --layout=reverse +i --tac --prompt="search: " --color=bw --bind=tab:down,btab:up,change:top --no-multi --info=inline --tiebreak=index'
-#fi
 
 PROMPT_COMMAND=prompt
 
@@ -64,3 +46,4 @@ prompt() {
 
 # enable forward search with ctrl s
 stty -ixon
+

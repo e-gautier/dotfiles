@@ -23,6 +23,7 @@ packages:
     - dnf-automatic
     - exfatprogs # exfat support
     - power-profiles-daemon # DBus-based power management
+    - bash-completion
   dev:
     - ShellCheck
     - git

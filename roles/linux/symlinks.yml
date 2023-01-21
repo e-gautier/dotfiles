@@ -9,17 +9,15 @@ links:
   ~/.bashrc: bash/bashrc
   ~/.bash_aliases: bash/bash_aliases
   ~/.bash_profile: bash/bash_profile
+  ~/.profile.d: bash/profile.d
+  ~/.profile: locales/profile
   ~/.gitconfig: git/gitconfig
   ~/.config/git/ignore: git/gitignore
-  ~/.git-prompt: git/git-prompt
-  ~/.local/bin/alttab: bin/alttab
-  ~/.local/bin/extract: bin/extract
-  ~/.local/bin/i3lock-fancy: bin/i3lock-fancy
+  ~/.bin: bin
   ~/.config/ranger/rc.conf: ranger/rc.conf
   ~/.config/procps/toprc: top/toprc
   ~/.fonts: fonts
   ~/.config/fontconfig/fonts.conf: fontconfig/fonts.conf
-  ~/.profile: locales/profile
   ~/.config/neofetch/config.conf: neofetch/config.conf
   ~/.config/i3: i3
   ~/.config/rofi/config: rofi/config
