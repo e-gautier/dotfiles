@@ -18,7 +18,6 @@ links:
   ~/.config/procps/toprc: top/toprc
   ~/.fonts: fonts
   ~/.config/fontconfig/fonts.conf: fontconfig/fonts.conf
-  ~/.config/neofetch/config.conf: neofetch/config.conf
   ~/.config/i3: i3
   ~/.config/rofi/config: rofi/config
   ~/.config/systemd/user/tmux.service: systemd/user/tmux.service
