@@ -79,9 +79,6 @@
 [submodule "vim/bundle/vim-auto-save"]
 	path = vim/bundle/vim-auto-save
 	url = https://github.com/907th/vim-auto-save.git
-[submodule "vim/bundle/fzf"]
-	path = vim/bundle/fzf
-	url = https://github.com/junegunn/fzf.vim.git
 [submodule "vim/bundle/vim-visual-multi"]
 	path = vim/bundle/vim-visual-multi
 	url = https://github.com/mg979/vim-visual-multi.git
@@ -103,3 +100,9 @@
 [submodule "vim/bundle/ale"]
 	path = vim/bundle/ale
 	url = https://github.com/dense-analysis/ale.git
+[submodule "vim/bundle/fzf.vim"]
+	path = vim/bundle/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
+[submodule "vim/bundle/fzf"]
+	path = vim/bundle/fzf
+	url = https://github.com/junegunn/fzf.git
