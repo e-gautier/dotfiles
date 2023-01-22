@@ -131,6 +131,7 @@ packages:
     - watchexec # file watcher
     - the_silver_searcher # find alternative
     - just # task runner
+    - genisoimage
   ui:
     - xorg
     - i3
