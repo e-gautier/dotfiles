@@ -1,0 +1,234 @@
+# sudo is required to chroot
+#
+# sudo ansible-galaxy collection install community.general
+# sudo ansible-galaxy collection install community.crypto
+# sudo ansible-galaxy collection install ansible.posix
+#
+# sudo ansible-playbook -K -i hosts -e "release=33" -e "device=/dev/sdb" -e "mountpoint=/tmp/root" -e "clean=true" playbook.yml
+# 
+# stuck in a boot loop? set SELinux to permissive mode in /etc/selinux/config and fix
+#
+---
+- name: dotfiles
+  connection: local
+  hosts: localhost
+  gather_facts: no
+  become: yes
+  vars_prompt:
+    - name: passphrase
+      prompt: Luks passphrase
+    - name: user
+      prompt: User
+      private: no
+    - name: password
+      prompt: User password
+    - name: hostname
+      prompt: Hostname
+      private: no
+  tasks:
+    - name: partition_table.delete
+      command: "sfdisk --delete {{ device }}"
+    - name: partprobe
+      command: "partprobe {{ device }}"
+    - name: partition.boot
+      parted:
+        device: "{{ device }}"
+        name: boot
+        part_end: 1GiB
+        state: present
+        label: gpt
+        flags:
+          - boot
+        number: 1
+    - name: partition.root
+      parted:
+        device: "{{ device }}"
+        name: root
+        part_start: 1GiB
+        part_type: logical
+        state: present
+        label: gpt
+        number: 2
+        flags:
+          - lvm
+    - name: partprobe
+      command: "partprobe {{ device }}"
+    - name: luks.root
+      no_log: yes
+      community.crypto.luks_device:
+        device: "{{ device }}2"
+        name: luks-root
+        state: opened
+        passphrase: "{{ passphrase }}"
+    - name: lvm.volume_group
+      lvg:
+        pvs: /dev/mapper/luks-root
+        vg: lvm1
+    - name: lvm.volume
+      lvol:
+        lv: "{{ item.lv }}"
+        pvs: /dev/mapper/luks-root
+        size: "{{ item.size }}"
+        vg: lvm1
+        shrink: "{{ item.shrink }}"
+      loop:
+        - { lv: swap, size: 9G, shrink: yes }
+        - { lv: home, size: 5G, shrink: yes }
+        - { lv: root, size: 100%FREE, shrink: no }
+    - name: filesystem
+      filesystem:
+        dev: "/dev/lvm1/{{ item.dev }}"
+        fstype: "{{ item.fstype }}"
+      loop:
+        - { dev: root, fstype: btrfs }
+        - { dev: home, fstype: btrfs }
+        - { dev: swap, fstype: swap }
+    - name: boot.uuid
+      command: "blkid -s UUID -o value {{ device }}1"
+      register: boot_uuid
+    - name: luks.uuid
+      command: "blkid -s UUID -o value {{ device }}2"
+      register: luks_uuid
+    - name: root.uuid
+      command: "blkid -s UUID -o value /dev/mapper/lvm1-root"
+      register: root_uuid
+    - name: home.uuid
+      command: "blkid -s UUID -o value /dev/mapper/lvm1-home"
+      register: home_uuid
+    - name: swap.uuid
+      command: "blkid -s UUID -o value /dev/mapper/lvm1-swap"
+      register: swap_uuid
+    - name: mount.root
+      mount:
+        fstab: /tmp/fstab.tmp
+        src: "{{ item.src }}"
+        path: "{{ item.path }}"
+        fstype: "{{ item.fstype }}"
+        state: mounted
+      loop:
+        - { src: /dev/lvm1/root, path: "{{ mountpoint }}", fstype: btrfs }
+        - { src: /dev/lvm1/home, path: "{{ mountpoint }}/home", fstype: btrfs }
+        - { src: "{{ device }}1", path: "{{ mountpoint }}/boot", fstype: vfat }
+        - { src: none, path: "{{ mountpoint }}/proc", fstype: proc }
+        - { src: none, path: "{{ mountpoint }}/sys", fstype: sysfs }
+    - name: dnf.install.filesystem
+      dnf:
+        releasever: "{{ release }}"
+        installroot: "{{ mountpoint }}"
+        name: basesystem,dnf,bash,fedora-release,system-release,fedora-repos
+    - name: fstab.create
+      copy:
+        dest: "{{ mountpoint }}/etc/fstab"
+        content: |
+          # /dev/mapper/lvm1-root
+          UUID={{ root_uuid.stdout }} / btrfs defaults 0 1
+          # {{ device }}1
+          UUID={{ boot_uuid.stdout }} /boot vfat defaults 0 2
+          # /dev/mapper/lvm1-home
+          UUID={{ home_uuid.stdout }} /home btrfs defaults	0 2
+          # /dev/mapper/lvm1-swap
+          UUID={{ swap_uuid.stdout }} none swap defaults 0 0
+    - name: crypttab.create
+      no_log: yes
+      crypttab:
+        name: luks-root
+        backing_device: "UUID={{ luks_uuid.stdout }}"
+        path: "{{ mountpoint }}/etc/crypttab"
+        opts: discard
+        state: present
+    - name: resolv.copy
+      copy:
+        src: /etc/resolv.conf
+        dest: "{{ mountpoint }}/etc/resolv.conf"
+    - name: mount.dev
+      ansible.posix.mount:
+        fstab: /tmp/fstab.tmp
+        src: /dev
+        path: "{{ mountpoint }}/dev"
+        fstype: none
+        opts: bind
+        state: mounted
+    - name: chroot
+      delegate_to: /tmp/root
+      block:
+        - name: dnf.install.base
+          dnf:
+            name: kernel,cryptsetup,selinux-policy-targeted,lvm2,sudo,systemd,setup,util-linux,shadow-utils,vim,less,curl,man,tree,btrfs-progs,binutils,openssl,openssh-clients,coreutils,policycoreutils,procps-ng,rootfiles,iproute,pam,htop
+        - name: boot.clean
+          command: rm -rf /boot/*
+        - name: bootctl.install
+          command: bootctl --no-variables install
+        - name: machine_id.get
+          command: cat /etc/machine-id
+          register: machine_id
+        - name: kernel_version.get
+          command: ls /lib/modules
+          register: kernel_version
+        - name: boot.entry_directory.create
+          file:
+            path: "/boot/{{ machine_id.stdout }}/{{ kernel_version.stdout }}"
+            state: directory
+        - name: initramfs.generate
+          command: |
+            dracut -a "base bash crypt systemd systemd-initrd resume dracut-systemd lvm" -v -H -f --kver "{{ kernel_version.stdout }}"
+        - name: kernel.generate
+          command: dnf reinstall -y kernel-core
+        - name: kernel.options
+          replace:
+            path: "/boot/loader/entries/{{ machine_id.stdout }}-{{ kernel_version.stdout }}.conf"
+            regexp: ^options.*$
+            replace: 'options luks.uuid={{ luks_uuid.stdout }} luks.name={{ luks_uuid.stdout }}:luks-root root=UUID={{ root_uuid.stdout }} ro resume=UUID={{ swap_uuid.stdout }} "acpi_osi=!Windows 2012"'
+        - name: systemd-firstboot
+          command: "systemd-firstboot --keymap=fr --hostname={{ hostname }}"
+        - name: group.add
+          group:
+            name: humains
+        - name: salt.generate
+          no_log: yes
+          shell: |
+            cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1
+          register: salt
+        - name: password.hash
+          no_log: yes
+          command: "openssl passwd -6 -salt {{ salt.stdout }} {{ password }}"
+          register: hashed_password
+        - name: user.add
+          no_log: yes
+          user:
+            name: "{{ user }}"
+            groups: wheel,humains
+            append: yes
+            password: "{{ hashed_password.stdout }}"
+            shell: /bin/bash
+            generate_ssh_key: yes
+    - name: clean
+      when: clean | bool
+      block:
+        - name: umount
+          mount:
+            path: "{{ item }}"
+            state: unmounted
+          loop:
+            - "{{ mountpoint }}/dev"
+            - "{{ mountpoint }}/sys"
+            - "{{ mountpoint }}/proc"
+            - "{{ mountpoint }}/boot"
+            - "{{ mountpoint }}/home"
+            - "{{ mountpoint }}"
+        - name: mountpoint.delete
+          file:
+            path: "{{ mountpoint }}"
+            state: absent
+        - name: lvm.disable
+          lvol:
+            lv: "{{ item }}"
+            vg: lvm1
+            active: no
+          loop:
+            - home
+            - swap
+            - root
+        - name: luks.close
+          community.crypto.luks_device:
+            name: luks-root
+            state: closed
