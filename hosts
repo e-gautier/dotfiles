@@ -1,0 +1,2 @@
+localhost ansible_connection=local
+/tmp/root ansible_connection=chroot
