@@ -132,6 +132,7 @@ packages:
     - the_silver_searcher # find alternative
     - just # task runner
     - genisoimage
+    - zsh
   ui:
     - xorg
     - i3
