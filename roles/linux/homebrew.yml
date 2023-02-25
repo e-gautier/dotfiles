@@ -4,3 +4,4 @@ homebrew:
   - pgcli # psql alternative
   - dust # du alternative
   - diff-so-fancy # diff interpreter
+  - pyenv
