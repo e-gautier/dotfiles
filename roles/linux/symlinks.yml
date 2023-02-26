@@ -6,6 +6,7 @@ links:
   ~/.vim/colors: vim/colors
   ~/.vimrc: vim/vimrc
   ~/.config/nvim/init.vim: nvim/init.vim
+  ~/.zshrc: zsh/zshrc
   ~/.bashrc: bash/bashrc
   ~/.bash_aliases: bash/bash_aliases
   ~/.bash_profile: bash/bash_profile
