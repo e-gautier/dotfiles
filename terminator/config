@@ -14,7 +14,7 @@
   [[default]]
     cursor_blink = False
     cursor_color = "#aaaaaa"
-    font = Monospace 11
+    font = FiraCode Nerd Font 11
     foreground_color = "#ffffff"
     show_titlebar = False
     scrollback_lines = 1000
