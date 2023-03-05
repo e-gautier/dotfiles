@@ -31,9 +31,6 @@
 [submodule "tmux/vendor/tmux-mem-cpu-load"]
 	path = tmux/vendor/tmux-mem-cpu-load
 	url = https://github.com/thewtex/tmux-mem-cpu-load.git
-[submodule "tmux/plugins/tmp"]
-	path = tmux/plugins/tmp
-	url = https://github.com/tmux-plugins/tpm
 [submodule "tmux/plugins/tpm"]
 	path = tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
