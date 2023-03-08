@@ -4,6 +4,7 @@ links:
   ~/.tmux/plugins: tmux/plugins
   ~/.vim/bundle: vim/bundle
   ~/.vim/colors: vim/colors
+  ~/.vim/ftplugin: vim/ftplugin
   ~/.vimrc: vim/vimrc
   ~/.config/nvim/init.vim: nvim/init.vim
   ~/.zshrc: zsh/zshrc
