@@ -1,7 +1,1 @@
-# brew
-export HOMEBREW_PREFIX="$HOME/.brew";
-export HOMEBREW_CELLAR="$HOME/.brew/Cellar";
-export HOMEBREW_REPOSITORY="$HOME/.brew";
-export PATH="$HOME/.brew/bin:$HOME/.brew/sbin${PATH+:$PATH}";
-export MANPATH="$HOME/.brew/share/man${MANPATH+:$MANPATH}:";
-export INFOPATH="$HOME/.brew/share/info:${INFOPATH:-}";
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
