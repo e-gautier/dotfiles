@@ -5,3 +5,4 @@ homebrew:
   - dust # du alternative
   - diff-so-fancy # diff interpreter
   - pyenv
+  - wader/tap/fq # binary parser
