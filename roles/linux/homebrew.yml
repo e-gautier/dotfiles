@@ -7,3 +7,6 @@ homebrew:
   - pyenv
   - wader/tap/fq # binary parser
   - mdcat # markdown reader
+  - clipboard # clipboard manager
+  - rust # + cargo package manager
+  - watchexec # file watcher
