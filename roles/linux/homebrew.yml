@@ -6,3 +6,4 @@ homebrew:
   - diff-so-fancy # diff interpreter
   - pyenv
   - wader/tap/fq # binary parser
+  - mdcat # markdown reader
