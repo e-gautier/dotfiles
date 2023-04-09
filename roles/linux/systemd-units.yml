@@ -4,6 +4,7 @@ units:
     enabled:
       - tmux
       - syncthing
+      - darkman
   system:
     enabled:
       - systemd-timesyncd

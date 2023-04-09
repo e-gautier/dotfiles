@@ -172,6 +172,8 @@ packages:
     - nomacs # image viewer
     - inkscape # vector-based image editor
     - thunderbird
+    - darkman # dark/light theme manager
+    - geoclue2 # geolocation service (used by darkman, among others)
   apps:
     - feh
     - caja
