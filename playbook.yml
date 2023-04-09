@@ -10,7 +10,11 @@
       default: "N"
       private: false
     - name: install_homebrew
-      prompt: install Homebrew? [y/N]
+      prompt: install Homebrew packages? [y/N]
+      default: "N"
+      private: false
+    - name: install_cargo
+      prompt: install Cargo packages? [y/N]
       default: "N"
       private: false
     - name: install_pip_packages

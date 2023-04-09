@@ -12,6 +12,7 @@
     - packages.yml
     - pip-packages.yml
     - homebrew.yml
+    - cargo.yml
     - symlinks.yml
     - systemd-units.yml
     - repositories.yml

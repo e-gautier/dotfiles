@@ -78,11 +78,14 @@
   when: install_homebrew is defined and install_homebrew != "N"
 - name: Install Homebrew packages
   community.general.homebrew:
-    path: ~/.homebrew/bin
     name: "{{ homebrew }}"
     update_homebrew: true
     upgrade_all: true
-  when: install_homebrew is defined and  install_homebrew != "N"
+  when: install_homebrew is defined and install_homebrew != "N"
+- name: Install Cargo packages
+  community.general.cargo:
+    name: "{{ cargo }}"
+  when: install_cargo is defined and install_cargo != "N"
 - name: Setup symlinks
   ansible.builtin.import_tasks: symlinks.yml
 - name: Install fonts
