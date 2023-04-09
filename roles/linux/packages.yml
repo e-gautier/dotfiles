@@ -24,6 +24,7 @@ packages:
     - exfatprogs # exfat support
     - power-profiles-daemon # DBus-based power management
     - bash-completion
+    - sway # Wayland compositor
   dev:
     - ShellCheck
     - git
