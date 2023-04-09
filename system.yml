@@ -5,7 +5,7 @@
 # sudo ansible-galaxy collection install ansible.posix
 #
 # sudo ansible-playbook -K -i hosts -e "release=33" -e "device=/dev/sdb" -e "mountpoint=/tmp/root" -e "clean=true" playbook.yml
-# 
+#
 # stuck in a boot loop? set SELinux to permissive mode in /etc/selinux/config and fix
 #
 ---
