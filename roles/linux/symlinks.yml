@@ -34,3 +34,5 @@ links:
   ~/.config/polybar/config: polybar/config
   ~/.editorconfig: editorconfig/editorconfig
   ~/.inputrc: input/inputrc
+  ~/.local/share/dark-mode.d: roles/linux/files/darkman/dark-mode.d
+  ~/.local/share/light-mode.d: roles/linux/files/darkman/light-mode.d
