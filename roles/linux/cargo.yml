@@ -3,3 +3,4 @@ cargo:
   - checkexec # files dependencies executor
   - systemfd # socket handler
   - cargo-watch
+  - cargo-update
