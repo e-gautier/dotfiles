@@ -37,3 +37,4 @@ links:
   ~/.local/share/dark-mode.d: roles/linux/files/darkman/dark-mode.d
   ~/.local/share/light-mode.d: roles/linux/files/darkman/light-mode.d
   ~/.config/darkman/config.yaml: roles/linux/files/darkman/config.yaml
+  ~/.vim/undodir: roles/linux/files/undodir

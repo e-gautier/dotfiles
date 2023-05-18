@@ -30,6 +30,7 @@ set mouse=a
 
 " persistent hitory
 set undofile
+set undodir=~/.vim/undodir
 
 " Return to last edit position when opening files
 autocmd BufReadPost *
