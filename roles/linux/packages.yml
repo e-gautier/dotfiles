@@ -210,7 +210,7 @@ packages:
     - asciio # draw in ascii
     - p7zip
     - p7zip-plugins
-    - keepass
+    - keepassxc
   misc:
     - audit
     - w3m # browser in terminal
