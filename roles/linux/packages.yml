@@ -133,7 +133,7 @@ packages:
     - just # task runner
     - genisoimage
     - zsh
-    - autossh
+    - autossh # monitor and keep ssh sessions running
   ui:
     - xorg
     - i3
