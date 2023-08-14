@@ -133,6 +133,7 @@ packages:
     - just # task runner
     - genisoimage
     - zsh
+    - autossh
   ui:
     - xorg
     - i3
