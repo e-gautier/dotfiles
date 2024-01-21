@@ -25,6 +25,7 @@ packages:
     - power-profiles-daemon # DBus-based power management
     - bash-completion
     - sway # Wayland compositor
+    - symlinks # broken links detector
   dev:
     - ShellCheck
     - git
