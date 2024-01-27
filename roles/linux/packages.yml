@@ -154,7 +154,7 @@ packages:
     - lm_sensors
     - acpi
     - xdotool # keyboard/mouse simulation
-    - compton
+    - picom
     - dunst # notifications
     - system-config-printer
     - usbguard

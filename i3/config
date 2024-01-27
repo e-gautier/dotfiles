@@ -233,7 +233,7 @@ exec feh --bg-scale ~/SYNC/MAIN/Wallpapers/i3/wpp
 # xrandr --output HDMI-1 --right-of LVDS-1
 
 # set vertical synchronization
-exec compton --backend glx --vsync opengl-swc
+exec picom --backend glx --vsync
 
 # set mouse config
 exec xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Natural Scrolling Enabled' 1
