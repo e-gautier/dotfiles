@@ -31,7 +31,7 @@ links:
   ~/.config/VSCodium/User/settings.json: vscodium/settings.json
   ~/.xscreensaver: xscreensaver/xscreensaver
   ~/.config/redshift: redshift/redshift
-  ~/.config/polybar/config: polybar/config
+  ~/.config/polybar/config.ini: polybar/config.ini
   ~/.editorconfig: editorconfig/editorconfig
   ~/.inputrc: input/inputrc
   ~/.local/share/dark-mode.d: roles/linux/files/darkman/dark-mode.d
