@@ -136,6 +136,7 @@ packages:
     - zsh
     - autossh # monitor and keep ssh sessions running
     - yank # terminal output to clipboard
+    - pygmentize # syntax highlighter
   ui:
     - xorg
     - i3
