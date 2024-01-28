@@ -135,6 +135,7 @@ packages:
     - genisoimage
     - zsh
     - autossh # monitor and keep ssh sessions running
+    - yank # terminal output to clipboard
   ui:
     - xorg
     - i3
