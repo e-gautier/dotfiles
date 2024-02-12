@@ -245,5 +245,3 @@ exec DISPLAY=:0 /usr/bin/xscreensaver
 # alttab
 exec alttab -d 1 -i 90x90
 
-# run terminator
-exec terminator
