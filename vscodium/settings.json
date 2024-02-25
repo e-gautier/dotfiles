@@ -3,10 +3,8 @@
     "editor.fontFamily": "Hasklig, Consolas, 'Courier New', monospace",
     "editor.tabSize": 2,
     "editor.wordWrap": "on",
-    "workbench.statusBar.feedback.visible": false,
     "window.zoomLevel": 0,
     "workbench.startupEditor": "none",
-    "vsicons.dontShowNewVersionMessage": true,
     "explorer.confirmDragAndDrop": false,
     "terminal.integrated.copyOnSelection": true,
     "explorer.confirmDelete": false,
@@ -20,26 +18,12 @@
     "files.enableTrash": false,
     "window.title": "${dirty}${activeEditorShort}${separator}${rootName}${separator}",
     "terminal.external.linuxExec": "terminator",
-    "telemetry.enableTelemetry": false,
-    "todo-tree.highlights.enabled": true,
-    "todo-tree.tree.showScanModeButton": false,
-    "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true,
-    "python.showStartPage": false,
-    "keyboard.dispatch": "keyCode",
-    "prettier.disableLanguages": [
-        "markdown"
-    ],
     "terminal.integrated.defaultProfile.windows": "Debian (WSL)",
     "redhat.telemetry.enabled": false,
     "[yaml]": {
         "editor.defaultFormatter": "redhat.vscode-yaml"
     },
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
     "git.openRepositoryInParentFolders": "never",
-    "markdown.extension.completion.enabled": true,
     "workbench.editorAssociations": {
       "*.md": "vscode.markdown.preview.editor"
     },
