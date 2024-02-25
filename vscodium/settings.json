@@ -29,5 +29,6 @@
     },
     "workbench.colorTheme": "Bearded Theme HC Ebony",
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.activityBar.location": "top"
+    "workbench.activityBar.location": "top",
+    "update.showReleaseNotes": false
 }
