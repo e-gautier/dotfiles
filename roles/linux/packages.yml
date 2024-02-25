@@ -137,6 +137,7 @@ packages:
     - autossh # monitor and keep ssh sessions running
     - yank # terminal output to clipboard
     - pygmentize # syntax highlighter
+    - shyaml # yaml parser
   ui:
     - xorg
     - i3
