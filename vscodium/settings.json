@@ -31,5 +31,7 @@
     "workbench.iconTheme": "material-icon-theme",
     "workbench.activityBar.location": "top",
     "update.showReleaseNotes": false,
-    "vsicons.dontShowNewVersionMessage": true
+    "vsicons.dontShowNewVersionMessage": true,
+    "window.titleBarStyle": "custom",
+    "window.dialogStyle": "custom"
 }
