@@ -1,33 +1,34 @@
 ---
 vscodium_extensions:
-  - be5invis.vscode-custom-css
+  - beardedbear.beardedtheme
   - dbaeumer.vscode-eslint
   - eamodio.gitlens
-  - EditorConfig.EditorConfig
-  - felixfbecker.php-intellisense
-  - formulahendry.terminal
-  - Gruntfuggly.todo-tree
-  - marcostazi.VS-code-vagrantfile
-  - mhutchie.git-graph
-  - ms-azuretools.vscode-docker
-  - ms-python.python
-  - ms-vscode.cpptools
-  - ms-vscode.Go
-  - redhat.vscode-yaml
-  - Tyriar.terminal-tabs
-  - vscode-icons-team.vscode-icons
-  - vscoss.vscode-ansible
-  - zenor.makefile-creator
-  - ms-vscode.powershell
-  - cfgweb.vscode-perl
-  - ms-vscode-remote.remote-wsl
-  - joaompinto.asciidoctor-vscode
-  - xyz.local-history
+  - editorconfig.editorconfig
   - esbenp.prettier-vscode
+  - felixfbecker.php-intellisense
+  - tyriar.windows-terminal
+  - gera2ld.markmap-vscode
+  - gruntfuggly.todo-tree
   - hediet.vscode-drawio
+  - jvalecillos.gpg
+  - llvm-vs-code-extensions.vscode-clangd
+  - marcostazi.vs-code-vagrantfile
+  - ms-azuretools.vscode-docker
+  - ms-python.debugpy
+  - ms-python.python
+  - ms-vscode.go
+  - pkief.material-icon-theme
+  - redhat.vscode-commons
+  - redhat.vscode-xml
+  - redhat.vscode-yaml
+  - vscode-icons-team.vscode-icons
+  - yzhang.markdown-all-in-one
+  - redhat.ansible
+  - ms-vscode.makefile-tools
+  - ms-vscode.powershell
+  - bscan.perlnavigator
+  - asciidoctor.asciidoctor-vscode
   - hediet.debug-visualizer
-  - foam.foam-vscode
   - randomfractalsinc.vscode-data-preview
-  - donjayamanne.githistory
   - usernamehw.errorlens
   - Alexey-Strakh.stackoverflow-search
