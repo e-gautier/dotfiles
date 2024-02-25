@@ -30,5 +30,6 @@
     "workbench.colorTheme": "Bearded Theme HC Ebony",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.activityBar.location": "top",
-    "update.showReleaseNotes": false
+    "update.showReleaseNotes": false,
+    "vsicons.dontShowNewVersionMessage": true
 }
