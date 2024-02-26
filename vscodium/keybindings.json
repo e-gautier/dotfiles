@@ -85,7 +85,7 @@
   },
   {
     "key": "alt+left",
-    "command": "cursorLineStart"
+    "command": "cursorHome"
   },
   {
     "key": "alt+[Backquote]",
