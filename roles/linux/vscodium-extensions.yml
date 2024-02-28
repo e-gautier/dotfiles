@@ -1,6 +1,5 @@
 ---
 vscodium_extensions:
-  - beardedbear.beardedtheme
   - dbaeumer.vscode-eslint
   - eamodio.gitlens
   - editorconfig.editorconfig
