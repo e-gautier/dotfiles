@@ -33,7 +33,6 @@
     "vsicons.dontShowNewVersionMessage": true,
     "window.titleBarStyle": "custom",
     "window.dialogStyle": "custom",
-    "todo-tree.general.statusBar": "total",
     "todo-tree.general.enableFileWatcher": true,
     "todo-tree.filtering.includeHiddenFiles": true,
     "todo-tree.tree.showCountsInTree": true,
