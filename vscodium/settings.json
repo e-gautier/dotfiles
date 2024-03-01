@@ -32,5 +32,16 @@
     "update.showReleaseNotes": false,
     "vsicons.dontShowNewVersionMessage": true,
     "window.titleBarStyle": "custom",
-    "window.dialogStyle": "custom"
+    "window.dialogStyle": "custom",
+    "todo-tree.general.statusBar": "total",
+    "todo-tree.general.enableFileWatcher": true,
+    "todo-tree.filtering.includeHiddenFiles": true,
+    "todo-tree.tree.showCountsInTree": true,
+    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^[ \\t]*(-|\\d+.)).*\\s($TAGS)",
+    "todo-tree.highlights.useColourScheme": true,
+    "puppet.editorService.formatOnType.enable": true,
+    "explorer.autoReveal": "focusNoScroll",
+    "explorer.confirmPasteNative": false,
+    "workbench.list.openMode": "doubleClick",
+    "workbench.tree.expandMode": "doubleClick",
 }
