@@ -32,3 +32,4 @@ vscodium_extensions:
   - usernamehw.errorlens
   - Alexey-Strakh.stackoverflow-search
   - puppet.puppet-vscode
+  - mhutchie.git-graph
