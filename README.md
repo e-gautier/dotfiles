@@ -69,7 +69,7 @@ browser[type="content"] {
 ```
 ### Auditd configuration
 ```
-cp auditd/audit.rules /etc/audit/rules.d/
+cp roles/linux/files/auditd/audit.rules /etc/audit/rules.d/
 ```
 ### NFTables configuration
 ```

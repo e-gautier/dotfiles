@@ -1,102 +1,102 @@
-[submodule "vim/bundle/auto-pairs"]
-	path = vim/bundle/auto-pairs
+[submodule "roles/linux/files/vim/bundle/auto-pairs"]
+	path = roles/linux/files/vim/bundle/auto-pairs
 	url = https://github.com/jiangmiao/auto-pairs
-[submodule "vim/bundle/ctrlp.vim"]
-	path = vim/bundle/ctrlp.vim
+[submodule "roles/linux/files/vim/bundle/ctrlp.vim"]
+	path = roles/linux/files/vim/bundle/ctrlp.vim
 	url = https://github.com/ctrlpvim/ctrlp.vim
-[submodule "vim/bundle/gist-vim"]
-	path = vim/bundle/gist-vim
+[submodule "roles/linux/files/vim/bundle/gist-vim"]
+	path = roles/linux/files/vim/bundle/gist-vim
 	url = https://github.com/mattn/gist-vim
-[submodule "vim/bundle/matchit"]
-	path = vim/bundle/matchit
+[submodule "roles/linux/files/vim/bundle/matchit"]
+	path = roles/linux/files/vim/bundle/matchit
 	url = https://github.com/tmhedberg/matchit
-[submodule "vim/bundle/nerdcommenter"]
-	path = vim/bundle/nerdcommenter
+[submodule "roles/linux/files/vim/bundle/nerdcommenter"]
+	path = roles/linux/files/vim/bundle/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter
-[submodule "vim/bundle/vim-easymotion"]
-	path = vim/bundle/vim-easymotion
+[submodule "roles/linux/files/vim/bundle/vim-easymotion"]
+	path = roles/linux/files/vim/bundle/vim-easymotion
 	url = https://github.com/easymotion/vim-easymotion
-[submodule "vim/bundle/vim-indent-guides"]
-	path = vim/bundle/vim-indent-guides
+[submodule "roles/linux/files/vim/bundle/vim-indent-guides"]
+	path = roles/linux/files/vim/bundle/vim-indent-guides
 	url = https://github.com/nathanaelkane/vim-indent-guides
-[submodule "vim/bundle/vim-preview"]
-	path = vim/bundle/vim-preview
+[submodule "roles/linux/files/vim/bundle/vim-preview"]
+	path = roles/linux/files/vim/bundle/vim-preview
 	url = https://github.com/greyblake/vim-preview
-[submodule "vim/bundle/vim-twig"]
-	path = vim/bundle/vim-twig
+[submodule "roles/linux/files/vim/bundle/vim-twig"]
+	path = roles/linux/files/vim/bundle/vim-twig
 	url = https://github.com/lumiliet/vim-twig
-[submodule "vim/bundle/vim-pathogen"]
-	path = vim/bundle/vim-pathogen
+[submodule "roles/linux/files/vim/bundle/vim-pathogen"]
+	path = roles/linux/files/vim/bundle/vim-pathogen
 	url = https://github.com/tpope/vim-pathogen
-[submodule "tmux/vendor/tmux-mem-cpu-load"]
-	path = tmux/vendor/tmux-mem-cpu-load
+[submodule "roles/linux/files/tmux/vendor/tmux-mem-cpu-load"]
+	path = roles/linux/files/tmux/vendor/tmux-mem-cpu-load
 	url = https://github.com/thewtex/tmux-mem-cpu-load.git
-[submodule "tmux/plugins/tpm"]
-	path = tmux/plugins/tpm
+[submodule "roles/linux/files/tmux/plugins/tpm"]
+	path = roles/linux/files/tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
-[submodule "vim/bundle/editorconfig-vim"]
-	path = vim/bundle/editorconfig-vim
+[submodule "roles/linux/files/vim/bundle/editorconfig-vim"]
+	path = roles/linux/files/vim/bundle/editorconfig-vim
 	url = https://github.com/editorconfig/editorconfig-vim.git
-[submodule "vim/bundle/vim-cool"]
-	path = vim/bundle/vim-cool
+[submodule "roles/linux/files/vim/bundle/vim-cool"]
+	path = roles/linux/files/vim/bundle/vim-cool
 	url = https://github.com/romainl/vim-cool.git
-[submodule "vim/bundle/Colorizer"]
-	path = vim/bundle/Colorizer
+[submodule "roles/linux/files/vim/bundle/Colorizer"]
+	path = roles/linux/files/vim/bundle/Colorizer
 	url = https://github.com/chrisbra/Colorizer.git
-[submodule "vim/bundle/vim-code-dark"]
-	path = vim/bundle/vim-code-dark
+[submodule "roles/linux/files/vim/bundle/vim-code-dark"]
+	path = roles/linux/files/vim/bundle/vim-code-dark
 	url = https://github.com/tomasiser/vim-code-dark.git
-[submodule "vim/bundle/tmuxline.vim"]
-	path = vim/bundle/tmuxline.vim
+[submodule "roles/linux/files/vim/bundle/tmuxline.vim"]
+	path = roles/linux/files/vim/bundle/tmuxline.vim
 	url = https://github.com/edkolev/tmuxline.vim.git
-[submodule "vim/bundle/nerdtree-git-plugin"]
-	path = vim/bundle/nerdtree-git-plugin
+[submodule "roles/linux/files/vim/bundle/nerdtree-git-plugin"]
+	path = roles/linux/files/vim/bundle/nerdtree-git-plugin
 	url = https://github.com/Xuyuanp/nerdtree-git-plugin.git
-[submodule "vim/bundle/nerdtree"]
-	path = vim/bundle/nerdtree
+[submodule "roles/linux/files/vim/bundle/nerdtree"]
+	path = roles/linux/files/vim/bundle/nerdtree
 	url = https://github.com/preservim/nerdtree.git
-[submodule "vim/bundle/vim-surround"]
-	path = vim/bundle/vim-surround
+[submodule "roles/linux/files/vim/bundle/vim-surround"]
+	path = roles/linux/files/vim/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround
-[submodule "vim/bundle/vim-smooth-scroll"]
-	path = vim/bundle/vim-smooth-scroll
+[submodule "roles/linux/files/vim/bundle/vim-smooth-scroll"]
+	path = roles/linux/files/vim/bundle/vim-smooth-scroll
 	url = https://github.com/terryma/vim-smooth-scroll.git
-[submodule "vim/bundle/DrawIt"]
-	path = vim/bundle/DrawIt
+[submodule "roles/linux/files/vim/bundle/DrawIt"]
+	path = roles/linux/files/vim/bundle/DrawIt
 	url = https://github.com/vim-scripts/DrawIt
-[submodule "vim/bundle/lightline.vim"]
-	path = vim/bundle/lightline.vim
+[submodule "roles/linux/files/vim/bundle/lightline.vim"]
+	path = roles/linux/files/vim/bundle/lightline.vim
 	url = https://github.com/itchyny/lightline.vim
-[submodule "vim/bundle/vim-commentary"]
-	path = vim/bundle/vim-commentary
+[submodule "roles/linux/files/vim/bundle/vim-commentary"]
+	path = roles/linux/files/vim/bundle/vim-commentary
 	url = https://github.com/tpope/vim-commentary.git
-[submodule "vim/bundle/vim-auto-save"]
-	path = vim/bundle/vim-auto-save
+[submodule "roles/linux/files/vim/bundle/vim-auto-save"]
+	path = roles/linux/files/vim/bundle/vim-auto-save
 	url = https://github.com/907th/vim-auto-save.git
-[submodule "vim/bundle/vim-visual-multi"]
-	path = vim/bundle/vim-visual-multi
+[submodule "roles/linux/files/vim/bundle/vim-visual-multi"]
+	path = roles/linux/files/vim/bundle/vim-visual-multi
 	url = https://github.com/mg979/vim-visual-multi.git
-[submodule "vim/bundle/nvim-blame-line"]
-	path = vim/bundle/nvim-blame-line
+[submodule "roles/linux/files/vim/bundle/nvim-blame-line"]
+	path = roles/linux/files/vim/bundle/nvim-blame-line
 	url = https://github.com/tveskag/nvim-blame-line.git
-[submodule "vim/bundle/vim-sensible"]
-	path = vim/bundle/vim-sensible
+[submodule "roles/linux/files/vim/bundle/vim-sensible"]
+	path = roles/linux/files/vim/bundle/vim-sensible
 	url = https://github.com/tpope/vim-sensible.git
-[submodule "vim/bundle/tagbar"]
-	path = vim/bundle/tagbar
+[submodule "roles/linux/files/vim/bundle/tagbar"]
+	path = roles/linux/files/vim/bundle/tagbar
 	url = https://github.com/preservim/tagbar.git
-[submodule "vim/bundle/vim-gitgutter"]
-	path = vim/bundle/vim-gitgutter
+[submodule "roles/linux/files/vim/bundle/vim-gitgutter"]
+	path = roles/linux/files/vim/bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
-[submodule "vim/bundle/vim-obsession"]
-	path = vim/bundle/vim-obsession
+[submodule "roles/linux/files/vim/bundle/vim-obsession"]
+	path = roles/linux/files/vim/bundle/vim-obsession
 	url = https://github.com/tpope/vim-obsession.git
-[submodule "vim/bundle/ale"]
-	path = vim/bundle/ale
+[submodule "roles/linux/files/vim/bundle/ale"]
+	path = roles/linux/files/vim/bundle/ale
 	url = https://github.com/dense-analysis/ale.git
-[submodule "vim/bundle/fzf.vim"]
-	path = vim/bundle/fzf.vim
+[submodule "roles/linux/files/vim/bundle/fzf.vim"]
+	path = roles/linux/files/vim/bundle/fzf.vim
 	url = https://github.com/junegunn/fzf.vim.git
-[submodule "vim/bundle/fzf"]
-	path = vim/bundle/fzf
+[submodule "roles/linux/files/vim/bundle/fzf"]
+	path = roles/linux/files/vim/bundle/fzf
 	url = https://github.com/junegunn/fzf.git

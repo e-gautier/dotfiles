@@ -33,7 +33,7 @@ links:
   ~/.config/polybar/config.ini: polybar/config.ini
   ~/.editorconfig: editorconfig/editorconfig
   ~/.inputrc: input/inputrc
-  ~/.local/share/dark-mode.d: roles/linux/files/darkman/dark-mode.d
-  ~/.local/share/light-mode.d: roles/linux/files/darkman/light-mode.d
-  ~/.config/darkman/config.yaml: roles/linux/files/darkman/config.yaml
-  ~/.config/VSCodium/User : ../Syncthing/VSCode-user # VScode user config
+  ~/.local/share/dark-mode.d: darkman/dark-mode.d
+  ~/.local/share/light-mode.d: darkman/light-mode.d
+  ~/.config/darkman/config.yaml: darkman/config.yaml
+  ~/.config/VSCodium/User : ../../../../Syncthing/VSCode-user # VScode user config

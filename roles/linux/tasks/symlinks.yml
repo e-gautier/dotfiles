@@ -8,7 +8,7 @@
     loop: "{{ links | dict2items }}"
   - name: Create symlinks
     ansible.builtin.file:
-      src: "{{ playbook_dir }}/{{ item.value }}"
+      src: "{{ role_path }}/files/{{ item.value }}"
       dest: "{{ item.key }}"
       state: link
       force: true
