@@ -27,8 +27,6 @@ links:
   ~/.xinitrc: x/xinitrc
   ~/.config/dunst/dunstrc: dunst/dunstrc
   ~/.config/terminator/config: terminator/config
-  ~/.config/VSCodium/User/keybindings.json: vscodium/keybindings.json
-  ~/.config/VSCodium/User/settings.json: vscodium/settings.json
   ~/.xscreensaver: xscreensaver/xscreensaver
   ~/.config/redshift: redshift/redshift
   ~/.config/polybar/config.ini: polybar/config.ini
@@ -38,3 +36,4 @@ links:
   ~/.local/share/light-mode.d: roles/linux/files/darkman/light-mode.d
   ~/.config/darkman/config.yaml: roles/linux/files/darkman/config.yaml
   ~/.vim/undodir: roles/linux/files/undodir
+  ~/Syncthing/VSCode-user: ~/.config/VSCodium/User # VScode user config
