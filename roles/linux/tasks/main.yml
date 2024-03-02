@@ -88,6 +88,10 @@
   when: install_cargo is defined and install_cargo != "N"
 - name: Setup symlinks
   ansible.builtin.import_tasks: symlinks.yml
+- name: create vim undodir
+  ansible.builtin.file:
+    path: ~/.vim/undodir
+    state: directory
 - name: Install fonts
   ansible.builtin.shell: if hash fc-cache 2>/dev/null; then fc-cache -f; fi
   register: output
