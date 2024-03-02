@@ -33,3 +33,4 @@ vscodium_extensions:
   - Alexey-Strakh.stackoverflow-search
   - puppet.puppet-vscode
   - mhutchie.git-graph
+  - eamodio.gitlens
