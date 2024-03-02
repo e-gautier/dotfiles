@@ -34,3 +34,6 @@ vscodium_extensions:
   - puppet.puppet-vscode
   - mhutchie.git-graph
   - eamodio.gitlens
+  - datasert.vscode-texty
+  - streetsidesoftware.code-spell-checker
+  - streetsidesoftware.code-spell-checker-french
