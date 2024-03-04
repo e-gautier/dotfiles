@@ -20,7 +20,6 @@ vscodium_extensions:
   - redhat.vscode-commons
   - redhat.vscode-xml
   - redhat.vscode-yaml
-  - vscode-icons-team.vscode-icons
   - yzhang.markdown-all-in-one
   - redhat.ansible
   - ms-vscode.makefile-tools
