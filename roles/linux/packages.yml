@@ -216,6 +216,7 @@ packages:
     - p7zip
     - p7zip-plugins
     - keepassxc
+    - gthumb # image viewer
   misc:
     - audit
     - w3m # browser in terminal
