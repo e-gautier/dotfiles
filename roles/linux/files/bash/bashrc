@@ -29,10 +29,10 @@ PATH=$PATH:~/.local/bin:~/.bin
 # umask
 umask 0077
 
-# caps lock to esc remapping
-if [ -x "$(command -v setxkbmap)" ]; then
-   setxkbmap -option caps:swapescape
-fi
+# caps lock to esc remapping (X only)
+# if [ -x "$(command -v setxkbmap)" ]; then
+#   setxkbmap -option caps:swapescape
+# fi
 
 PROMPT_COMMAND=prompt
 
