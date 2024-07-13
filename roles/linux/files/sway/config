@@ -142,6 +142,10 @@ exec dunst
 exec udiskie -at
 
 exec swayidle -w \
-         timeout 3600 'xscreensaver-command -suspend' \
-         timeout 3610 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-         before-sleep 'xscreensaver-command -suspend'
+         timeout 3600 'swaylock' \
+         timeout 3610 'swaymsg "output * dpms off"' \
+         resume 'swaymsg "output * dpms on"' \
+         before-sleep 'swaylock' \
+         lock 'swaymsg "output * dpms off"'
+bindswitch --reload --locked lid:on exec swaylock
+bindsym Control+Mod1+l exec swaylock
