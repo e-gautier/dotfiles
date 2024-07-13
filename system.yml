@@ -196,7 +196,7 @@
           no_log: yes
           user:
             name: "{{ user }}"
-            groups: wheel,humains
+            groups: wheel,humains,input
             append: yes
             password: "{{ hashed_password.stdout }}"
             shell: /bin/bash

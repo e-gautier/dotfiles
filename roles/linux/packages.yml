@@ -179,6 +179,7 @@ packages:
     - thunderbird
     - darkman # dark/light theme manager
     - geoclue2 # geolocation service (used by darkman, among others)
+    - waybar # sway bar
   apps:
     - feh
     - caja

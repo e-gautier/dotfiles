@@ -1,0 +1,102 @@
+// -*- mode: jsonc -*-
+{
+    "position": "bottom",
+    "height": 25,
+    "spacing": 5,
+    "ipc": true,
+    "reload_style_on_change": true,
+    "modules-left": [
+        "sway/workspaces",
+        "custom/separator",
+        "sway/window",
+        "custom/separator",
+        "sway/mode"
+    ],
+    "modules-center": [
+    ],
+    "modules-right": [
+        "keyboard-state",
+        "custom/separator",
+        "pulseaudio",
+        "custom/separator",
+        "backlight",
+        "custom/separator",
+        "disk",
+        "custom/separator",
+        "network",
+        "custom/separator",
+        "memory",
+        "custom/separator",
+        "custom/fan",
+        "custom/separator",
+        "temperature",
+        "custom/separator",
+        "load",
+        "custom/separator",
+        "battery",
+        "custom/separator",
+        "clock",
+        "custom/separator",
+        "tray"
+    ],
+    "keyboard-state": {
+        "numlock": true,
+        "capslock": true,
+        "format": "{name}"
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "tray": {
+        "icon-size": 15,
+        "spacing": 3
+    },
+    "clock": {
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "format": "{:%H:%M %d/%m/%Y}",
+        "on-click": "gnome-calendar"
+    },
+    "battery": {
+        "states": {
+            "warning": 20
+        },
+        "format": "Bat:{capacity}% ({power}W)",
+        "format-full": "Bat:{capacity}% ({power}W)",
+        "format-charging": "->Bat:{capacity}% ({power}W)"
+    },
+    "load": {
+        "format": "L:{load1}"
+    },
+    "temperature": {
+        "interval": 1
+    },
+    "custom/fan": {
+        "exec": "sensors | grep fan1 | awk '{print $2}'",
+        "interval": 1,
+        "format": "F:{}"
+    },
+    "memory": {
+        "interval": 10,
+        "format": "M:{percentage}% S:{swapPercentage}%"
+    },
+    "network": {
+        "format": "{signalStrength}% {ifname}"
+    },
+    "disk": {
+        "path": "/home",
+        "format": "/home {percentage_used}%/{total}"
+    },
+    "backlight": {
+        "format": "BL:{percent}%"
+    },
+    "pulseaudio": {
+        "format": "{format_source} Out:{volume}%",
+        "format-muted": "{format_source} Out:Mut%",
+        "format-source": "In:{volume}%",
+        "format-source-muted": "In:Mut"
+    },
+    "custom/separator": {
+        "format": "|",
+        "interval": "once"
+    }
+}

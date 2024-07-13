@@ -1,0 +1,72 @@
+* {
+    font-family: "fixed:pixelsize=10;1";
+    font-size: 13px;
+}
+
+window#waybar {
+    background-color: #212121;
+    border-bottom: 3px solid #212121;
+    color: #f3f4f5;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+#workspaces button {
+    padding: 0;
+    color: #f3f4f5;
+}
+
+#workspaces button:hover {
+    background: #48466d;
+}
+
+#workspaces button.focused {
+    background-color: #48466d;
+}
+
+#workspaces button.urgent {
+    background-color: #e53935;
+}
+
+@keyframes blink {
+    to {
+        background-color: #f3f4f5;
+        color: #212121;
+    }
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #f3f4f5;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+label:focus {
+    background-color: #212121;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #e53935;
+}
+
+#keyboard-state>label.locked {
+    background: #00ff00;
+}
+
+#custom-separator {
+    color: #f3f4f5;
+}
