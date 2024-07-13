@@ -93,7 +93,7 @@
     },
     "pulseaudio": {
         "format": "{format_source} Out:{volume}%",
-        "format-muted": "{format_source} Out:Mut%",
+        "format-muted": "{format_source} Out:Mut",
         "format-source": "In:{volume}%",
         "format-source-muted": "In:Mut"
     },
