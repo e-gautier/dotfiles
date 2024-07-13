@@ -11,10 +11,6 @@ window#waybar {
     transition-duration: .5s;
 }
 
-window#waybar.hidden {
-    opacity: 0.2;
-}
-
 #workspaces button {
     padding: 0;
     color: #f3f4f5;
@@ -64,7 +60,7 @@ label:focus {
 }
 
 #keyboard-state>label.locked {
-    background: #00ff00;
+    color: #00ff00;
 }
 
 #custom-separator {

@@ -15,6 +15,7 @@
     "modules-center": [
     ],
     "modules-right": [
+        "sway/language",
         "keyboard-state",
         "custom/separator",
         "pulseaudio",
@@ -40,9 +41,10 @@
         "tray"
     ],
     "keyboard-state": {
-        "numlock": true,
         "capslock": true,
-        "format": "{name}"
+        "format": {
+            "capslock": "CAPS"
+        }
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
