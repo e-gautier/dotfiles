@@ -139,24 +139,22 @@ packages:
     - pygmentize # syntax highlighter
     - shyaml # yaml parser
   ui:
-    - xorg
-    - i3
-    - xev # X events printer
+    - wev # wayland events printer
+    - wlr-randr # wayland screen manager
     - rofi
     - i3lock
     - pavucontrol # gtk pulse audio gui
-    - arandr
+    - wdisplays # wayland screen manager GUI
     - lxappearance # gtk theme manager
     - breeze-gtk # gtk theme
     - qt5-qtstyleplugins # qt theme manager
     - gtk-v4l # Video4Linux
     - yad # gtk dialog
-    - xss-lock
+    - swaylock # sway lockscreen
     - powertop
-    - xbindkeys
     - lm_sensors
     - acpi
-    - xdotool # keyboard/mouse simulation
+    - wtype # wayland keyboard/mouse simulation
     - picom
     - dunst # notifications
     - system-config-printer
@@ -165,9 +163,7 @@ packages:
     - pasystray # PulseAudio tray
     - blueman # bluetooth manager
     - brightnessctl
-    - xcalib # monitor calibration
-    - redshift
-    - xscreensaver
+    - gammastep # screen temperature color
     - network-manager-applet
     - alsa-utils
     - NetworkManager-wifi
@@ -180,6 +176,9 @@ packages:
     - darkman # dark/light theme manager
     - geoclue2 # geolocation service (used by darkman, among others)
     - waybar # sway bar
+    - ydotool # command line automation
+    - wshowkeys # key display
+    - kanshi # output profiles automation
   apps:
     - feh
     - caja

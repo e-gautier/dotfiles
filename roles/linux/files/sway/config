@@ -52,14 +52,14 @@ bindsym Mod4+underscore workspace $ws8
 bindsym Mod4+ccedilla workspace $ws9
 bindsym Mod4+agrave workspace $ws10
 
-bindsym Mod4+Shift+1 move container to workspace $ws1
+bindsym Mod4+Shift+ampersand move container to workspace $ws1
 bindsym Mod4+Shift+eacute move container to workspace $ws2
-bindsym Mod4+Shift+3 move container to workspace $ws3
-bindsym Mod4+Shift+4 move container to workspace $ws4
-bindsym Mod4+Shift+5 move container to workspace $ws5
-bindsym Mod4+Shift+6 move container to workspace $ws6
+bindsym Mod4+Shift+quotedbl move container to workspace $ws3
+bindsym Mod4+Shift+apostrophe move container to workspace $ws4
+bindsym Mod4+Shift+parenleft move container to workspace $ws5
+bindsym Mod4+Shift+minus move container to workspace $ws6
 bindsym Mod4+Shift+egrave move container to workspace $ws7
-bindsym Mod4+Shift+8 move container to workspace $ws8
+bindsym Mod4+Shift+underscore move container to workspace $ws8
 bindsym Mod4+Shift+ccedilla move container to workspace $ws9
 bindsym Mod4+Shift+agrave move container to workspace $ws10
 
@@ -136,7 +136,7 @@ exec copyq
 exec pasystray
 exec bluetoothctl power off
 exec blueman-applet
-exec redshift -c ~/.config/redshift
+exec gammastep -c ~/.config/redshift
 exec shutter --min_at_startup
 exec dunst
 exec udiskie -at
@@ -149,3 +149,5 @@ exec swayidle -w \
          lock 'swaymsg "output * dpms off"'
 bindswitch --reload --locked lid:on exec swaylock
 bindsym Control+Mod1+l exec swaylock
+
+bindsym Mod1+tab workspace back_and_forth
