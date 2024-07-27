@@ -217,6 +217,7 @@ packages:
     - p7zip-plugins
     - keepassxc
     - gthumb # image viewer
+    - gopass # GPG team password manager
   misc:
     - audit
     - w3m # browser in terminal
