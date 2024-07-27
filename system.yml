@@ -6,7 +6,11 @@
 #
 # sudo ansible-playbook -K -i hosts -e "release=33" -e "device=/dev/sdb" -e "mountpoint=/tmp/root" -e "clean=true" playbook.yml
 #
+# == notes
+#
 # stuck in a boot loop? set SELinux to permissive mode in /etc/selinux/config and fix
+#
+# TODO use kernel-install? `kernel-install add $(uname -r) /lib/modules/$(uname -r)/vmlinuz`
 #
 ---
 - name: dotfiles
