@@ -138,6 +138,7 @@ packages:
     - yank # terminal output to clipboard
     - pygmentize # syntax highlighter
     - shyaml # yaml parser
+    - zstd
   ui:
     - wev # wayland events printer
     - wlr-randr # wayland screen manager
