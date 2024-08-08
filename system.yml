@@ -10,32 +10,39 @@
 #
 # stuck in a boot loop? set SELinux to permissive mode in /etc/selinux/config and fix
 #
-# TODO use kernel-install? `kernel-install add $(uname -r) /lib/modules/$(uname -r)/vmlinuz`
+# TODO use kernel-install?
+# ```
+# export KERNEL_INSTALL_BOOT_ROOT=/efi
+# && export KERNEL_INSTALL_LAYOUT=bls
+# && kernel-install add $(uname -r) /lib/modules/$(uname -r)/vmlinuz
+# ```
 #
 ---
-- name: dotfiles
+- name: Dotfiles
   connection: local
   hosts: localhost
-  gather_facts: no
-  become: yes
+  gather_facts: false
+  become: true
   vars_prompt:
     - name: passphrase
       prompt: Luks passphrase
     - name: user
       prompt: User
-      private: no
+      private: false
     - name: password
       prompt: User password
     - name: hostname
       prompt: Hostname
-      private: no
+      private: false
   tasks:
-    - name: partition_table.delete
-      command: "sfdisk --delete {{ device }}"
-    - name: partprobe
-      command: "partprobe {{ device }}"
-    - name: partition.boot
-      parted:
+    - name: Partition_table.delete
+      ansible.builtin.command: "sfdisk --delete {{ device }}"
+      changed_when: true
+    - name: Partprobe
+      ansible.builtin.command: "partprobe {{ device }}"
+      changed_when: true
+    - name: Partition.boot
+      community.general.parted:
         device: "{{ device }}"
         name: boot
         part_end: 1GiB
@@ -44,8 +51,8 @@
         flags:
           - boot
         number: 1
-    - name: partition.root
-      parted:
+    - name: Partition.root
+      community.general.parted:
         device: "{{ device }}"
         name: root
         part_start: 1GiB
@@ -55,55 +62,61 @@
         number: 2
         flags:
           - lvm
-    - name: partprobe
-      command: "partprobe {{ device }}"
-    - name: luks.root
-      no_log: yes
+    - name: Partprobe
+      ansible.builtin.command: "partprobe {{ device }}"
+      changed_when: true
+    - name: Luks.root
+      no_log: true
       community.crypto.luks_device:
         device: "{{ device }}2"
         name: luks-root
         state: opened
         passphrase: "{{ passphrase }}"
-    - name: lvm.volume_group
-      lvg:
+    - name: Lvm.volume_group
+      community.general.lvg:
         pvs: /dev/mapper/luks-root
         vg: lvm1
-    - name: lvm.volume
-      lvol:
+    - name: Lvm.volume
+      community.general.lvol:
         lv: "{{ item.lv }}"
         pvs: /dev/mapper/luks-root
         size: "{{ item.size }}"
         vg: lvm1
         shrink: "{{ item.shrink }}"
       loop:
-        - { lv: swap, size: 9G, shrink: yes }
-        - { lv: home, size: 5G, shrink: yes }
-        - { lv: root, size: 100%FREE, shrink: no }
-    - name: filesystem
-      filesystem:
+        - { lv: swap, size: 9G, shrink: true }
+        - { lv: home, size: 5G, shrink: true }
+        - { lv: root, size: 100%FREE, shrink: false }
+    - name: Filesystem
+      community.general.filesystem:
         dev: "/dev/lvm1/{{ item.dev }}"
         fstype: "{{ item.fstype }}"
       loop:
         - { dev: root, fstype: btrfs }
         - { dev: home, fstype: btrfs }
         - { dev: swap, fstype: swap }
-    - name: boot.uuid
-      command: "blkid -s UUID -o value {{ device }}1"
+    - name: Boot.uuid
+      ansible.builtin.command: "blkid -s UUID -o value {{ device }}1"
+      changed_when: true
       register: boot_uuid
-    - name: luks.uuid
-      command: "blkid -s UUID -o value {{ device }}2"
+    - name: Luks.uuid
+      ansible.builtin.command: "blkid -s UUID -o value {{ device }}2"
+      changed_when: true
       register: luks_uuid
-    - name: root.uuid
-      command: "blkid -s UUID -o value /dev/mapper/lvm1-root"
+    - name: Root.uuid
+      ansible.builtin.command: "blkid -s UUID -o value /dev/mapper/lvm1-root"
+      changed_when: true
       register: root_uuid
-    - name: home.uuid
-      command: "blkid -s UUID -o value /dev/mapper/lvm1-home"
+    - name: Home.uuid
+      ansible.builtin.command: "blkid -s UUID -o value /dev/mapper/lvm1-home"
+      changed_when: true
       register: home_uuid
-    - name: swap.uuid
-      command: "blkid -s UUID -o value /dev/mapper/lvm1-swap"
+    - name: Swap.uuid
+      ansible.builtin.command: "blkid -s UUID -o value /dev/mapper/lvm1-swap"
+      changed_when: true
       register: swap_uuid
-    - name: mount.root
-      mount:
+    - name: Mount.root
+      ansible.posix.mount:
         fstab: /tmp/fstab.tmp
         src: "{{ item.src }}"
         path: "{{ item.path }}"
@@ -115,13 +128,13 @@
         - { src: "{{ device }}1", path: "{{ mountpoint }}/boot", fstype: vfat }
         - { src: none, path: "{{ mountpoint }}/proc", fstype: proc }
         - { src: none, path: "{{ mountpoint }}/sys", fstype: sysfs }
-    - name: dnf.install.filesystem
-      dnf:
+    - name: Dnf.install.filesystem
+      ansible.builtin.dnf:
         releasever: "{{ release }}"
         installroot: "{{ mountpoint }}"
         name: basesystem,dnf,bash,fedora-release,system-release,fedora-repos
-    - name: fstab.create
-      copy:
+    - name: Fstab.create
+      ansible.builtin.copy:
         dest: "{{ mountpoint }}/etc/fstab"
         content: |
           # /dev/mapper/lvm1-root
@@ -132,19 +145,19 @@
           UUID={{ home_uuid.stdout }} /home btrfs defaults	0 2
           # /dev/mapper/lvm1-swap
           UUID={{ swap_uuid.stdout }} none swap defaults 0 0
-    - name: crypttab.create
-      no_log: yes
-      crypttab:
+    - name: Crypttab.create
+      no_log: true
+      community.general.crypttab:
         name: luks-root
         backing_device: "UUID={{ luks_uuid.stdout }}"
         path: "{{ mountpoint }}/etc/crypttab"
         opts: discard
         state: present
-    - name: resolv.copy
-      copy:
+    - name: Resolv.copy
+      ansible.builtin.copy:
         src: /etc/resolv.conf
         dest: "{{ mountpoint }}/etc/resolv.conf"
-    - name: mount.dev
+    - name: Mount.dev
       ansible.posix.mount:
         fstab: /tmp/fstab.tmp
         src: /dev
@@ -152,64 +165,106 @@
         fstype: none
         opts: bind
         state: mounted
-    - name: chroot
+    - name: Chroot
       delegate_to: /tmp/root
       block:
-        - name: dnf.install.base
-          dnf:
-            name: kernel,cryptsetup,selinux-policy-targeted,lvm2,sudo,systemd,setup,util-linux,shadow-utils,vim,less,curl,man,tree,btrfs-progs,binutils,openssl,openssh-clients,coreutils,policycoreutils,procps-ng,rootfiles,iproute,pam,htop
-        - name: boot.clean
-          command: rm -rf /boot/*
-        - name: bootctl.install
-          command: bootctl --no-variables install
-        - name: machine_id.get
-          command: cat /etc/machine-id
+        - name: Dnf.install.base
+          ansible.builtin.dnf:
+            name:
+              - kernel
+              - cryptsetup
+              - selinux-policy-targeted
+              - lvm2
+              - sudo
+              - systemd
+              - setup
+              - util-linux
+              - shadow-utils
+              - vim
+              - less
+              - curl
+              - man
+              - tree
+              - btrfs-progs
+              - binutils
+              - openssl
+              - openssh-clients
+              - coreutils
+              - policycoreutils
+              - procps-ng
+              - rootfiles
+              - iproute
+              - pam
+              - htop
+        - name: Boot.clean
+          ansible.builtin.command: rm -rf /boot/*
+          changed_when: true
+        - name: Bootctl.install
+          ansible.builtin.command: bootctl --no-variables install
+          changed_when: true
+        - name: Machine_id.get
+          ansible.builtin.command: cat /etc/machine-id
+          changed_when: true
           register: machine_id
-        - name: kernel_version.get
-          command: ls /lib/modules
+        - name: Kernel_version.get
+          ansible.builtin.command: ls /lib/modules
+          changed_when: true
           register: kernel_version
-        - name: boot.entry_directory.create
-          file:
+        - name: Boot.entry_directory.create
+          ansible.builtin.file:
             path: "/boot/{{ machine_id.stdout }}/{{ kernel_version.stdout }}"
             state: directory
-        - name: initramfs.generate
-          command: |
+        - name: Initramfs.generate
+          ansible.builtin.command: |
             dracut -a "base bash crypt systemd systemd-initrd resume dracut-systemd lvm" -v -H -f --kver "{{ kernel_version.stdout }}"
-        - name: kernel.generate
-          command: dnf reinstall -y kernel-core
-        - name: kernel.options
-          replace:
+          changed_when: true
+        - name: Kernel.generate
+          ansible.builtin.command: dnf reinstall -y kernel-core
+          changed_when: true
+        - name: Kernel.options
+          ansible.builtin.replace:
             path: "/boot/loader/entries/{{ machine_id.stdout }}-{{ kernel_version.stdout }}.conf"
             regexp: ^options.*$
-            replace: 'options luks.uuid={{ luks_uuid.stdout }} luks.name={{ luks_uuid.stdout }}:luks-root root=UUID={{ root_uuid.stdout }} ro resume=UUID={{ swap_uuid.stdout }} "acpi_osi=!Windows 2012"'
-        - name: systemd-firstboot
-          command: "systemd-firstboot --keymap=fr --hostname={{ hostname }}"
-        - name: group.add
-          group:
+            replace: |
+              options \
+              luks.uuid={{ luks_uuid.stdout }} \
+              luks.name={{ luks_uuid.stdout }}:luks-root \
+              root=UUID={{ root_uuid.stdout }} \
+              ro \
+              resume=UUID={{ swap_uuid.stdout }} \
+              "acpi_osi=!Windows 2012"
+        - name: Systemd-firstboot
+          ansible.builtin.command: "systemd-firstboot --keymap=fr --hostname={{ hostname }}"
+          changed_when: true
+        - name: Group.add
+          ansible.builtin.group:
             name: humains
-        - name: salt.generate
-          no_log: yes
-          shell: |
+        - name: Salt.generate
+          no_log: true
+          ansible.builtin.shell: |
+            set -o pipefail
             cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1
+          changed_when: true
           register: salt
-        - name: password.hash
-          no_log: yes
-          command: "openssl passwd -6 -salt {{ salt.stdout }} {{ password }}"
+        - name: Password.hash
+          no_log: true
+          ansible.builtin.command: "openssl passwd -6 -salt {{ salt.stdout }} {{ password }}"
+          changed_when: true
           register: hashed_password
-        - name: user.add
-          no_log: yes
-          user:
+        - name: User.add
+          no_log: true
+          ansible.builtin.user:
             name: "{{ user }}"
             groups: wheel,humains,input
-            append: yes
+            append: true
             password: "{{ hashed_password.stdout }}"
             shell: /bin/bash
-            generate_ssh_key: yes
-    - name: clean
+            generate_ssh_key: true
+    - name: Clean
       when: clean | bool
       block:
-        - name: umount
-          mount:
+        - name: Umount
+          ansible.posix.mount:
             path: "{{ item }}"
             state: unmounted
           loop:
@@ -219,20 +274,20 @@
             - "{{ mountpoint }}/boot"
             - "{{ mountpoint }}/home"
             - "{{ mountpoint }}"
-        - name: mountpoint.delete
-          file:
+        - name: Mountpoint.delete
+          ansible.builtin.file:
             path: "{{ mountpoint }}"
             state: absent
-        - name: lvm.disable
-          lvol:
+        - name: Lvm.disable
+          community.general.lvol:
             lv: "{{ item }}"
             vg: lvm1
-            active: no
+            active: false
           loop:
             - home
             - swap
             - root
-        - name: luks.close
+        - name: Luks.close
           community.crypto.luks_device:
             name: luks-root
             state: closed
