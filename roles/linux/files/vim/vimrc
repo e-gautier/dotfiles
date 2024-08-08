@@ -59,9 +59,6 @@ set cindent&
 set smartindent&
 set indentexpr&
 
-" indent visual indicator
-let g:indent_guides_enable_on_vim_startup = 1
-
 " autorun ColorHighlight after bundles load
 autocmd VimEnter * ColorHighlight
 
