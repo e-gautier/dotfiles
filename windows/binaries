@@ -14,10 +14,7 @@ openvpn
 bulk-crap-uninstaller
 chromium
 openhardwaremonitor
-jetbrainstoolbox
-nodejs
 postman
-slack
 syncthing
 synctrayzor
 transmission
@@ -36,7 +33,7 @@ copyq
 x64dbg.portable
 ghidra
 microsoft-windows-terminal
-keepass
+keepassxc
 etcher
 tor-browser
 mumble
@@ -49,3 +46,5 @@ sharpkeys
 cpu-z
 gpu-z
 ssd-z.portable
+discord
+spotify
