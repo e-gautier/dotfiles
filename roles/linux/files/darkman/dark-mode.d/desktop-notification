@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-notify-send "switching to dark mode"
+notify-send "Darkman" "switching to dark mode"

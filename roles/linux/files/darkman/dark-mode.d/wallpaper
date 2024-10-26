@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-export DISPLAY=:0
-feh --bg-scale ~/SYNC/MAIN/Wallpapers/i3/dark/
