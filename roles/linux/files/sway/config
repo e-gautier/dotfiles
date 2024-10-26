@@ -134,7 +134,6 @@ exec nm-applet
 exec usbguard-applet-qt
 exec copyq
 exec pasystray
-exec bluetoothctl power off
 exec blueman-applet
 exec gammastep -c ~/.config/redshift
 exec shutter --min_at_startup
