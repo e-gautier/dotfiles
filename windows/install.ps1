@@ -7,13 +7,8 @@ Set-NetFirewallProfile -All -DefaultInboundAction Block -DefaultOutboundAction A
 # remove all existing rules
 Remove-NetFirewallRule -All
 
-# install chocolatey
-if (!(Test-Path -Path "$env:ProgramData\Chocolatey")) {
-  Invoke-Expression((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-}
-
 # install binaries
-Set-Variable -Name "BINARY_INSTALL" -Value 'Get-Content "$HOME\dotfiles\windows\binaries" | ForEach-Object{($_ -split "\r\n")[0]} | ForEach-Object{choco install -y --accept-license $_}'
+Set-Variable -Name "BINARY_INSTALL" -Value 'Get-Content "$HOME\dotfiles\windows\binaries" | ForEach-Object{($_ -split "\r\n")[0]} | ForEach-Object{winget install -y --accept-license $_}'
 $CHOICE = Read-Host "Install binaries ([Y]/n)? "
 switch ($CHOICE) {
   { 'n', 'N' -contains $_ } { break }
