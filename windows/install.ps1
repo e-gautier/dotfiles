@@ -2,25 +2,10 @@
 
 # enable firewall with default block
 Set-NetFirewallProfile -All -Enabled True
-Set-NetFirewallProfile -All -DefaultInboundAction Block -DefaultOutboundAction Block -NotifyOnListen True -AllowUnicastResponseToMulticast True -LogFileName %SystemRoot%\System32\LogFiles\Firewall\pfirewall.log
+Set-NetFirewallProfile -All -DefaultInboundAction Block -DefaultOutboundAction Allow -NotifyOnListen True -AllowUnicastResponseToMulticast True -LogFileName %SystemRoot%\System32\LogFiles\Firewall\pfirewall.log
 
 # remove all existing rules
 Remove-NetFirewallRule -All
-
-# add firewall rules
-# allow System to map SMB volumes
-New-NetFirewallRule -DisplayName "System" -Direction Outbound -Program "System" -Action Allow
-# allow svchost to allow DNS, DHCP...
-New-NetFirewallRule -DisplayName "svchost" -Direction Outbound -Program "%SystemRoot%\System32\svchost.exe" -Action Allow
-New-NetFirewallRule -DisplayName "Powershell" -Direction Outbound -Program "%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -Action Allow
-New-NetFirewallRule -DisplayName "Chocolatey" -Direction Outbound -Program "%ALLUSERSPROFILE%\chocolatey\choco.exe" -Action Allow
-New-NetFirewallRule -DisplayName "Firefox" -Direction Outbound -Program "%ProgramFiles%\Mozilla Firefox\firefox.exe" -Action Allow
-New-NetFirewallRule -DisplayName "Jetbrains toolbox" -Direction Outbound -Program "%USERPROFILE%\AppData\Local\JetBrains\Toolbox\bin\jetbrains-toolbox.exe" -Action Allow
-New-NetFirewallRule -DisplayName "Steam" -Direction Outbound -Program "%ProgramFiles% (x86)\Steam\Steam.exe" -Action Allow
-New-NetFirewallRule -DisplayName "Steam web helper" -Direction Outbound -Program "%ProgramFiles% (x86)\Steam\bin\cef\cef.win7x64\steamwebhelper.exe" -Action Allow
-New-NetFirewallRule -DisplayName "Syncthing" -Direction Outbound -Program "%APPDATA%\SyncTrayzor\syncthing.exe" -Action Allow
-New-NetFirewallRule -DisplayName "SyncTrayzor" -Direction Outbound -Program "%ProgramFiles%\SyncTrayzor\SyncTrayzor.exe" -Action Allow
-New-NetFirewallRule -DisplayName "VSCodium" -Direction Outbound -Program "%USERPROFILE%\AppData\Local\Programs\VSCodium\VSCodium.exe" -Action Allow
 
 # install chocolatey
 if (!(Test-Path -Path "$env:ProgramData\Chocolatey")) {
