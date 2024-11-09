@@ -56,22 +56,6 @@ $o = new-object -com shell.application
 $o.Namespace("$HOME").Self.InvokeVerb("pintohome")
 $o.Namespace("C:\ProgramData\chocolatey\lib\sysinternals").Self.InvokeVerb("pintohome")
 $o.Namespace("C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools").Self.InvokeVerb("pintohome")
-Set-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState" -Name "HideFileExt" -Value 0 -ea SilentlyContinue
-Set-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState" -Name "FullPath" -Value 1 -ea SilentlyContinue
-Set-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "Hidden" -Value 1 -ea SilentlyContinue
-Set-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "AutoCheckSelect" -Value 0 -ea SilentlyContinue
-Set-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideDrivesWithNoMedia" -Value 0
-# show preview pane
-Set-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Modules\GlobalSettings\DetailsContainer" -Name "DetailsContainer" -Value ([byte[]](0x02,0x00,0x00,0x00,0x01,0x00,0x00,0x00)) -ea SilentlyContinue
-Set-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Modules\GlobalSettings\Sizer" -Name "DetailsContainerSizer" -Value ([byte[]](0x3e,0x01,0x00,0x00,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x49,0x03,0x00,0x00)) -ea SilentlyContinue
-# set default view mode to detail
-Remove-Item -Path "HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" -recurse -force -ea SilentlyContinue
-Remove-Item -Path "HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\BagMRU" -recurse -force -ea SilentlyContinue
-New-Item -Path "HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" -ea SilentlyContinue | Out-Null
-New-Item -Path "HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders" -ea SilentlyContinue | Out-Null
-New-Item -Path "HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell" -ea SilentlyContinue | Out-Null
-New-Item -Path "HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell\{5C4F28B5-F869-4E84-8E60-F11DB97C5CC7}" -ea SilentlyContinue | Out-Null
-Set-ItemProperty -LiteralPath "HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell\{5C4F28B5-F869-4E84-8E60-F11DB97C5CC7}" -Name "Mode" -Value 4 -ea SilentlyContinue
 Stop-Process -ProcessName Explorer
 
 Write-Output "done."
