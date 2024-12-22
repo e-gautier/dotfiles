@@ -220,6 +220,7 @@ packages:
     - keepassxc
     - gthumb # image viewer
     - gopass # GPG team password manager
+    - imv # feh alternative
   misc:
     - audit
     - w3m # browser in terminal
