@@ -221,6 +221,7 @@ packages:
     - gthumb # image viewer
     - gopass # GPG team password manager
     - imv # feh alternative
+    - thunar # file manager
   misc:
     - audit
     - w3m # browser in terminal
