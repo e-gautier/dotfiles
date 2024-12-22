@@ -180,6 +180,7 @@ packages:
     - ydotool # command line automation
     - wshowkeys # key display
     - kanshi # output profiles automation
+    - light # backlight manager
   apps:
     - feh
     - caja
