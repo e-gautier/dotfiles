@@ -222,6 +222,7 @@ packages:
     - gopass # GPG team password manager
     - imv # feh alternative
     - thunar # file manager
+    - flatpak # package manager
   misc:
     - audit
     - w3m # browser in terminal
