@@ -1,5 +1,7 @@
 ---
 namespace: main
+description: main
+repository: https://github.com/e-gautier/dotfiles
 name: dotfiles
 version: 1.0.0
 readme: README.md

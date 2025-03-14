@@ -2,3 +2,7 @@ skip_list:
     - latest[git]
     - ignore-errors
     - risky-file-permissions
+
+exclude_paths:
+    - roles/linux/files/vim/bundle
+    - .github

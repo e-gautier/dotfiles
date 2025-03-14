@@ -99,7 +99,7 @@
   when: install_flatpak is defined and install_flatpak != "N"
 - name: Setup symlinks
   ansible.builtin.import_tasks: symlinks.yml
-- name: create vim undodir
+- name: Create vim undodir
   ansible.builtin.file:
     path: ~/.vim/undodir
     state: directory

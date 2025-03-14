@@ -2,6 +2,6 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: role.linux
-      include_role:
+    - name: Linux role
+      ansible.builtin.include_role:
         name: linux

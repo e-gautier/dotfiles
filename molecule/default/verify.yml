@@ -3,9 +3,9 @@
   hosts: all
   gather_facts: true
   tasks:
-    - name: services facts loading
-      service_facts:
-    - name: assert required services are enabled
-      assert:
+    - name: Services facts loading
+      ansible.builtin.service_facts:
+    - name: Assert required services are enabled
+      ansible.builtin.assert:
         that:
           - ansible_facts.services["systemd-resolved.service"]["status"] == "enabled"

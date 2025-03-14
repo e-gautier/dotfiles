@@ -36,7 +36,7 @@ links:
   ~/.local/share/dark-mode.d: darkman/dark-mode.d
   ~/.local/share/light-mode.d: darkman/light-mode.d
   ~/.config/darkman/config.yaml: darkman/config.yaml
-  ~/.config/VSCodium/User : ../../../../Syncthing/VSCode-user # VScode user config
+  ~/.config/VSCodium/User: ../../../../Syncthing/VSCode-user # VScode user config
   ~/.config/waybar/config.jsonc: waybar/config.jsonc
   ~/.config/waybar/style.css: waybar/style.css
   ~/.config/swaylock/config: swaylock/config

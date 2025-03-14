@@ -1,15 +1,15 @@
 ---
 - name: Setup symlinks
   block:
-  - name: Setup symlink subdirs # hacky way to create symlinks parent subdirectories (since Ansible does not do it)
-    ansible.builtin.file:
-      path: "{{ item.key | regex_replace('(.+)\/.*', '\\1') }}"
-      state: directory
-    loop: "{{ links | dict2items }}"
-  - name: Create symlinks
-    ansible.builtin.file:
-      src: "{{ role_path }}/files/{{ item.value }}"
-      dest: "{{ item.key }}"
-      state: link
-      force: true
-    loop: "{{ links | dict2items }}"
+    - name: Setup symlink subdirs # hacky way to create symlinks parent subdirectories (since Ansible does not do it)
+      ansible.builtin.file:
+        path: "{{ item.key | regex_replace('(.+)\/.*', '\\1') }}"
+        state: directory
+      loop: "{{ links | dict2items }}"
+    - name: Create symlinks
+      ansible.builtin.file:
+        src: "{{ role_path }}/files/{{ item.value }}"
+        dest: "{{ item.key }}"
+        state: link
+        force: true
+      loop: "{{ links | dict2items }}"
