@@ -2,10 +2,13 @@
 dependency:
   name: galaxy
 driver:
+  # https://github.com/ansible-community/molecule-plugins/tree/main/doc/vagrant
   name: vagrant
+  provider:
+    name: libvirt
 platforms:
   - name: instance
-    box: fedora/37-cloud-base
+    box: fedora/41-cloud-base
     memory: 1024
     cpus: 1
 provisioner:

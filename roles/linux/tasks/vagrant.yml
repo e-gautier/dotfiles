@@ -4,7 +4,7 @@
     name: dnf-plugins-core
     state: present
 - name: Install Hashicorp repo
-  ansible.builtin.command: dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+  ansible.builtin.command: dnf config-manager addrepo --overwrite --from-repofile=https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
   register: output
   changed_when: output.rc != 0
 - name: Install Vagrant
