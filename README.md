@@ -15,7 +15,7 @@ Invoke-Expression((New-Object System.Net.WebClient).DownloadString('https://git.
 ## Tests
 ```bash
 # dependencies
-pip install -U --user pip molecule molecule-vagrant ansible ansible-core ansible-lint yamllint
+pip install ansible-dev-tools molecule-plugins[vagrant]
 dnf install -y vagrant vagrant-libvirt
 vagrant plugin install vagrant-libvirt
 systemctl start libvirtd
