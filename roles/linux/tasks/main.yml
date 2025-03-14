@@ -86,6 +86,17 @@
   community.general.cargo:
     name: "{{ cargo }}"
   when: install_cargo is defined and install_cargo != "N"
+- name: Add the flathub flatpak repository remote to the user installation
+  community.general.flatpak_remote:
+    name: flathub
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    method: user
+  when: install_flatpak is defined and install_flatpak != "N"
+- name: Install flatpak packages
+  community.general.flatpak:
+    name: "{{ flatpak }}"
+    remote: flathub
+  when: install_flatpak is defined and install_flatpak != "N"
 - name: Setup symlinks
   ansible.builtin.import_tasks: symlinks.yml
 - name: create vim undodir

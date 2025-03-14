@@ -19,6 +19,7 @@
     - vscodium-extensions.yml
     - snaps.yml
     - rpm-keys.yml
+    - flatpak.yml
   tags: always
 - name: Source Ansible services facts
   ansible.builtin.service_facts:

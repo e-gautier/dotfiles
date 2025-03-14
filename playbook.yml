@@ -29,6 +29,10 @@
       prompt: install snaps? [y/N]
       default: "N"
       private: false
+    - name: install_flatpak
+      prompt: install flatpak packages? [y/N]
+      default: "N"
+      private: false
   tasks:
     - name: Assert version
       ansible.builtin.assert:
