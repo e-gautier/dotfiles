@@ -40,3 +40,4 @@ links:
   ~/.config/waybar/config.jsonc: waybar/config.jsonc
   ~/.config/waybar/style.css: waybar/style.css
   ~/.config/swaylock/config: swaylock/config
+  ~/.pythonstartup: python/startup

@@ -4,3 +4,4 @@ tmux/plugins/*
 fonts/.uuid
 .history
 .ansible_facts_cache
+.ansible
