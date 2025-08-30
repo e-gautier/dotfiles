@@ -29,11 +29,6 @@
       repo_gpgcheck=1
       gpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
     dest: /etc/yum.repos.d/vscodium.repo
-- name: Configure battery low threshold
-  become: true
-  ansible.builtin.copy:
-    content: SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[0-10]", RUN+="/usr/bin/systemctl hybrid-sleep"
-    dest: /etc/udev/rules.d/99-low-battery.rules
 - name: Setup logind configuration
   become: true
   ansible.builtin.replace:
