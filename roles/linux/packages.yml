@@ -26,6 +26,7 @@ packages:
     - bash-completion
     - sway # Wayland compositor
     - symlinks # broken links detector
+    - upower # battery low management
   dev:
     - ShellCheck
     - git
