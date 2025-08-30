@@ -1,7 +1,8 @@
 // -*- mode: jsonc -*-
 {
+    "id": "main",
     "position": "bottom",
-    "height": 25,
+    "height": 26,
     "spacing": 5,
     "ipc": true,
     "reload_style_on_change": true,
@@ -60,7 +61,12 @@
     },
     "battery": {
         "states": {
-            "warning": 20
+            "warning": 20,
+            "critical": 10
+        },
+        "events": {
+            "on-discharging-warning": "notify-send -u critical 'Low Battery'",
+            "on-discharging-critical": "notify-send -u critical 'Very Low Battery'"
         },
         "format": "Bat:{capacity}% ({power}W)",
         "format-full": "Bat:{capacity}% ({power}W)",
