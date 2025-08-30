@@ -17,6 +17,24 @@
     url: https://packages.microsoft.com/config/rhel/7/prod.repo
     dest: /etc/yum.repos.d/microsoft.repo
     force: true
+- name: Upower config
+  become: true
+  ansible.builtin.copy:
+    content: |
+      [UPower]
+      EnableWattsUpPro=false
+      NoPollBatteries=false
+      IgnoreLid=false
+      UsePercentageForPolicy=true
+      PercentageLow=20.0
+      PercentageCritical=10.0
+      PercentageAction=5.0
+      TimeLow=1200
+      TimeCritical=300
+      TimeAction=120
+      AllowRiskyCriticalPowerAction=false
+      CriticalPowerAction=HybridSleep
+    dest: /etc/UPower/UPower.conf
 - name: Install VSCodium repo
   become: true
   ansible.builtin.copy:
