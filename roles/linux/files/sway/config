@@ -127,6 +127,9 @@ bindsym XF86AudioLowerVolume exec pactl set-sink-volume $OUTPUT -5% && pactl set
 bindsym XF86AudioMute exec pactl set-sink-mute $OUTPUT toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute $INPUT toggle && polybar-msg hook input 1
 
+bindsym XF86MonBrightnessDown exec brightnessctl -d intel_backlight set 5%-
+bindsym XF86MonBrightnessUp   exec brightnessctl -d intel_backlight set +5%
+
 include /etc/sway/config.d/*
 
 exec waybar --config ~/.config/waybar/config.jsonc
