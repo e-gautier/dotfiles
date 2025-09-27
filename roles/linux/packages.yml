@@ -182,6 +182,7 @@ packages:
     - wshowkeys # key display
     - kanshi # output profiles automation
     - light # backlight manager
+    - git-delta
   apps:
     - feh
     - caja

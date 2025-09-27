@@ -95,6 +95,11 @@
     update_homebrew: true
     upgrade_all: true
   when: install_homebrew is defined and install_homebrew != "N"
+- name: enable Homebrew services
+  community.general.homebrew_services:
+    name: "{{ item }}"
+  loop: "{{ homebrew_services }}"
+  when: install_homebrew is defined and install_homebrew != "N"
 - name: Install Cargo packages
   community.general.cargo:
     name: "{{ cargo }}"
