@@ -10,3 +10,4 @@ homebrew:
   - clipboard # clipboard manager
   - rust # + cargo package manager
   - watchexec # file watcher
+  - qrencode # qrcode creator
