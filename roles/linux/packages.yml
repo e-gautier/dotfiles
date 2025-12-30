@@ -192,7 +192,7 @@ packages:
     - syncthing
     - discord
     - copyq
-    - shutter
+    - shutter # screenshot
     - gimp
     - cmus # terminal music player
     - vlc
