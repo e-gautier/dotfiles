@@ -11,3 +11,4 @@ homebrew:
   - rust # + cargo package manager
   - watchexec # file watcher
   - qrencode # qrcode creator
+  - opencode # ai-assisted coding
