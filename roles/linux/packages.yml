@@ -140,6 +140,7 @@ packages:
     - pygmentize # syntax highlighter
     - shyaml # yaml parser
     - zstd
+    - ftp
   ui:
     - wev # wayland events printer
     - wlr-randr # wayland screen manager
@@ -183,6 +184,7 @@ packages:
     - kanshi # output profiles automation
     - light # backlight manager
     - git-delta
+    - filezilla
   apps:
     - feh
     - caja
