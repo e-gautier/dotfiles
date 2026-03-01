@@ -153,7 +153,7 @@
   tags: system
 - name: Setup Nerdfonts
   ansible.builtin.import_tasks: nerd-fonts.yml
-  when: install_nerdfont is defined and install_nerdfonts != "N"
+  when: install_nerdfonts is defined and install_nerdfonts != "N"
   tags: fonts
 - name: Install VSCode extensions
   ansible.builtin.shell:
@@ -214,7 +214,7 @@
 - name: Put user in groups
   become: true
   ansible.builtin.user:
-    name: etienne
+    name: "{{ ansible_user_id }}"
     groups:
       - docker
       - wireshark
