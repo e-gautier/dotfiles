@@ -5,3 +5,5 @@
 *.swp
 *~
 .uuid
+node_modules
+.python-version
