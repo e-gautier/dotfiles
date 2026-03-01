@@ -20,5 +20,5 @@ python -m pip install --user ansible
 if [ ! -d "$FOLDER" ]; then
     git clone --recursive "$URL" "$FOLDER"
 fi
-cd $FOLDER
+ansible-galaxy collection install -r ${FOLDER}/requirements.yml
 ansible-playbook -K ${FOLDER}/playbook.yml

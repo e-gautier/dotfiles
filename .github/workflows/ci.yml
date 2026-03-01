@@ -10,5 +10,7 @@ jobs:
     runs-on: fedora-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Install Ansible collections
+        run: ansible-galaxy collection install -r requirements.yml
       - name: Molecule tests
         run: molecule test

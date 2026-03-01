@@ -1,22 +1,26 @@
 ---
 - name: Run requirements
   ansible.builtin.import_tasks: requirements.yml
+  tags: always
 - name: Add RPM keys
   become: true
   ansible.builtin.rpm_key:
     key: "{{ item }}"
   loop: "{{ rpm_keys }}"
+  tags: repos
 - name: Install dnf repos
   become: true
   ansible.builtin.dnf:
     name: "{{ item }}"
   loop: "{{ dnf.repos }}"
+  tags: repos
 - name: Install Microsoft repo
   become: true
   ansible.builtin.get_url:
     url: https://packages.microsoft.com/config/rhel/7/prod.repo
     dest: /etc/yum.repos.d/microsoft.repo
     force: true
+  tags: repos
 - name: Upower config
   become: true
   ansible.builtin.copy:
@@ -35,6 +39,7 @@
       AllowRiskyCriticalPowerAction=false
       CriticalPowerAction=HybridSleep
     dest: /etc/UPower/UPower.conf
+  tags: system
 - name: Install VSCodium repo
   become: true
   ansible.builtin.copy:
@@ -47,6 +52,7 @@
       repo_gpgcheck=1
       gpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
     dest: /etc/yum.repos.d/vscodium.repo
+  tags: repos
 - name: Setup logind configuration
   become: true
   ansible.builtin.replace:
@@ -60,18 +66,23 @@
     - HandleLidSwitch
     - HandleLidSwitchExternalPower
     - HandleLidSwitchDocked
+  tags: system
 - name: Setup DNS configuration
   ansible.builtin.import_tasks: dns.yml
   become: true
+  tags: system
 - name: Setup Docker
   ansible.builtin.import_tasks: docker.yml
   become: true
+  tags: docker
 - name: Setup Vagrant
   ansible.builtin.import_tasks: vagrant.yml
   become: true
+  tags: vagrant
 - name: Setup security updates
   ansible.builtin.import_tasks: security-updates.yml
   become: true
+  tags: system
 - name: Install packages
   become: true
   when: install_packages is defined and install_packages != "N"
@@ -79,68 +90,83 @@
     name: "{{ packages[item] }}"
     state: present
   loop: "{{ install_packages.split(',') }}"
+  tags: packages
 - name: Install Pip packages
   when: install_pip_packages is defined and install_pip_packages != "N"
   ansible.builtin.pip:
     name: "{{ pip }}"
     extra_args: --user
+  tags: packages
 - name: Homebrew clone repo
   ansible.builtin.git:
     repo: https://github.com/Homebrew/brew
     dest: ~/.homebrew
   when: install_homebrew is defined and install_homebrew != "N"
+  tags: packages
 - name: Install Homebrew packages
   community.general.homebrew:
     name: "{{ homebrew }}"
     update_homebrew: true
     upgrade_all: true
   when: install_homebrew is defined and install_homebrew != "N"
+  tags: packages
 - name: enable Homebrew services
   community.general.homebrew_services:
     name: "{{ item }}"
   loop: "{{ homebrew_services }}"
   when: install_homebrew is defined and install_homebrew != "N"
+  tags: packages
 - name: Install Cargo packages
   community.general.cargo:
     name: "{{ cargo }}"
   when: install_cargo is defined and install_cargo != "N"
+  tags: packages
 - name: Add the flathub flatpak repository remote to the user installation
   community.general.flatpak_remote:
     name: flathub
     flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
     method: user
   when: install_flatpak is defined and install_flatpak != "N"
+  tags: packages
 - name: Install flatpak packages
   community.general.flatpak:
     name: "{{ flatpak }}"
     remote: flathub
   when: install_flatpak is defined and install_flatpak != "N"
+  tags: packages
 - name: Setup symlinks
   ansible.builtin.import_tasks: symlinks.yml
+  tags: dotfiles
 - name: Create vim undodir
   ansible.builtin.file:
     path: ~/.vim/undodir
     state: directory
+  tags: dotfiles
 - name: Install fonts
   ansible.builtin.shell: if hash fc-cache 2>/dev/null; then fc-cache -f; fi
   register: output
   changed_when: output.rc != 0
+  tags: fonts
 - name: Setup nftables
   ansible.builtin.import_tasks: nftables.yml
   become: true
+  tags: system
 - name: Setup Nerdfonts
   ansible.builtin.import_tasks: nerd-fonts.yml
   when: install_nerdfont is defined and install_nerdfonts != "N"
+  tags: fonts
 - name: Install VSCode extensions
   ansible.builtin.shell:
     cmd: "codium --install-extension {{ item }} ||:"
   loop: "{{ vscodium_extensions }}"
   register: output
   changed_when: output.rc != 0
+  tags: vscodium
 - name: Install snaps
   community.general.snap:
     name: "{{ snaps }}"
   when: install_snaps is defined and install_snaps != "N"
+  tags: packages
 - name: Setup powertop unit
   become: true
   ansible.builtin.template:
@@ -151,6 +177,7 @@
     type: oneshot
     exec_start: /usr/sbin/powertop --auto-tune
     wanted_by: multi-user.target
+  tags: services
 - name: Enable systemd user services
   ansible.builtin.systemd:
     name: "{{ item }}"
@@ -160,6 +187,7 @@
     daemon_reload: true
   loop: "{{ units.user.enabled }}"
   ignore_errors: true
+  tags: services
 - name: Enable systemd system services
   become: true
   ansible.builtin.systemd:
@@ -171,6 +199,7 @@
   ignore_errors: true
   register: output
   changed_when: output.enabled != true
+  tags: services
 - name: Disable systemd system services
   become: true
   ansible.builtin.systemd:
@@ -181,6 +210,7 @@
   when: item ~ ".service" in ansible_facts.services
   loop: "{{ units.system.disabled }}"
   ignore_errors: true
+  tags: services
 - name: Put user in groups
   become: true
   ansible.builtin.user:
@@ -190,3 +220,4 @@
       - wireshark
     append: true
   ignore_errors: true
+  tags: services
