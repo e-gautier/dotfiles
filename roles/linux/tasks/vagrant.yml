@@ -5,8 +5,8 @@
     state: present
 - name: Install Hashicorp repo
   ansible.builtin.command: dnf config-manager addrepo --overwrite --from-repofile=https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
-  register: output
-  changed_when: output.rc != 0
+  register: linux_output
+  changed_when: linux_output.rc != 0
 - name: Install Vagrant
   ansible.builtin.package:
     name: vagrant

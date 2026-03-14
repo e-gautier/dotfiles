@@ -5,8 +5,8 @@
     state: present
 - name: Install Docker repo
   ansible.builtin.command: dnf config-manager addrepo --overwrite --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
-  register: output
-  changed_when: output.rc != 0
+  register: linux_output
+  changed_when: linux_output.rc != 0
 - name: Install Docker
   ansible.builtin.package:
     name:
@@ -23,5 +23,5 @@
   loop:
     - docker
     - containerd
-  register: output
-  changed_when: output.state != "started"
+  register: linux_output
+  changed_when: linux_output.state != "started"

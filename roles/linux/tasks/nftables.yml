@@ -18,5 +18,5 @@
     state: restarted
     enabled: true
     daemon_reload: true
-  register: output
-  changed_when: output.state != "started"
+  register: linux_output
+  changed_when: linux_output.state != "started"

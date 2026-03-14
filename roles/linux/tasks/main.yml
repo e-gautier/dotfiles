@@ -174,7 +174,7 @@
   tags:
     - packages
     - homebrew
-- name: enable Homebrew services
+- name: Enable Homebrew services
   community.general.homebrew_services:
     name: "{{ item }}"
   loop: "{{ homebrew_services }}"
@@ -207,8 +207,8 @@
     - vim
 - name: Install fonts
   ansible.builtin.shell: if hash fc-cache 2>/dev/null; then fc-cache -f; fi
-  register: output
-  changed_when: output.rc != 0
+  register: linux_output
+  changed_when: linux_output.rc != 0
   tags:
     - fonts
     - font-cache
@@ -227,8 +227,8 @@
   ansible.builtin.shell:
     cmd: "codium --install-extension {{ item }} ||:"
   loop: "{{ vscodium_extensions }}"
-  register: output
-  changed_when: output.rc != 0
+  register: linux_output
+  changed_when: linux_output.rc != 0
   tags: vscodium
 - name: Install snaps
   community.general.snap:
@@ -271,8 +271,8 @@
     daemon_reload: true
   loop: "{{ units.system.enabled }}"
   ignore_errors: true
-  register: output
-  changed_when: output.enabled != true
+  register: linux_output
+  changed_when: linux_output.enabled != true
   tags:
     - services
     - systemd-system

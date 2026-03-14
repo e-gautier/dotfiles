@@ -5,5 +5,5 @@
     dest: ~/.nerdfonts
 - name: Install Nerdfonts
   ansible.builtin.command: ~/.nerdfonts/install.sh
-  register: output
-  changed_when: output.rc != 0
+  register: linux_output
+  changed_when: linux_output.rc != 0
