@@ -27,8 +27,7 @@ molecule verify
 molecule test
 # check manually
 ansible-playbook playbook.yml --list-tags
-ansible-playbook -K playbook.yml --tags dotfiles --check --diff \
-  -e "install_packages=N install_homebrew=N install_cargo=N install_pip_packages=N install_nerdfonts=N install_snaps=N install_flatpak=N"
+ansible-playbook -K playbook.yml --tags dotfiles --check --diff
 ```
 ## Install a Vim plugin
 ```

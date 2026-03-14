@@ -65,6 +65,7 @@
     - vscodium-repo
 - name: Setup logind configuration
   become: true
+  ignore_errors: true
   ansible.builtin.replace:
     path: /etc/systemd/logind.conf
     regexp: "^#{{ item }}(=.*)$"
@@ -82,6 +83,7 @@
 - name: Setup DNS configuration
   ansible.builtin.import_tasks: dns.yml
   become: true
+  ignore_errors: true
   tags:
     - system
     - dns
@@ -96,21 +98,61 @@
 - name: Setup security updates
   ansible.builtin.import_tasks: security-updates.yml
   become: true
+  ignore_errors: true
   tags:
     - system
     - security-updates
-- name: Install packages
+- name: Install core packages
   become: true
-  when: install_packages is defined and install_packages != "N"
+  ignore_errors: true
   ansible.builtin.package:
-    name: "{{ packages[item] }}"
+    name: "{{ packages.core }}"
     state: present
-  loop: "{{ install_packages.split(',') }}"
   tags:
     - packages
     - dnf
+    - packages-core
+- name: Install dev packages
+  become: true
+  ignore_errors: true
+  ansible.builtin.package:
+    name: "{{ packages.dev }}"
+    state: present
+  tags:
+    - packages
+    - dnf
+    - packages-dev
+- name: Install ui packages
+  become: true
+  ignore_errors: true
+  ansible.builtin.package:
+    name: "{{ packages.ui }}"
+    state: present
+  tags:
+    - packages
+    - dnf
+    - packages-ui
+- name: Install apps packages
+  become: true
+  ignore_errors: true
+  ansible.builtin.package:
+    name: "{{ packages.apps }}"
+    state: present
+  tags:
+    - packages
+    - dnf
+    - packages-apps
+- name: Install misc packages
+  become: true
+  ignore_errors: true
+  ansible.builtin.package:
+    name: "{{ packages.misc }}"
+    state: present
+  tags:
+    - packages
+    - dnf
+    - packages-misc
 - name: Install Pip packages
-  when: install_pip_packages is defined and install_pip_packages != "N"
   ansible.builtin.pip:
     name: "{{ pip }}"
     extra_args: --user
@@ -121,7 +163,6 @@
   ansible.builtin.git:
     repo: https://github.com/Homebrew/brew
     dest: ~/.homebrew
-  when: install_homebrew is defined and install_homebrew != "N"
   tags:
     - packages
     - homebrew
@@ -130,7 +171,6 @@
     name: "{{ homebrew }}"
     update_homebrew: true
     upgrade_all: true
-  when: install_homebrew is defined and install_homebrew != "N"
   tags:
     - packages
     - homebrew
@@ -138,31 +178,18 @@
   community.general.homebrew_services:
     name: "{{ item }}"
   loop: "{{ homebrew_services }}"
-  when: install_homebrew is defined and install_homebrew != "N"
   tags:
     - packages
     - homebrew
 - name: Install Cargo packages
   community.general.cargo:
     name: "{{ cargo }}"
-  when: install_cargo is defined and install_cargo != "N"
   tags:
     - packages
     - cargo
-- name: Add the flathub flatpak repository remote to the user installation
-  community.general.flatpak_remote:
-    name: flathub
-    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
-    method: user
-  when: install_flatpak is defined and install_flatpak != "N"
-  tags:
-    - packages
-    - flatpak
-- name: Install flatpak packages
-  community.general.flatpak:
-    name: "{{ flatpak }}"
-    remote: flathub
-  when: install_flatpak is defined and install_flatpak != "N"
+- name: Setup Flatpak
+  ansible.builtin.import_tasks: flatpak.yml
+  ignore_errors: true
   tags:
     - packages
     - flatpak
@@ -193,7 +220,6 @@
     - nftables
 - name: Setup Nerdfonts
   ansible.builtin.import_tasks: nerd-fonts.yml
-  when: install_nerdfonts is defined and install_nerdfonts != "N"
   tags:
     - fonts
     - nerdfonts
@@ -207,7 +233,7 @@
 - name: Install snaps
   community.general.snap:
     name: "{{ snaps }}"
-  when: install_snaps is defined and install_snaps != "N"
+  ignore_errors: true
   tags:
     - packages
     - snaps
@@ -266,7 +292,7 @@
 - name: Put user in groups
   become: true
   ansible.builtin.user:
-    name: "{{ ansible_user_id }}"
+    name: "{{ ansible_facts['user_id'] }}"
     groups:
       - docker
       - wireshark
