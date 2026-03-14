@@ -20,8 +20,13 @@ dnf install -y vagrant vagrant-libvirt
 vagrant plugin install vagrant-libvirt
 systemctl start libvirtd
 # run tests suite
+molecule create
+molecule converge
+molecule verify
+# or
 molecule test
 # check manually
+ansible-playbook playbook.yml --list-tags
 ansible-playbook -K playbook.yml --tags dotfiles --check --diff \
   -e "install_packages=N install_homebrew=N install_cargo=N install_pip_packages=N install_nerdfonts=N install_snaps=N install_flatpak=N"
 ```

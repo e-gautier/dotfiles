@@ -42,7 +42,7 @@
       vars:
         ansible_core_version: 2.12
     - name: Include Linux role
-      ansible.builtin.include_role:
+      ansible.builtin.import_role:
         name: linux
       when: ansible_system == "Linux"
       tags: always

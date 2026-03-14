@@ -7,20 +7,26 @@
   ansible.builtin.rpm_key:
     key: "{{ item }}"
   loop: "{{ rpm_keys }}"
-  tags: repos
+  tags:
+    - repos
+    - rpm-keys
 - name: Install dnf repos
   become: true
   ansible.builtin.dnf:
     name: "{{ item }}"
   loop: "{{ dnf.repos }}"
-  tags: repos
+  tags:
+    - repos
+    - dnf-repos
 - name: Install Microsoft repo
   become: true
   ansible.builtin.get_url:
     url: https://packages.microsoft.com/config/rhel/7/prod.repo
     dest: /etc/yum.repos.d/microsoft.repo
     force: true
-  tags: repos
+  tags:
+    - repos
+    - microsoft-repo
 - name: Upower config
   become: true
   ansible.builtin.copy:
@@ -39,7 +45,9 @@
       AllowRiskyCriticalPowerAction=false
       CriticalPowerAction=HybridSleep
     dest: /etc/UPower/UPower.conf
-  tags: system
+  tags:
+    - system
+    - upower
 - name: Install VSCodium repo
   become: true
   ansible.builtin.copy:
@@ -52,7 +60,9 @@
       repo_gpgcheck=1
       gpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
     dest: /etc/yum.repos.d/vscodium.repo
-  tags: repos
+  tags:
+    - repos
+    - vscodium-repo
 - name: Setup logind configuration
   become: true
   ansible.builtin.replace:
@@ -66,11 +76,15 @@
     - HandleLidSwitch
     - HandleLidSwitchExternalPower
     - HandleLidSwitchDocked
-  tags: system
+  tags:
+    - system
+    - logind
 - name: Setup DNS configuration
   ansible.builtin.import_tasks: dns.yml
   become: true
-  tags: system
+  tags:
+    - system
+    - dns
 - name: Setup Docker
   ansible.builtin.import_tasks: docker.yml
   become: true
@@ -82,7 +96,9 @@
 - name: Setup security updates
   ansible.builtin.import_tasks: security-updates.yml
   become: true
-  tags: system
+  tags:
+    - system
+    - security-updates
 - name: Install packages
   become: true
   when: install_packages is defined and install_packages != "N"
@@ -90,71 +106,97 @@
     name: "{{ packages[item] }}"
     state: present
   loop: "{{ install_packages.split(',') }}"
-  tags: packages
+  tags:
+    - packages
+    - dnf
 - name: Install Pip packages
   when: install_pip_packages is defined and install_pip_packages != "N"
   ansible.builtin.pip:
     name: "{{ pip }}"
     extra_args: --user
-  tags: packages
+  tags:
+    - packages
+    - pip
 - name: Homebrew clone repo
   ansible.builtin.git:
     repo: https://github.com/Homebrew/brew
     dest: ~/.homebrew
   when: install_homebrew is defined and install_homebrew != "N"
-  tags: packages
+  tags:
+    - packages
+    - homebrew
 - name: Install Homebrew packages
   community.general.homebrew:
     name: "{{ homebrew }}"
     update_homebrew: true
     upgrade_all: true
   when: install_homebrew is defined and install_homebrew != "N"
-  tags: packages
+  tags:
+    - packages
+    - homebrew
 - name: enable Homebrew services
   community.general.homebrew_services:
     name: "{{ item }}"
   loop: "{{ homebrew_services }}"
   when: install_homebrew is defined and install_homebrew != "N"
-  tags: packages
+  tags:
+    - packages
+    - homebrew
 - name: Install Cargo packages
   community.general.cargo:
     name: "{{ cargo }}"
   when: install_cargo is defined and install_cargo != "N"
-  tags: packages
+  tags:
+    - packages
+    - cargo
 - name: Add the flathub flatpak repository remote to the user installation
   community.general.flatpak_remote:
     name: flathub
     flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
     method: user
   when: install_flatpak is defined and install_flatpak != "N"
-  tags: packages
+  tags:
+    - packages
+    - flatpak
 - name: Install flatpak packages
   community.general.flatpak:
     name: "{{ flatpak }}"
     remote: flathub
   when: install_flatpak is defined and install_flatpak != "N"
-  tags: packages
+  tags:
+    - packages
+    - flatpak
 - name: Setup symlinks
   ansible.builtin.import_tasks: symlinks.yml
-  tags: dotfiles
+  tags:
+    - dotfiles
+    - symlinks
 - name: Create vim undodir
   ansible.builtin.file:
     path: ~/.vim/undodir
     state: directory
-  tags: dotfiles
+  tags:
+    - dotfiles
+    - vim
 - name: Install fonts
   ansible.builtin.shell: if hash fc-cache 2>/dev/null; then fc-cache -f; fi
   register: output
   changed_when: output.rc != 0
-  tags: fonts
+  tags:
+    - fonts
+    - font-cache
 - name: Setup nftables
   ansible.builtin.import_tasks: nftables.yml
   become: true
-  tags: system
+  tags:
+    - system
+    - nftables
 - name: Setup Nerdfonts
   ansible.builtin.import_tasks: nerd-fonts.yml
   when: install_nerdfonts is defined and install_nerdfonts != "N"
-  tags: fonts
+  tags:
+    - fonts
+    - nerdfonts
 - name: Install VSCode extensions
   ansible.builtin.shell:
     cmd: "codium --install-extension {{ item }} ||:"
@@ -166,7 +208,9 @@
   community.general.snap:
     name: "{{ snaps }}"
   when: install_snaps is defined and install_snaps != "N"
-  tags: packages
+  tags:
+    - packages
+    - snaps
 - name: Setup powertop unit
   become: true
   ansible.builtin.template:
@@ -177,7 +221,9 @@
     type: oneshot
     exec_start: /usr/sbin/powertop --auto-tune
     wanted_by: multi-user.target
-  tags: services
+  tags:
+    - services
+    - powertop
 - name: Enable systemd user services
   ansible.builtin.systemd:
     name: "{{ item }}"
@@ -187,7 +233,9 @@
     daemon_reload: true
   loop: "{{ units.user.enabled }}"
   ignore_errors: true
-  tags: services
+  tags:
+    - services
+    - systemd-user
 - name: Enable systemd system services
   become: true
   ansible.builtin.systemd:
@@ -199,7 +247,9 @@
   ignore_errors: true
   register: output
   changed_when: output.enabled != true
-  tags: services
+  tags:
+    - services
+    - systemd-system
 - name: Disable systemd system services
   become: true
   ansible.builtin.systemd:
@@ -210,7 +260,9 @@
   when: item ~ ".service" in ansible_facts.services
   loop: "{{ units.system.disabled }}"
   ignore_errors: true
-  tags: services
+  tags:
+    - services
+    - systemd-system
 - name: Put user in groups
   become: true
   ansible.builtin.user:
@@ -220,4 +272,6 @@
       - wireshark
     append: true
   ignore_errors: true
-  tags: services
+  tags:
+    - services
+    - groups
