@@ -4,39 +4,11 @@
 - name: Dotfiles
   connection: local
   hosts: localhost
-  vars_prompt:
-    - name: install_packages
-      prompt: install what packages? [core,dev,ui,apps,misc/N]
-      default: "N"
-      private: false
-    - name: install_homebrew
-      prompt: install Homebrew packages? [y/N]
-      default: "N"
-      private: false
-    - name: install_cargo
-      prompt: install Cargo packages? [y/N]
-      default: "N"
-      private: false
-    - name: install_pip_packages
-      prompt: install pip packages? [y/N]
-      default: "N"
-      private: false
-    - name: install_nerdfonts
-      prompt: install Nerdfonts? [y/N]
-      default: "N"
-      private: false
-    - name: install_snaps
-      prompt: install snaps? [y/N]
-      default: "N"
-      private: false
-    - name: install_flatpak
-      prompt: install flatpak packages? [y/N]
-      default: "N"
-      private: false
+  vars_prompt: []
   tasks:
     - name: Assert version
       ansible.builtin.assert:
-        that: "{{ ansible_version.full is version(ansible_core_version, '>=') }}"
+        that: ansible_version.full is version(ansible_core_version, '>=')
         success_msg: "Ansible version >= {{ ansible_core_version }}"
         fail_msg: "Ansible version < {{ ansible_core_version }}"
       vars:
@@ -44,5 +16,5 @@
     - name: Include Linux role
       ansible.builtin.import_role:
         name: linux
-      when: ansible_system == "Linux"
+      when: ansible_facts["system"] == "Linux"
       tags: always
