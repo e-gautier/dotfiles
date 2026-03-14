@@ -152,4 +152,9 @@ exec swayidle -w \
 bindswitch --reload --locked lid:on exec swaylock
 bindsym Control+Mod1+l exec swaylock
 
-bindsym Mod1+tab workspace back_and_forth
+# native alttab commented below (uncomment if alttab is failing)
+# bindsym Mod1+tab workspace back_and_forth
+
+exec alttab
+bindsym Mod1+tab exec alttab --show
+

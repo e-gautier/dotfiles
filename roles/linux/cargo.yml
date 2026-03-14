@@ -4,3 +4,4 @@ cargo:
   - systemfd # socket handler
   - cargo-watch
   - cargo-update
+  - alttab # https://github.com/e-gautier/alttab
