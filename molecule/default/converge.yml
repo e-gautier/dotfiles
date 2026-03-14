@@ -5,3 +5,8 @@
     - name: Linux role
       ansible.builtin.include_role:
         name: linux
+        tasks_from: requirements.yml
+    - name: Linux role
+      ansible.builtin.include_role:
+        name: linux
+        tasks_from: symlinks.yml
