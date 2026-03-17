@@ -155,6 +155,6 @@ bindsym Control+Mod1+l exec swaylock
 # native alttab commented below (uncomment if alttab is failing)
 # bindsym Mod1+tab workspace back_and_forth
 
-exec alttab
-bindsym Mod1+tab exec alttab --show
+exec ~/.cargo/bin/alttab
+bindsym Mod1+tab exec ~/.cargo/bin/alttab --show
 
