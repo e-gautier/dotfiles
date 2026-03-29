@@ -171,6 +171,11 @@
     - packages
     - npm
     - nvm
+- name: Setup Nix
+  ansible.builtin.import_tasks: nix.yml
+  tags:
+    - packages
+    - nix
 - name: Install npm packages
   ansible.builtin.shell:
     cmd: . ~/.nvm/nvm.sh && npm install -g {{ item }}
