@@ -1,7 +1,6 @@
 ---
 - name: Run requirements
   ansible.builtin.import_tasks: requirements.yml
-  tags: always
 - name: Add RPM keys
   become: true
   ansible.builtin.rpm_key:

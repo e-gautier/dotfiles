@@ -17,4 +17,3 @@
       ansible.builtin.import_role:
         name: linux
       when: ansible_facts["system"] == "Linux"
-      tags: always
