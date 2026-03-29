@@ -5,23 +5,23 @@
     method: HEAD
     follow_redirects: none
     status_code: 301, 302
-  register: nix_redirect
+  register: linux_nix_redirect
 - name: Set Nix version fact
   ansible.builtin.set_fact:
-    nix_version: "{{ nix_redirect.location | regex_search('nix-([0-9]+\\.[0-9]+\\.[0-9]+)', '\\1') | first }}"
+    linux_nix_version: "{{ linux_nix_redirect.location | regex_search('nix-([0-9]+\\.[0-9]+\\.[0-9]+)', '\\1') | first }}"
 - name: Download Nix tarball
   ansible.builtin.get_url:
-    url: "https://releases.nixos.org/nix/nix-{{ nix_version }}/nix-{{ nix_version }}-x86_64-linux.tar.xz"
-    dest: "/tmp/nix-{{ nix_version }}-x86_64-linux.tar.xz"
+    url: "https://releases.nixos.org/nix/nix-{{ linux_nix_version }}/nix-{{ linux_nix_version }}-x86_64-linux.tar.xz"
+    dest: "/tmp/nix-{{ linux_nix_version }}-x86_64-linux.tar.xz"
 - name: Unpack Nix tarball
   ansible.builtin.unarchive:
-    src: "/tmp/nix-{{ nix_version }}-x86_64-linux.tar.xz"
+    src: "/tmp/nix-{{ linux_nix_version }}-x86_64-linux.tar.xz"
     dest: /tmp
     remote_src: true
-    creates: "/tmp/nix-{{ nix_version }}-x86_64-linux"
+    creates: "/tmp/nix-{{ linux_nix_version }}-x86_64-linux"
 - name: Run Nix installer
   ansible.builtin.command:
-    cmd: "/tmp/nix-{{ nix_version }}-x86_64-linux/install --no-daemon --yes --no-modify-profile"
+    cmd: "/tmp/nix-{{ linux_nix_version }}-x86_64-linux/install --no-daemon --yes --no-modify-profile"
     creates: ~/.nix-profile/bin/nix
   environment:
     INVOKED_FROM_INSTALL_IN: "1"

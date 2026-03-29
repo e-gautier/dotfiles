@@ -3,11 +3,15 @@
   ansible.builtin.uri:
     url: https://api.github.com/repos/nvm-sh/nvm/releases/latest
     return_content: true
-  register: nvm_release
+  register: linux_nvm_release
+- name: Download nvm install script
+  ansible.builtin.get_url:
+    url: "https://raw.githubusercontent.com/nvm-sh/nvm/{{ linux_nvm_release.json.tag_name }}/install.sh"
+    dest: /tmp/nvm-install.sh
+    mode: "0755"
 - name: Install nvm
-  ansible.builtin.shell:
-    cmd: >
-      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ nvm_release.json.tag_name }}/install.sh | bash
+  ansible.builtin.command:
+    cmd: bash /tmp/nvm-install.sh
     creates: ~/.nvm/nvm.sh
 - name: Install Node LTS
   ansible.builtin.shell:
