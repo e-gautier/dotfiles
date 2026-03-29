@@ -1,0 +1,23 @@
+---
+- name: Get latest nvm version
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/nvm-sh/nvm/releases/latest
+    return_content: true
+  register: nvm_release
+- name: Install nvm
+  ansible.builtin.shell:
+    cmd: >
+      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ nvm_release.json.tag_name }}/install.sh | bash
+    creates: ~/.nvm/nvm.sh
+- name: Install Node LTS
+  ansible.builtin.shell:
+    cmd: . ~/.nvm/nvm.sh && nvm install --lts
+    executable: /bin/bash
+  register: linux_output
+  changed_when: "'already installed' not in linux_output.stderr"
+- name: Set Node LTS as default
+  ansible.builtin.shell:
+    cmd: . ~/.nvm/nvm.sh && nvm alias default lts/*
+    executable: /bin/bash
+  register: linux_output
+  changed_when: linux_output.rc != 0

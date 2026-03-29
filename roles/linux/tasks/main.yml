@@ -158,6 +158,22 @@
   tags:
     - packages
     - pip
+- name: Setup nvm
+  ansible.builtin.import_tasks: nvm.yml
+  tags:
+    - packages
+    - npm
+    - nvm
+- name: Install npm packages
+  ansible.builtin.shell:
+    cmd: . ~/.nvm/nvm.sh && npm install -g {{ item }}
+    executable: /bin/bash
+  loop: "{{ npm }}"
+  register: linux_output
+  changed_when: linux_output.rc != 0
+  tags:
+    - packages
+    - npm
 - name: Homebrew clone repo
   ansible.builtin.git:
     repo: https://github.com/Homebrew/brew

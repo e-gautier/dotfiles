@@ -1,0 +1,4 @@
+---
+npm:
+  - "@googleworkspace/cli"
+  - "@google/gemini-cli"
