@@ -24,6 +24,7 @@
     recent = branch -v --sort=-committerdate
     undo = reset --soft HEAD^
     recommit = commit --reedit-message ORIG_HEAD
+    commit = commit -S
 [winUpdater]
     recentlySeenVersion = 2.22.0.windows.1
 [merge]
