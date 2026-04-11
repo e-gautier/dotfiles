@@ -69,6 +69,13 @@
     - repos
     - packages
     - google-cloud-cli
+- name: Setup GitHub CLI
+  ansible.builtin.import_tasks: github-cli.yml
+  become: true
+  tags:
+    - repos
+    - packages
+    - github-cli
 - name: Setup logind configuration
   become: true
   ignore_errors: true

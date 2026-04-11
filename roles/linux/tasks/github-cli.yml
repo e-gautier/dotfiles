@@ -1,0 +1,13 @@
+---
+- name: Install GitHub CLI repo
+  ansible.builtin.get_url:
+    url: https://cli.github.com/packages/rpm/gh-cli.repo
+    dest: /etc/yum.repos.d/gh-cli.repo
+    mode: "0644"
+- name: Import GitHub CLI RPM key
+  ansible.builtin.rpm_key:
+    key: https://cli.github.com/packages/githubcli-archive-keyring.asc
+- name: Install gh
+  ansible.builtin.package:
+    name: gh
+    state: present
