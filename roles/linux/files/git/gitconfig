@@ -11,7 +11,7 @@
     plog = log --graph  --pretty=format:'%C(auto)%h %ad %an %d %s %gn' --abbrev-commit --all --date=format:'%H:%M %d/%m/%Y'
     a = add
     b = branch
-    c = commit
+    c = commit -s
     cl = clone
     d = diff
     st = status
