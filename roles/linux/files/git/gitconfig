@@ -17,7 +17,7 @@
     st = status
     f = fetch
     ck = checkout
-    ps = push
+    p = push --force-with-lease
     pl = pull
     pull = pull --autostash
     fom = fetch origin master:master
