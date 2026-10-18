@@ -1,7 +1,6 @@
 ---
 vscodium_extensions:
   - dbaeumer.vscode-eslint
-  - eamodio.gitlens
   - editorconfig.editorconfig
   - esbenp.prettier-vscode
   - felixfbecker.php-intellisense
