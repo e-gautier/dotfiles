@@ -30,12 +30,10 @@ vscodium_extensions:
   - usernamehw.errorlens
   - Alexey-Strakh.stackoverflow-search
   - puppet.puppet-vscode
-  - mhutchie.git-graph
-  - eamodio.gitlens
   - datasert.vscode-texty
   - streetsidesoftware.code-spell-checker
   - streetsidesoftware.code-spell-checker-french
   - sleistner.vscode-fileutils
-  - Continue.continue
   - anweber.reveal-button
   - kilocode.Kilo-Code
+  - waderyan.gitblame
