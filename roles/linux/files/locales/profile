@@ -1,23 +1,25 @@
 # locales
-LANG=en_US.UTF-8
-LANGUAGE=en_US.UTF-8
-LC_CTYPE=fr_FR.UTF-8
-LC_NUMERIC=fr_FR.UTF-8
-LC_TIME=fr_FR.UTF-8
-LC_COLLATE=fr_FR.UTF-8
-LC_MONETARY=fr_FR.UTF-8
-LC_PAPER=fr_FR.UTF-8
-LC_NAME=fr_FR.UTF-8
-LC_ADDRESS=fr_FR.UTF-8
-LC_TELEPHONE=fr_FR.UTF-8
-LC_MEASUREMENT=fr_FR.UTF-8
-LC_IDENTIFICATION=fr_FR.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+export LC_CTYPE=fr_FR.UTF-8
+export LC_NUMERIC=fr_FR.UTF-8
+export LC_TIME=fr_FR.UTF-8
+export LC_COLLATE=fr_FR.UTF-8
+export LC_MONETARY=fr_FR.UTF-8
+export LC_PAPER=fr_FR.UTF-8
+export LC_NAME=fr_FR.UTF-8
+export LC_ADDRESS=fr_FR.UTF-8
+export LC_TELEPHONE=fr_FR.UTF-8
+export LC_MEASUREMENT=fr_FR.UTF-8
+export LC_IDENTIFICATION=fr_FR.UTF-8
 
 # editor, pagers, etc
-EDITOR=vim
-VISUAL=bat
-PAGER=bat
-MANPAGER=bat
+export EDITOR=vim
+export VISUAL=vim
+export PAGER=bat
+# man pages highlighted with bat
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANROFFOPT="-c"
 
 # misc
-FZF_DEFAULT_COMMAND="ag --hidden --ignore .git -l"
+export FZF_DEFAULT_COMMAND="ag --hidden --ignore .git -l"

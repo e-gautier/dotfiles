@@ -19,12 +19,12 @@
     ck = checkout
     p = push --force-with-lease
     pl = pull
-    pull = pull --autostash
     fom = fetch origin master:master
     recent = branch -v --sort=-committerdate
     undo = reset --soft HEAD^
     recommit = commit --reedit-message ORIG_HEAD
-    commit = commit -S
+[commit]
+    gpgSign = true
 [winUpdater]
     recentlySeenVersion = 2.22.0.windows.1
 [merge]

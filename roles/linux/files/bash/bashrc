@@ -29,15 +29,11 @@ PATH=$PATH:~/.local/bin:~/.bin
 # umask
 umask 0077
 
-PROMPT_COMMAND=prompt
+# git integrated in PS1
+PS1='\u@\h:\w$(__git_ps1 " [%s] ")[$?]\$ '
 
-prompt() {
-  # git integrated in PS1
-  PS1='\u@\h:\w$(__git_ps1 " [%s] ")[$?]\$ '
-
-  # save history at each prompt
-  PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
-}
+# save history at each prompt
+PROMPT_COMMAND="history -a"
 
 # enable forward search with ctrl s
 stty -ixon
