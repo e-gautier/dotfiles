@@ -17,3 +17,7 @@
   ansible.builtin.systemd:
     name: tlp
     state: restarted
+- name: Load audit rules
+  become: true
+  ansible.builtin.command: augenrules --load
+  changed_when: true

@@ -1,31 +1,31 @@
-## This set of rules is to suppress the performance effects of the
-## audit system. The result is that you only get hardwired events.
+# delete all rules
 -D
-
-## This suppresses syscall auditing for all tasks started
-## with this rule in effect.  Remove it if you need syscall
-## auditing.
--a task,never
+# kernel queue size
+-b 8192
+# printk on failure
+-f 1
+# wait when queue full
+--backlog_wait_time 60000
 
 # auditd
 -w /var/log/audit/ -p ra -k auditauditd
 -w /etc/audit/ -p wa -k auditauditd
 -w /etc/libaudit.conf -p wa -k auditauditd
--w /usr/sbin/auditctl -p xa -k auditauditd
--w /usr/sbin/auditd -p xa -k auditauditd
+-w /usr/bin/auditctl -p xa -k auditauditd
+-w /usr/bin/auditd -p xa -k auditauditd
 
 # kernel configuration
 -w /etc/sysctl.conf -p wa -k auditkernel
 -w /etc/sysctl.d/ -p wa -k auditkernel
 
 # mount operations
--a always,exit -F -S mount -S umount2 -S umount -F -k auditmount
+-a always,exit -F arch=b64 -S mount,umount2 -k auditmount
+-a always,exit -F arch=b32 -S mount,umount,umount2 -k auditmount
 
-# user,group,password modification
--w /etc/group -p raw -k auditgroup
--w /etc/passwd -p raw -k auditpasswd
+# users, groups, passwords
+-w /etc/group -p wa -k auditgroup
+-w /etc/passwd -p wa -k auditpasswd
 -w /etc/gshadow -p raw -k auditgroup
 -w /etc/shadow -p raw -k auditpasswd
 -w /etc/sudoers -p raw -k auditsudoers
 -w /etc/sudoers.d/ -p raw -k auditsudoers
--w /usr/bin/passwd -p xa -k auditpasswd

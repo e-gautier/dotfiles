@@ -70,7 +70,7 @@ browser[type="content"] {
 ```
 ### Auditd configuration
 ```
-cp roles/linux/files/auditd/audit.rules /etc/audit/rules.d/
+ansible-playbook -K playbook.yml --tags auditd
 ```
 ### NFTables configuration
 ```

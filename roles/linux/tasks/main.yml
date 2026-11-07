@@ -46,6 +46,16 @@
   tags:
     - system
     - upower
+- name: Audit rules
+  become: true
+  ansible.builtin.copy:
+    src: auditd/audit.rules
+    dest: /etc/audit/rules.d/audit.rules
+    mode: "0600"
+  notify: Load audit rules
+  tags:
+    - system
+    - auditd
 - name: SELinux enforcing
   become: true
   ansible.posix.selinux:
