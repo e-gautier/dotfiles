@@ -1,0 +1,32 @@
+---
+- name: Create Homebrew prefix
+  become: true
+  ansible.builtin.file:
+    path: /home/linuxbrew/.linuxbrew
+    state: directory
+    owner: "{{ ansible_facts['user_id'] }}"
+    group: "{{ ansible_facts['user_id'] }}"
+    mode: "0755"
+- name: Clone Homebrew
+  ansible.builtin.git:
+    repo: https://github.com/Homebrew/brew
+    dest: /home/linuxbrew/.linuxbrew/Homebrew
+    update: false # brew self-updates
+- name: Create Homebrew bin directory
+  ansible.builtin.file:
+    path: /home/linuxbrew/.linuxbrew/bin
+    state: directory
+    mode: "0755"
+- name: Link brew
+  ansible.builtin.file:
+    src: ../Homebrew/bin/brew
+    dest: /home/linuxbrew/.linuxbrew/bin/brew
+    state: link
+- name: Install Homebrew packages
+  community.general.homebrew:
+    name: "{{ homebrew }}"
+    state: present
+- name: Enable Homebrew services
+  community.general.homebrew_services:
+    name: "{{ item }}"
+  loop: "{{ homebrew_services }}"

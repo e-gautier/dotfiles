@@ -201,28 +201,18 @@
   tags:
     - packages
     - agy
-- name: Homebrew clone repo
-  ansible.builtin.git:
-    repo: https://github.com/Homebrew/brew
-    dest: ~/.homebrew
+- name: Setup Homebrew
+  ansible.builtin.import_tasks: homebrew.yml
   tags:
     - packages
     - homebrew
-- name: Install Homebrew packages
+- name: Upgrade Homebrew packages
   community.general.homebrew:
-    name: "{{ homebrew }}"
     update_homebrew: true
     upgrade_all: true
   tags:
-    - packages
-    - homebrew
-- name: Enable Homebrew services
-  community.general.homebrew_services:
-    name: "{{ item }}"
-  loop: "{{ homebrew_services }}"
-  tags:
-    - packages
-    - homebrew
+    - never
+    - upgrade
 - name: Install Cargo packages
   community.general.cargo:
     name: "{{ cargo }}"
