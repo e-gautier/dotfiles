@@ -7,16 +7,15 @@
   ansible.builtin.copy:
     src: "{{ role_path }}/files/nftables/inet-filter.nft"
     dest: /etc/nftables/inet-filter.nft
+  notify: Restart nftables
 - name: Enable nft inet.filter rules
   ansible.builtin.lineinfile:
     path: /etc/sysconfig/nftables.conf
     regexp: ^# include "\/etc\/nftables\/inet\-filter.nft"$
     line: include "/etc/nftables/inet-filter.nft"
-- name: Restart nft service
+  notify: Restart nftables
+- name: Enable nft service
   ansible.builtin.systemd:
     name: nftables
-    state: restarted
+    state: started
     enabled: true
-    daemon_reload: true
-  register: linux_output
-  changed_when: linux_output.state != "started"

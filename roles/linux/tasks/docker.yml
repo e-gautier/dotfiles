@@ -13,14 +13,11 @@
       - containerd.io
       - docker-compose-plugin
     state: present
-- name: Restart Docker service
+- name: Enable Docker service
   ansible.builtin.systemd:
     name: "{{ item }}"
-    state: restarted
+    state: started
     enabled: true
-    daemon_reload: true
   loop:
     - docker
     - containerd
-  register: linux_output
-  changed_when: linux_output.state != "started"

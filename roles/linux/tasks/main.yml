@@ -318,7 +318,7 @@
   ansible.builtin.systemd:
     name: "{{ item }}"
     scope: user
-    state: restarted
+    state: started
     enabled: true
     daemon_reload: true
   loop: "{{ units.user.enabled }}"
@@ -330,13 +330,11 @@
   become: true
   ansible.builtin.systemd:
     name: "{{ item }}"
-    state: restarted
+    state: started
     enabled: true
     daemon_reload: true
   loop: "{{ units.system.enabled }}"
   ignore_errors: true
-  register: linux_output
-  changed_when: linux_output.enabled != true
   tags:
     - services
     - systemd-system
