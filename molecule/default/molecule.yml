@@ -8,7 +8,8 @@ driver:
     name: libvirt
 platforms:
   - name: instance
-    box: alvistack/fedora-41
+    box: fedora/44-cloud-base
+    box_url: https://dl.fedoraproject.org/pub/fedora/linux/releases/44/Cloud/x86_64/images/Fedora-Cloud-Base-Vagrant-libvirt-44-1.7.x86_64.vagrant.libvirt.box
     memory: 1024
     cpus: 1
 provisioner:
