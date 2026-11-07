@@ -1,0 +1,15 @@
+# git prompt: use the copy shipped by the git package (kept up to date by dnf).
+# Completion is loaded on demand by bash-completion (/usr/share/bash-completion/completions/git).
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWSTASHSTATE=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
+GIT_PS1_SHOWUPSTREAM=git
+GIT_PS1_DESCRIBE_STYLE=default
+GIT_PS1_SHOWCOLORHINTS=1
+GIT_PS1_HIDE_IF_PWD_IGNORED=1
+
+if [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
+    . /usr/share/git-core/contrib/completion/git-prompt.sh
+else
+    __git_ps1() { :; } # keep PS1 working if git is not installed
+fi

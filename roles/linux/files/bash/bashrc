@@ -3,6 +3,11 @@ case $- in
       *) return;;
 esac
 
+# system defaults: /etc/profile.d (bash-completion, ls colors, vte...) for non-login shells
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
 HISTCONTROL=ignoreboth
 HISTSIZE=-1
 HISTFILESIZE=-1
@@ -20,11 +25,27 @@ fi
 
 # profile directory
 if [ -d ~/.profile.d ]; then
-    for file in ~/.profile.d/*; do source $file; done
+    for file in ~/.profile.d/*; do source "$file"; done
 fi
 
 # local bin
 PATH=$PATH:~/.local/bin:~/.bin
+
+# drop duplicate PATH entries (nested shells, tmux panes re-run the lines above)
+__dedupe_path() {
+    local dir out= parts
+    IFS=: read -ra parts <<< "$PATH"
+    for dir in "${parts[@]}"; do
+        [ -n "$dir" ] || continue
+        case ":$out:" in
+            *":$dir:"*) ;;
+            *) out=${out:+$out:}$dir ;;
+        esac
+    done
+    PATH=$out
+}
+__dedupe_path
+unset -f __dedupe_path
 
 # umask
 umask 0077
@@ -33,8 +54,8 @@ umask 0077
 PS1='\u@\h:\w$(__git_ps1 " [%s] ")[$?]\$ '
 
 # save history at each prompt
-PROMPT_COMMAND="history -a"
+PROMPT_COMMAND+=('history -a') # append, /etc/bashrc already registers vte hooks
 
 # enable forward search with ctrl s
-stty -ixon
+[ -t 0 ] && stty -ixon
 
