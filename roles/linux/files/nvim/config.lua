@@ -1,11 +1,13 @@
-vim.lsp.start({
-  name = 'python-lsp',
-  cmd = {'pylsp'},
-  root_dir = vim.fs.dirname(vim.fs.find({'setup.py', 'pyproject.toml'}, { upward = true })[1]),
+vim.lsp.config('pylsp', {
+  cmd = { 'pylsp' },
+  filetypes = { 'python' },
+  root_markers = { 'pyproject.toml', 'setup.py', '.git' },
 })
+vim.lsp.enable('pylsp')
 
+-- LSP replaces ALE where attached
 vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(args)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = args.buf })
+  callback = function()
+    pcall(vim.cmd, 'ALEDisableBuffer')
   end,
 })

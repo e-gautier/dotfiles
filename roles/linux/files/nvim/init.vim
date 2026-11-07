@@ -3,6 +3,16 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source ~/.vimrc
 
+" sudo write (no tty for sudo in nvim)
+function! s:SudoWrite() abort
+  let l:tmp = tempname()
+  call writefile(getline(1, '$'), l:tmp)
+  call system('sudo -k -S cp ' . shellescape(l:tmp) . ' ' . shellescape(expand('%:p')), inputsecret('[sudo] password: ') . "\n")
+  call delete(l:tmp)
+  if v:shell_error | echoerr 'sudo write failed' | else | setlocal nomodified | endif
+endfunction
+cnoremap w!! call <SID>SudoWrite()
+
 " clipboard integration
 set clipboard+=unnamedplus
 

@@ -29,6 +29,7 @@ packages:
     - upower # battery low management
   dev:
     - ShellCheck # shell script linter
+    - python3-lsp-server # python LSP
     - git # version control
     - make # build tool
     - cmake # build system generator
