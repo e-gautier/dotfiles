@@ -30,6 +30,8 @@ packages:
   dev:
     - ShellCheck # shell script linter
     - python3-lsp-server # python LSP
+    - mkcert # local dev certificates
+    - nss-tools # mkcert browser trust
     - git # version control
     - make # build tool
     - cmake # build system generator
