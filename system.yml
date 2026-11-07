@@ -4,7 +4,7 @@
 # sudo ansible-galaxy collection install community.crypto
 # sudo ansible-galaxy collection install ansible.posix
 #
-# sudo ansible-playbook -K -i hosts -e "release=39" -e "device=/dev/sdb" -e "mountpoint=/tmp/root" -e "clean=true" playbook.yml
+# sudo ansible-playbook -K -i hosts -e "release=44" -e "device=/dev/sdb" -e "mountpoint=/tmp/root" -e "clean=true" system.yml
 #
 # == notes
 #
@@ -28,6 +28,18 @@
       prompt: Hostname
       private: false
   tasks:
+    - name: Device.check
+      ansible.builtin.command: "lsblk -nro MOUNTPOINTS {{ device }}"
+      changed_when: false
+      register: device_mounts
+      failed_when: device_mounts.rc != 0 or device_mounts.stdout | trim | length > 0
+    - name: Device.confirm
+      ansible.builtin.pause:
+        prompt: "Wipe {{ device }}? (yes/no)"
+      register: device_confirm
+    - name: Device.confirm.check
+      ansible.builtin.assert:
+        that: device_confirm.user_input == 'yes'
     - name: Partition_table.delete
       ansible.builtin.command: "sfdisk --delete {{ device }}"
       changed_when: true
@@ -91,23 +103,23 @@
         - { dev: swap, fstype: swap }
     - name: Boot.uuid
       ansible.builtin.command: "blkid -s UUID -o value {{ device }}1"
-      changed_when: true
+      changed_when: false
       register: boot_uuid
     - name: Luks.uuid
       ansible.builtin.command: "blkid -s UUID -o value {{ device }}2"
-      changed_when: true
+      changed_when: false
       register: luks_uuid
     - name: Root.uuid
       ansible.builtin.command: "blkid -s UUID -o value /dev/mapper/lvm1-root"
-      changed_when: true
+      changed_when: false
       register: root_uuid
     - name: Home.uuid
       ansible.builtin.command: "blkid -s UUID -o value /dev/mapper/lvm1-home"
-      changed_when: true
+      changed_when: false
       register: home_uuid
     - name: Swap.uuid
       ansible.builtin.command: "blkid -s UUID -o value /dev/mapper/lvm1-swap"
-      changed_when: true
+      changed_when: false
       register: swap_uuid
     - name: Mount.root
       ansible.posix.mount:
@@ -203,11 +215,11 @@
           changed_when: true
         - name: Machine_id.get
           ansible.builtin.command: cat /etc/machine-id
-          changed_when: true
+          changed_when: false
           register: machine_id
         - name: Kernel_version.get
           ansible.builtin.command: ls /lib/modules
-          changed_when: true
+          changed_when: false
           register: kernel_version
         - name: Boot.entry_directory.create
           ansible.builtin.file:
@@ -222,20 +234,17 @@
         - name: Kernel install cmdline
           ansible.builtin.copy:
             dest: /etc/kernel/cmdline
-            content: |
-              root=UUID={{ root_uuid.stdout }} \
-              ro \
-              resume=UUID={{ swap_uuid.stdout }} \
-              rd.lvm.lv=fedora/root \
-              rd.luks.uuid={{ luks_uuid.stdout }} \
-              rd.lvm.lv=fedora/swap \
+            content: >
+              root=UUID={{ root_uuid.stdout }} ro
+              resume=UUID={{ swap_uuid.stdout }}
+              rd.luks.uuid={{ luks_uuid.stdout }}
+              rd.lvm.lv=lvm1/root rd.lvm.lv=lvm1/swap
               "acpi_osi=!Windows 2012"
         - name: Bootctl install
           ansible.builtin.command: bootctl install
           changed_when: true
         - name: Kernel install
-          ansible.builtin.command: |
-            "kernel-install add {{ kernel_version.stdout }} /lib/modules/{{ kernel_version.stdout }}/vmlinuz"
+          ansible.builtin.command: "kernel-install add {{ kernel_version.stdout }} /lib/modules/{{ kernel_version.stdout }}/vmlinuz"
           changed_when: true
         - name: Kernel.generate
           ansible.builtin.command: dnf reinstall -y kernel-core
@@ -250,17 +259,12 @@
         - name: Group.add
           ansible.builtin.group:
             name: humains
-        - name: Salt.generate
-          no_log: true
-          ansible.builtin.shell: |
-            set -o pipefail
-            cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1
-          changed_when: true
-          register: salt
         - name: Password.hash
           no_log: true
-          ansible.builtin.command: "openssl passwd -6 -salt {{ salt.stdout }} {{ password }}"
-          changed_when: true
+          ansible.builtin.command:
+            cmd: openssl passwd -6 -stdin
+            stdin: "{{ password }}"
+          changed_when: false
           register: hashed_password
         - name: User.add
           no_log: true
@@ -271,6 +275,11 @@
             password: "{{ hashed_password.stdout }}"
             shell: /bin/bash
             generate_ssh_key: true
+    - name: Selinux.autorelabel
+      ansible.builtin.file:
+        path: "{{ mountpoint }}/.autorelabel"
+        state: touch
+        mode: "0644"
     - name: Clean
       when: clean | bool
       block:
