@@ -37,3 +37,4 @@ links:
   ~/.config/swaylock/config: swaylock/config
   ~/.pythonstartup: python/startup
   ~/.config/mise/config.toml: mise/config.toml
+  ~/.config/flameshot/flameshot.ini: flameshot/flameshot.ini

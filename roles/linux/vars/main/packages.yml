@@ -190,7 +190,7 @@ packages:
     - syncthing # continuous file sync
     - discord # chat
     - copyq # clipboard manager
-    - shutter # screenshot
+    - flameshot # screenshot
     - gimp # image editor
     - cmus # terminal music player
     - vlc # media player

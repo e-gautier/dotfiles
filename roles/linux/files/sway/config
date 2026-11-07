@@ -139,7 +139,7 @@ exec copyq
 exec pasystray
 exec blueman-applet
 exec gammastep -c ~/.config/redshift
-exec shutter --min_at_startup
+exec flameshot
 exec dunst
 exec udiskie -at
 
@@ -151,6 +151,7 @@ exec swayidle -w \
          lock 'swaymsg "output * dpms off"'
 bindswitch --reload --locked lid:on exec swaylock
 bindsym Control+Mod1+l exec swaylock
+bindsym Print exec flameshot gui
 
 # native alttab commented below (uncomment if alttab is failing)
 # bindsym Mod1+tab workspace back_and_forth
