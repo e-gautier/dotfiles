@@ -138,7 +138,7 @@ exec usbguard-notifier
 exec copyq
 exec pasystray
 exec blueman-applet
-exec gammastep -c ~/.config/redshift
+exec gammastep
 exec dunst
 exec udiskie -at
 

@@ -25,7 +25,7 @@ links:
   ~/.config/systemd/user/tmux.service: systemd/user/tmux.service
   ~/.config/dunst/dunstrc: dunst/dunstrc
   ~/.config/terminator/config: terminator/config
-  ~/.config/redshift: redshift/redshift
+  ~/.config/gammastep/config.ini: gammastep/config.ini
   ~/.editorconfig: editorconfig/editorconfig
   ~/.inputrc: input/inputrc
   ~/.local/share/dark-mode.d: darkman/dark-mode.d
