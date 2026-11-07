@@ -1,18 +1,9 @@
 [submodule "roles/linux/files/vim/bundle/auto-pairs"]
 	path = roles/linux/files/vim/bundle/auto-pairs
 	url = https://github.com/jiangmiao/auto-pairs
-[submodule "roles/linux/files/vim/bundle/ctrlp.vim"]
-	path = roles/linux/files/vim/bundle/ctrlp.vim
-	url = https://github.com/ctrlpvim/ctrlp.vim
 [submodule "roles/linux/files/vim/bundle/gist-vim"]
 	path = roles/linux/files/vim/bundle/gist-vim
 	url = https://github.com/mattn/gist-vim
-[submodule "roles/linux/files/vim/bundle/matchit"]
-	path = roles/linux/files/vim/bundle/matchit
-	url = https://github.com/tmhedberg/matchit
-[submodule "roles/linux/files/vim/bundle/nerdcommenter"]
-	path = roles/linux/files/vim/bundle/nerdcommenter
-	url = https://github.com/scrooloose/nerdcommenter
 [submodule "roles/linux/files/vim/bundle/vim-easymotion"]
 	path = roles/linux/files/vim/bundle/vim-easymotion
 	url = https://github.com/easymotion/vim-easymotion
@@ -25,9 +16,6 @@
 [submodule "roles/linux/files/vim/bundle/vim-twig"]
 	path = roles/linux/files/vim/bundle/vim-twig
 	url = https://github.com/lumiliet/vim-twig
-[submodule "roles/linux/files/vim/bundle/vim-pathogen"]
-	path = roles/linux/files/vim/bundle/vim-pathogen
-	url = https://github.com/tpope/vim-pathogen
 [submodule "roles/linux/files/tmux/vendor/tmux-mem-cpu-load"]
 	path = roles/linux/files/tmux/vendor/tmux-mem-cpu-load
 	url = https://github.com/thewtex/tmux-mem-cpu-load.git
@@ -79,9 +67,6 @@
 [submodule "roles/linux/files/vim/bundle/nvim-blame-line"]
 	path = roles/linux/files/vim/bundle/nvim-blame-line
 	url = https://github.com/tveskag/nvim-blame-line.git
-[submodule "roles/linux/files/vim/bundle/vim-sensible"]
-	path = roles/linux/files/vim/bundle/vim-sensible
-	url = https://github.com/tpope/vim-sensible.git
 [submodule "roles/linux/files/vim/bundle/tagbar"]
 	path = roles/linux/files/vim/bundle/tagbar
 	url = https://github.com/preservim/tagbar.git

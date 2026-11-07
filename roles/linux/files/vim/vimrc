@@ -44,10 +44,9 @@ set laststatus=2
 " Lightline theme
 let g:lightline = {"colorscheme": "deus"}
 
-" Load Pathogen
-let g:pathogen_disabled = ["vim-sensible"]
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect()
+" load plugins now (native packages)
+packadd! matchit
+packloadall
 
 " disable format options
 set formatoptions=
