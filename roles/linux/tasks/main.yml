@@ -237,12 +237,6 @@
   tags:
     - dotfiles
     - vim
-- name: Refresh font cache
-  ansible.builtin.shell: if hash fc-cache 2>/dev/null; then fc-cache; fi
-  changed_when: false
-  tags:
-    - fonts
-    - font-cache
 - name: Setup nftables
   ansible.builtin.import_tasks: nftables.yml
   become: true

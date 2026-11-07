@@ -1,6 +1,6 @@
 ---
-- name: Install Nerdfonts
-  ansible.builtin.command: ~/.nerdfonts/install.sh
+- name: Rebuild font cache
+  ansible.builtin.command: fc-cache
   changed_when: true
 - name: Restart nftables
   become: true

@@ -1,0 +1,5 @@
+---
+nerdfonts:
+  - FantasqueSansMono # sway, dunst
+  - FiraCode # code ligatures
+  - Hasklig # code ligatures

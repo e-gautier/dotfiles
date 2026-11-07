@@ -13,3 +13,4 @@
         state: link
         force: true
       loop: "{{ links | dict2items }}"
+      notify: Rebuild font cache

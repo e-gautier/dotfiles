@@ -15,6 +15,7 @@
     - rpm-keys.yml
     - flatpak.yml
     - npm-packages.yml
+    - nerdfonts.yml
   tags: always
 - name: Source Ansible services facts
   ansible.builtin.service_facts:
