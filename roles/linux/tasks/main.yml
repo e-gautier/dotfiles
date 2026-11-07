@@ -184,11 +184,11 @@
     - nix
 - name: Install npm packages
   ansible.builtin.shell:
-    cmd: . ~/.nvm/nvm.sh && npm install -g {{ item }}
+    cmd: . ~/.nvm/nvm.sh && { npm ls -g --depth=0 "{{ item }}" >/dev/null && echo present || npm install -g "{{ item }}"; }
     executable: /bin/bash
   loop: "{{ npm }}"
   register: linux_output
-  changed_when: linux_output.rc != 0
+  changed_when: "'present' not in linux_output.stdout"
   tags:
     - packages
     - npm
@@ -243,10 +243,9 @@
   tags:
     - dotfiles
     - vim
-- name: Install fonts
-  ansible.builtin.shell: if hash fc-cache 2>/dev/null; then fc-cache -f; fi
-  register: linux_output
-  changed_when: linux_output.rc != 0
+- name: Refresh font cache
+  ansible.builtin.shell: if hash fc-cache 2>/dev/null; then fc-cache; fi
+  changed_when: false
   tags:
     - fonts
     - font-cache
@@ -261,12 +260,39 @@
   tags:
     - fonts
     - nerdfonts
+- name: List VSCode extensions
+  ansible.builtin.command: codium --list-extensions
+  register: linux_codium_extensions
+  changed_when: false
+  failed_when: false # codium not installed
+  check_mode: false
+  tags: vscodium
 - name: Install VSCode extensions
-  ansible.builtin.shell:
-    cmd: "codium --install-extension {{ item }} ||:"
+  ansible.builtin.command: codium --install-extension {{ item }}
   loop: "{{ vscodium_extensions }}"
-  register: linux_output
-  changed_when: linux_output.rc != 0
+  when:
+    - linux_codium_extensions.rc == 0
+    - item | lower not in linux_codium_extensions.stdout | lower
+  changed_when: true
+  tags: vscodium
+- name: Download VSCode extensions VSIX
+  ansible.builtin.get_url:
+    url: "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/{{ item.split('.')[0] }}/vsextensions/{{ item.split('.')[1] }}/latest/vspackage"
+    dest: /tmp/{{ item }}.vsix
+    mode: "0644"
+  check_mode: false # marketplace rejects HEAD
+  loop: "{{ vscodium_vsix }}"
+  when:
+    - linux_codium_extensions.rc == 0
+    - item | lower not in linux_codium_extensions.stdout | lower
+  tags: vscodium
+- name: Install VSCode extensions VSIX
+  ansible.builtin.command: codium --install-extension /tmp/{{ item }}.vsix
+  loop: "{{ vscodium_vsix }}"
+  when:
+    - linux_codium_extensions.rc == 0
+    - item | lower not in linux_codium_extensions.stdout | lower
+  changed_when: true
   tags: vscodium
 - name: Install snaps
   community.general.snap:

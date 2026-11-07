@@ -8,7 +8,6 @@ vscodium_extensions:
   - gera2ld.markmap-vscode
   - gruntfuggly.todo-tree
   - hediet.vscode-drawio
-  - jvalecillos.gpg
   - llvm-vs-code-extensions.vscode-clangd
   - marcostazi.vs-code-vagrantfile
   - ms-azuretools.vscode-docker
@@ -25,10 +24,8 @@ vscodium_extensions:
   - ms-vscode.powershell
   - bscan.perlnavigator
   - asciidoctor.asciidoctor-vscode
-  - hediet.debug-visualizer
   - randomfractalsinc.vscode-data-preview
   - usernamehw.errorlens
-  - Alexey-Strakh.stackoverflow-search
   - puppet.puppet-vscode
   - datasert.vscode-texty
   - streetsidesoftware.code-spell-checker
@@ -37,3 +34,6 @@ vscodium_extensions:
   - anweber.reveal-button
   - kilocode.Kilo-Code
   - waderyan.gitblame
+vscodium_vsix:
+  - jvalecillos.gpg
+  - hediet.debug-visualizer

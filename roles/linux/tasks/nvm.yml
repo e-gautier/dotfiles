@@ -4,6 +4,7 @@
     url: https://api.github.com/repos/nvm-sh/nvm/releases/latest
     return_content: true
   register: linux_nvm_release
+  check_mode: false # read-only request
 - name: Download nvm install script
   ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/nvm-sh/nvm/{{ linux_nvm_release.json.tag_name }}/install.sh"
@@ -20,8 +21,6 @@
   register: linux_output
   changed_when: "'already installed' not in linux_output.stderr"
 - name: Set Node LTS as default
-  ansible.builtin.shell:
-    cmd: . ~/.nvm/nvm.sh && nvm alias default lts/*
-    executable: /bin/bash
-  register: linux_output
-  changed_when: linux_output.rc != 0
+  ansible.builtin.copy:
+    content: "lts/*\n"
+    dest: ~/.nvm/alias/default

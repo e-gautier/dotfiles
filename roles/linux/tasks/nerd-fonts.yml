@@ -3,7 +3,4 @@
   ansible.builtin.git:
     repo: https://github.com/ryanoasis/nerd-fonts.git
     dest: ~/.nerdfonts
-- name: Install Nerdfonts
-  ansible.builtin.command: ~/.nerdfonts/install.sh
-  register: linux_output
-  changed_when: linux_output.rc != 0
+  notify: Install Nerdfonts

@@ -6,6 +6,7 @@
     follow_redirects: none
     status_code: 301, 302
   register: linux_nix_redirect
+  check_mode: false # read-only request
 - name: Set Nix version fact
   ansible.builtin.set_fact:
     linux_nix_version: "{{ linux_nix_redirect.location | regex_search('nix-([0-9]+\\.[0-9]+\\.[0-9]+)', '\\1') | first }}"

@@ -1,0 +1,4 @@
+---
+- name: Install Nerdfonts
+  ansible.builtin.command: ~/.nerdfonts/install.sh
+  changed_when: true
