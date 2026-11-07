@@ -1,0 +1,11 @@
+---
+# Antigravity CLI (successor of Gemini CLI), self-updates once installed
+- name: Download Antigravity CLI install script
+  ansible.builtin.get_url:
+    url: https://antigravity.google/cli/install.sh
+    dest: /tmp/agy-install.sh
+    mode: "0755"
+- name: Install Antigravity CLI
+  ansible.builtin.command:
+    cmd: bash /tmp/agy-install.sh
+    creates: ~/.local/bin/agy

@@ -117,7 +117,6 @@
     - security-updates
 - name: Install core packages
   become: true
-  ignore_errors: true
   ansible.builtin.package:
     name: "{{ packages.core }}"
     state: present
@@ -127,7 +126,6 @@
     - packages-core
 - name: Install dev packages
   become: true
-  ignore_errors: true
   ansible.builtin.package:
     name: "{{ packages.dev }}"
     state: present
@@ -137,7 +135,6 @@
     - packages-dev
 - name: Install ui packages
   become: true
-  ignore_errors: true
   ansible.builtin.package:
     name: "{{ packages.ui }}"
     state: present
@@ -147,7 +144,6 @@
     - packages-ui
 - name: Install apps packages
   become: true
-  ignore_errors: true
   ansible.builtin.package:
     name: "{{ packages.apps }}"
     state: present
@@ -157,7 +153,6 @@
     - packages-apps
 - name: Install misc packages
   become: true
-  ignore_errors: true
   ansible.builtin.package:
     name: "{{ packages.misc }}"
     state: present
@@ -193,6 +188,11 @@
   tags:
     - packages
     - npm
+- name: Setup Antigravity CLI
+  ansible.builtin.import_tasks: agy.yml
+  tags:
+    - packages
+    - agy
 - name: Homebrew clone repo
   ansible.builtin.git:
     repo: https://github.com/Homebrew/brew

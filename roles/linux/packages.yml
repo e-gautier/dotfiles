@@ -1,152 +1,145 @@
 ---
 packages:
   core:
-    - coreutils
-    - progress
-    - vim
-    - neovim
-    - wget
-    - htop
-    - curl
-    - tmux
-    - ranger
-    - man
-    - multitail
+    - coreutils # basic GNU tools
+    - progress # cp/mv progress
+    - vim # text editor
+    - neovim # vim fork
+    - wget # file downloader
+    - htop # interactive process viewer
+    - curl # HTTP/FTP client
+    - tmux # terminal multiplexer
+    - ranger # terminal file manager
+    - man # manual pages
+    - multitail # multi-file tail
     - sysstat # system performance tools suite https://github.com/sysstat/sysstat (sar, iostat etc)
-    - tree
+    - tree # directory tree viewer
     - dstat # system resource statistics
     - perf # performance analysis tools
-    - nftables
-    - iotop
-    - rsync
-    - dnf-plugin-system-upgrade
-    - dnf-automatic
+    - nftables # firewall (netfilter)
+    - iotop # per-process I/O monitor
+    - rsync # file synchronization
+    - dnf-plugin-system-upgrade # Fedora upgrades
+    - dnf-automatic # automatic updates
     - exfatprogs # exfat support
     - power-profiles-daemon # DBus-based power management
-    - bash-completion
+    - bash-completion # bash programmable completion
     - sway # Wayland compositor
     - symlinks # broken links detector
     - upower # battery low management
   dev:
-    - ShellCheck
-    - git
-    - make
-    - cmake
-    - automake
-    - gcc
-    - gcc-c++
-    - kernel-devel
-    - glibc
-    - glibc-langpack-fr
-    - glibc-all-langpacks
-    - libcgroup
-    - libcgroup-tools
-    - gdb
-    - edb
-    - jq
-    - jo
-    - jc
-    - yq
-    - fq
-    - htmlq
-    - socat
+    - ShellCheck # shell script linter
+    - git # version control
+    - make # build tool
+    - cmake # build system generator
+    - automake # Makefile generator
+    - gcc # C compiler
+    - gcc-c++ # C++ compiler
+    - kernel-devel # kernel headers
+    - glibc # GNU C library
+    - glibc-langpack-fr # French locale
+    - glibc-all-langpacks # all locales
+    - libcgroup # cgroups library
+    - libcgroup-tools # cgroups tools
+    - gdb # GNU debugger
+    - cutter-re # GUI debugger
+    - jq # JSON processor
+    - jo # JSON object builder
+    - jc # CLI to JSON
+    - yq # YAML/JSON/XML processor
+    - socat # netcat++
     - pandoc # markup converter
     - kexec-tools # kernel restarter/executor (eg. kexec -e)
-    - gnupg2
-    - strace
-    - pgrep
-    - ngrep
-    - tcpdump
-    - stunnel
-    - rlwrap
+    - gnupg2 # GPG
+    - strace # syscall tracer
+    - procps-ng # pgrep, pkill, ps
+    - ngrep # network grep
+    - tcpdump # packet capture
+    - stunnel # TLS wrapper
+    - rlwrap # readline wrapper
     - systemtap # performance analysis tools
-    - bison
+    - bison # parser generator
     - flex # fast lexical analyzer
     - p0f # passive OS detection based on SYN packets
-    - ctop # container top
     - atop # performance analysis
-    - lsof
+    - lsof # list open files
     - iptraf # network statistics
     - iperf # network performance analysis
-    - stress
-    - alien
+    - stress # system load generator
+    - alien # rpm/deb package converter
     - ImageMagick # image converter
-    - tig
-    - udisks2
-    - udiskie
-    - powershell
-    - fzf
-    - iproute-tc
-    - sshfs
-    - nmap
-    - nodejs
-    - samba-client
-    - cifs-utils
-    - proxychains
-    - smartmontools
-    - qemu
-    - graphviz
-    - VirtualBox
+    - tig # git TUI
+    - udisks2 # disk manager
+    - udiskie # removable disk automounter
+    - powershell # Microsoft PowerShell
+    - fzf # fuzzy finder
+    - iproute-tc # traffic control (tc)
+    - sshfs # SSH mount
+    - nmap # network scanner
+    - nodejs # JavaScript runtime
+    - samba-client # SMB client (smbclient)
+    - cifs-utils # mount SMB/CIFS shares
+    - proxychains-ng # proxy forcer
+    - smartmontools # disk health
+    - qemu # emulator
+    - graphviz # graph visualization (dot)
+    - VirtualBox # virtualization
     - fatrace # FS trace
-    - extrace # exe trace
-    - net-tools
-    - tcpflow
-    - tcptraceroute
-    - dbus
-    - snapd
-    - libvirt-daemon-kvm
-    - virt-manager
-    - virt-top
-    - virt-install
-    - libvirt-client
-    - btrfs-progs
-    - flamegraph
-    - flamegraph-stackcollapse
-    - flamegraph-stackcollapse-perf
-    - ioping
-    - wireguard-tools
-    - 3proxy
-    - ddrutility
-    - gns3-server
-    - gns3-gui
-    - podman
-    - plocate
-    - tesseract
-    - whois
-    - clustershell
-    - zstd
+    - bcc-tools # exe trace (execsnoop)
+    - net-tools # ifconfig, netstat
+    - tcpflow # TCP stream recorder
+    - tcptraceroute # traceroute over TCP
+    - dbus # message bus
+    - snapd # snap package manager
+    - libvirt-daemon-kvm # libvirt KVM driver
+    - virt-manager # VM manager GUI
+    - virt-top # top for VMs
+    - virt-install # VM creation CLI
+    - libvirt-client # libvirt CLI (virsh)
+    - btrfs-progs # btrfs tools
+    - flamegraph # stack trace visualizer
+    - flamegraph-stackcollapse # flamegraph collapsers
+    - flamegraph-stackcollapse-perf # perf collapser
+    - ioping # disk latency
+    - ddrescue # disk recovery
+    - wireguard-tools # VPN
+    - 3proxy # lightweight proxy server
+    - gns3-server # network simulator (server)
+    - gns3-gui # network simulator (GUI)
+    - podman # daemonless containers
+    - plocate # fast file locate
+    - tesseract # OCR engine
+    - whois # whois client
+    - clustershell # parallel ssh
+    - zstd # zstd compression
     - mosh # ssh client
     - bat # better cat
     - fd-find # find alternative
-    - fud # df alternative
     - ncdu # du alternative
+    - duf # df alternative
     - glances # top alternative
     - tldr # man for lazies
-    - sd # sed alternative
     - ripgrep # grep alternative
     - the_silver_searcher # grep alternative
-    - exa # ls alternative
+    - eza # ls alternative
     - mtr # traceroute+ping alternative
     - xxd # hex dump
     - entr # file watcher
     - ldns-utils # drill = dig with DNSSEC
     - parallel # run multiple commands at the same time
-    - the_silver_searcher # find alternative
     - just # task runner
-    - genisoimage
-    - zsh
+    - genisoimage # ISO image creator
+    - zsh # Z shell
     - autossh # monitor and keep ssh sessions running
     - yank # terminal output to clipboard
     - pygmentize # syntax highlighter
     - shyaml # yaml parser
-    - zstd
-    - ftp
-    - wtype # xdotool type for Wayland
+    - ftp # FTP client
   ui:
     - wev # wayland events printer
     - wlr-randr # wayland screen manager
-    - rofi
-    - i3lock
+    - rofi # app launcher
+    - i3lock # X11 screen locker
     - pavucontrol # gtk pulse audio gui
     - wdisplays # wayland screen manager GUI
     - lxappearance # gtk theme manager
@@ -155,28 +148,28 @@ packages:
     - gtk-v4l # Video4Linux
     - yad # gtk dialog
     - swaylock # sway lockscreen
-    - powertop
-    - lm_sensors
-    - acpi
+    - powertop # power consumption monitor
+    - lm_sensors # hardware sensors
+    - acpi # battery info
     - wtype # wayland keyboard/mouse simulation
-    - picom
+    - picom # X11 compositor
     - dunst # notifications
-    - system-config-printer
-    - usbguard
-    - usbguard-applet-qt
+    - system-config-printer # printer configuration GUI
+    - usbguard # USB device policy
+    - usbguard-notifier # usbguard desktop notifications
     - pasystray # PulseAudio tray
     - blueman # bluetooth manager
-    - brightnessctl
+    - brightnessctl # screen brightness control
     - gammastep # screen temperature color
-    - network-manager-applet
-    - alsa-utils
-    - NetworkManager-wifi
-    - fuse
-    - polybar
+    - network-manager-applet # NetworkManager tray applet
+    - alsa-utils # alsamixer
+    - NetworkManager-wifi # NetworkManager wifi plugin
+    - fuse # userspace FS
+    - polybar # X11 status bar
     - gucharmap # font preview
     - nomacs # image viewer
     - inkscape # vector-based image editor
-    - thunderbird
+    - thunderbird # mail client
     - darkman # dark/light theme manager
     - geoclue2 # geolocation service (used by darkman, among others)
     - waybar # sway bar
@@ -184,58 +177,56 @@ packages:
     - wshowkeys # key display
     - kanshi # output profiles automation
     - light # backlight manager
-    - git-delta
-    - filezilla
+    - git-delta # syntax-highlighting git pager
+    - filezilla # FTP/SFTP client GUI
   apps:
-    - feh
-    - caja
-    - dolphin
-    - terminator
-    - steam
-    - syncthing
-    - discord
-    - copyq
+    - feh # image viewer
+    - caja # file manager (MATE)
+    - dolphin # file manager (KDE)
+    - terminator # tiling terminal emulator
+    - steam # games
+    - syncthing # continuous file sync
+    - discord # chat
+    - copyq # clipboard manager
     - shutter # screenshot
-    - gimp
+    - gimp # image editor
     - cmus # terminal music player
-    - vlc
-    - gnome-calculator
-    - tor
-    - onionshare
-    - gnuradio
-    - gqrx
-    - firefox
-    - obs-studio
-    - wireshark
-    - openshot
-    - audacity
-    - libreoffice
-    - chromium
+    - vlc # media player
+    - gnome-calculator # calculator
+    - tor # anonymity network
+    - onionshare # Tor file sharing
+    - gnuradio # SDR framework
+    - gqrx # SDR receiver
+    - firefox # web browser
+    - obs-studio # screen recording
+    - wireshark # network traffic analyzer
+    - openshot # video editor
+    - audacity # audio editor
+    - libreoffice # office suite
+    - chromium # web browser
     - deadbeef # music player
-    - transmission
-    - unetbootin
-    - codium
-    - gnuplot
-    - rkhunter
-    - clamav
-    - clamav-update
-    - asciio # draw in ascii
-    - p7zip
-    - p7zip-plugins
-    - keepassxc
+    - transmission # BitTorrent client
+    - unetbootin # bootable USB creator
+    - codium # VSCodium editor
+    - gnuplot # plotting tool
+    - rkhunter # rootkit scanner
+    - clamav # antivirus scanner
+    - clamav-update # antivirus updates
+    - p7zip # 7z archiver
+    - p7zip-plugins # 7z additional formats
+    - keepassxc # password manager
     - gthumb # image viewer
     - gopass # GPG team password manager
     - imv # feh alternative
     - thunar # file manager
     - flatpak # package manager
   misc:
-    - audit
+    - audit # kernel auditing (auditd)
     - w3m # browser in terminal
     - lzip # alternative compressor
-    - rsyslog
-    - downtimed # downtime reporting tool
+    - rsyslog # syslog daemon
+    - tuptime # uptime history
     - gettext # translator
-    - neofetch
-    - cmatrix
-    - youtube-dl
-    - fancontrol # pwmconfig
+    - fastfetch # neofetch alternative
+    - cmatrix # Matrix screen effect
+    - yt-dlp # video downloader

@@ -4,11 +4,14 @@ homebrew:
   - pgcli # psql alternative
   - dust # du alternative
   - diff-so-fancy # diff interpreter
-  - pyenv
-  - wader/tap/fq # binary parser
+  - pyenv # python version manager
+  - fq # binary parser
   - mdcat # markdown reader
   - clipboard # clipboard manager
   - rust # + cargo package manager
   - watchexec # file watcher
   - qrencode # qrcode creator
+  - ctop # container top
+  - htmlq # jq for html
+  - sd # sed alternative
   - opencode # ai-assisted coding

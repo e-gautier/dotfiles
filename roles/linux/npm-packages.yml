@@ -1,4 +1,3 @@
 ---
 npm:
-  - "@googleworkspace/cli"
-  - "@google/gemini-cli"
+  - "@googleworkspace/cli" # Google Workspace CLI

@@ -1,3 +1,4 @@
 ---
 flatpak:
-  - com.logseq.Logseq
+  - com.logseq.Logseq # notes
+  - io.github.nokse22.asciidraw # ascii drawing
