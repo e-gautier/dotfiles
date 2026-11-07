@@ -41,9 +41,6 @@ function mkcd {
   cd -P -- "$1"
 }
 
-# feh
-alias feh="feh --scale-down"
-
 # nftables related
 openporttcp() {
   sudo nft add element inet filter tcp_open "{ $1 }"

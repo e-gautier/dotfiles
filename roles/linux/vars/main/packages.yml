@@ -178,11 +178,9 @@ packages:
     - ydotool # command line automation
     - wshowkeys # key display
     - kanshi # output profiles automation
-    - light # backlight manager
     - git-delta # syntax-highlighting git pager
     - filezilla # FTP/SFTP client GUI
   apps:
-    - feh # image viewer
     - caja # file manager (MATE)
     - dolphin # file manager (KDE)
     - terminator # tiling terminal emulator
@@ -220,7 +218,7 @@ packages:
     - keepassxc # password manager
     - gthumb # image viewer
     - gopass # GPG team password manager
-    - imv # feh alternative
+    - imv # image viewer
     - thunar # file manager
     - flatpak # package manager
   misc:
