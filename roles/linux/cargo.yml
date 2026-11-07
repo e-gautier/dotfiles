@@ -1,7 +1,0 @@
----
-cargo:
-  - checkexec # files dependencies executor
-  - systemfd # socket handler
-  - cargo-watch # rerun on change
-  - cargo-update # update crates
-  - alttab # https://github.com/e-gautier/alttab

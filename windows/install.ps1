@@ -37,7 +37,7 @@ New-Link "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\Loc
 # install vscodium extensions
 if ((Read-Host "Install VSCodium extensions ([Y]/n)?") -notmatch '^n') {
   $extensions = @{}
-  foreach ($line in Get-Content "$DOTFILES\roles\linux\vscodium-extensions.yml") {
+  foreach ($line in Get-Content "$DOTFILES\roles\linux\vars\main\vscodium.yml") {
     if ($line -match '^(\w+):') { $key = $Matches[1]; $extensions[$key] = @() }
     elseif ($line -match '^\s+- ([\w.-]+)') { $extensions[$key] += $Matches[1] }
   }

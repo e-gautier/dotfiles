@@ -1,7 +1,0 @@
----
-snaps:
-  - freeplane-mindmapping # mind mapping
-  - postman # API client
-  - drawio # diagram editor
-  - plex-desktop # Plex media client
-  - spotify # music streaming

@@ -3,6 +3,7 @@ skip_list:
     - ignore-errors
     - risky-file-permissions
     - galaxy
+    - var-naming[no-role-prefix]
 
 exclude_paths:
     - roles/linux/files/vim/bundle
