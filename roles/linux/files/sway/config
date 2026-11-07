@@ -139,7 +139,6 @@ exec copyq
 exec pasystray
 exec blueman-applet
 exec gammastep -c ~/.config/redshift
-exec flameshot
 exec dunst
 exec udiskie -at
 
@@ -151,7 +150,8 @@ exec swayidle -w \
          lock 'swaymsg "output * dpms off"'
 bindswitch --reload --locked lid:on exec swaylock
 bindsym Control+Mod1+l exec swaylock
-bindsym Print exec flameshot gui
+bindsym Print exec grimshot save area - | swappy -f -
+bindsym Shift+Print exec grimshot save screen - | swappy -f -
 
 # native alttab commented below (uncomment if alttab is failing)
 # bindsym Mod1+tab workspace back_and_forth

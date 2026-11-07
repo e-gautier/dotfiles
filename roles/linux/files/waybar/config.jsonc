@@ -39,6 +39,8 @@
         "custom/separator",
         "clock",
         "custom/separator",
+        "custom/screenshot",
+        "custom/separator",
         "tray"
     ],
     "keyboard-state": {
@@ -102,6 +104,12 @@
         "format-muted": "{format_source} Out:Mut",
         "format-source": "In:{volume}%",
         "format-source-muted": "In:Mut"
+    },
+    "custom/screenshot": {
+        "format": "SCR",
+        "tooltip-format": "left: area, right: screen",
+        "on-click": "grimshot save area - | swappy -f -",
+        "on-click-right": "grimshot save screen - | swappy -f -"
     },
     "custom/separator": {
         "format": "|",
