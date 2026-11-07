@@ -13,11 +13,15 @@
       - containerd.io
       - docker-compose-plugin
     state: present
-- name: Enable Docker service
+- name: Enable Docker socket
   ansible.builtin.systemd:
-    name: "{{ item }}"
+    name: docker.socket
     state: started
     enabled: true
+- name: Disable Docker at boot
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    enabled: false
   loop:
     - docker
     - containerd
