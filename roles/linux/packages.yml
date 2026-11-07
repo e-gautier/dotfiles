@@ -141,6 +141,7 @@ packages:
     - shyaml # yaml parser
     - zstd
     - ftp
+    - wtype # xdotool type for Wayland
   ui:
     - wev # wayland events printer
     - wlr-randr # wayland screen manager
