@@ -1,7 +1,7 @@
 .DS_Store
-tmux/plugins/*
-!tmux/plugins/tpm
-fonts/.uuid
 .history
-.ansible_facts_cache
-.ansible
+/roles/linux/files/tmux/plugins/*
+!/roles/linux/files/tmux/plugins/tpm
+/roles/linux/files/fonts/**/.uuid
+/.ansible/
+/.ansible_facts_cache/
