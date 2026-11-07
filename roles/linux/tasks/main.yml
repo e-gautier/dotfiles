@@ -78,25 +78,30 @@
     - github-cli
 - name: Setup logind configuration
   become: true
-  ignore_errors: true
-  ansible.builtin.replace:
-    path: /etc/systemd/logind.conf
-    regexp: "^#{{ item }}(=.*)$"
-    replace: "{{ item }}\\1"
-  loop:
-    - HandlePowerKey
-    - HandleSuspendKey
-    - HandleHibernateKey
-    - HandleLidSwitch
-    - HandleLidSwitchExternalPower
-    - HandleLidSwitchDocked
   tags:
     - system
     - logind
+  block:
+    - name: Create logind drop-in directory
+      ansible.builtin.file:
+        path: /etc/systemd/logind.conf.d
+        state: directory
+        mode: "0755"
+    - name: Pin logind defaults
+      ansible.builtin.copy:
+        dest: /etc/systemd/logind.conf.d/power.conf
+        content: |
+          [Login]
+          HandlePowerKey=poweroff
+          HandleSuspendKey=suspend
+          HandleHibernateKey=hibernate
+          HandleLidSwitch=suspend
+          HandleLidSwitchExternalPower=suspend
+          HandleLidSwitchDocked=ignore
+        mode: "0644"
 - name: Setup DNS configuration
   ansible.builtin.import_tasks: dns.yml
   become: true
-  ignore_errors: true
   tags:
     - system
     - dns
@@ -111,7 +116,6 @@
 - name: Setup security updates
   ansible.builtin.import_tasks: security-updates.yml
   become: true
-  ignore_errors: true
   tags:
     - system
     - security-updates

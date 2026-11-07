@@ -1,25 +1,28 @@
 ---
-- name: Resolved configuration edit
-  ansible.builtin.replace:
-    path: /etc/systemd/resolved.conf
-    regexp: "{{ item.key }}"
-    replace: "{{ item.value }}"
-  loop: "{{ items | dict2items }}"
-  vars:
-    items:
-      ^DNS=.*$: DNS=1.1.1.1 2606:4700:4700::1111
-      ^#FallbackDNS=.*$: FallbackDNS=1.0.0.1 2606:4700:4700::1001
+- name: Create resolved drop-in directory
+  ansible.builtin.file:
+    path: /etc/systemd/resolved.conf.d
+    state: directory
+    mode: "0755"
+- name: Configure resolved DNS
+  ansible.builtin.copy:
+    dest: /etc/systemd/resolved.conf.d/dns.conf
+    content: |
+      [Resolve]
+      DNS=1.1.1.1 2606:4700:4700::1111
+      FallbackDNS=1.0.0.1 2606:4700:4700::1001
+    mode: "0644"
+  register: linux_resolved_conf
 - name: Resolved configuration install
   ansible.builtin.file:
     src: /run/systemd/resolve/resolv.conf
     dest: /etc/resolv.conf
     state: link
     force: true
+  register: linux_resolv_link
 - name: Restart systemd-resolved service
   ansible.builtin.systemd:
     name: systemd-resolved
     state: restarted
     enabled: true
-    daemon_reload: true
-  register: linux_output
-  changed_when: linux_output.state != "started"
+  when: linux_resolved_conf is changed or linux_resolv_link is changed

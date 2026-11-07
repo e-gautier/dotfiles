@@ -4,20 +4,15 @@
     name: dnf-automatic
     state: present
 - name: Configure dnf security auto update
-  ansible.builtin.replace:
+  community.general.ini_file:
     path: /etc/dnf/automatic.conf
-    regexp: "{{ item.key }}"
-    replace: "{{ item.value }}"
-  loop: "{{ items | dict2items }}"
-  vars:
-    items:
-      upgrade_type = default: upgrade_type = security
-      apply_updates = no: apply_updates = yes
-- name: Restart dnf security service
+    section: commands
+    option: "{{ item.key }}"
+    value: "{{ item.value }}"
+    mode: "0644"
+  loop: "{{ {'upgrade_type': 'security', 'apply_updates': 'yes'} | dict2items }}"
+- name: Enable dnf automatic timer # no restart needed
   ansible.builtin.systemd:
-    name: dnf-automatic.timer
-    state: restarted
+    name: dnf5-automatic.timer
+    state: started
     enabled: true
-    daemon_reload: true
-  register: linux_output
-  changed_when: linux_output.state != "started"
