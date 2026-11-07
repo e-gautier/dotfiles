@@ -1,6 +1,8 @@
 [tools]
 node = "lts"
+"pipx:ansible-dev-tools" = { version = "latest", python = "3.13", expose = ["ansible-core", "ansible-lint", "molecule"] }
 python = "latest"
+uv = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node", "python"]
