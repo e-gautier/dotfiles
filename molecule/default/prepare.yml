@@ -1,0 +1,9 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: false
+  tags: always
+  tasks:
+    - name: Install Ansible requirements
+      ansible.builtin.raw: dnf install -y python3 python3-libdnf5 fontconfig tar xz
+      changed_when: false

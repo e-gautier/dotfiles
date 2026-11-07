@@ -1,6 +1,6 @@
 [tools]
 node = "lts"
-"pipx:ansible-dev-tools" = { version = "latest", python = "3.13", with = ["molecule-plugins[vagrant]"], expose = ["ansible-core", "ansible-lint", "molecule"] }
+"pipx:ansible-dev-tools" = { version = "latest", python = "3.13", with = ["molecule-plugins[docker]"], expose = ["ansible-core", "ansible-lint", "molecule"] }
 python = "latest"
 uv = "latest"
 

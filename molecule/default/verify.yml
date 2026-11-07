@@ -1,13 +1,29 @@
 ---
 - name: Verify
   hosts: all
+  tags: always
   tasks:
-    - name: Assert git config symlink exists
+    - name: Stat dotfiles
       ansible.builtin.stat:
-        path: ~/.gitconfig
-      register: gitconfig
-    - name: Verify gitconfig is a symlink
+        path: "{{ item }}"
+      register: linux_verify
+      loop:
+        - ~/.gitconfig
+        - ~/.bashrc
+        - ~/.config/nvim/init.vim
+    - name: Assert dotfiles are symlinks
       ansible.builtin.assert:
-        that:
-          - gitconfig.stat.exists
-          - gitconfig.stat.islnk
+        that: item.stat.islnk
+        fail_msg: "{{ item.item }} is not a symlink"
+      loop: "{{ linux_verify.results }}"
+      loop_control:
+        label: "{{ item.item }}"
+    - name: List Nerd Fonts
+      ansible.builtin.find:
+        paths: ~/.local/share/fonts/NerdFonts
+        patterns: "*.ttf"
+        recurse: true
+      register: linux_verify_fonts
+    - name: Assert Nerd Fonts are installed
+      ansible.builtin.assert:
+        that: linux_verify_fonts.matched > 0

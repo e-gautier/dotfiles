@@ -3,4 +3,4 @@ collections:
   - name: community.general
   - name: community.crypto
   - name: ansible.posix
-  - name: community.vagrant
+  - name: community.docker

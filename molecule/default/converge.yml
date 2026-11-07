@@ -1,8 +1,5 @@
 ---
 - name: Converge
   hosts: all
-  tasks:
-    - name: Linux role
-      ansible.builtin.include_role:
-        name: linux
-        tasks_from: symlinks.yml
+  roles:
+    - linux

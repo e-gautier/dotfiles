@@ -2,22 +2,19 @@
 dependency:
   name: galaxy
 driver:
-  # https://github.com/ansible-community/molecule-plugins/tree/main/doc/vagrant
-  name: vagrant
-  provider:
-    name: libvirt
+  name: docker
 platforms:
   - name: instance
-    box: fedora/44-cloud-base
-    box_url: https://dl.fedoraproject.org/pub/fedora/linux/releases/44/Cloud/x86_64/images/Fedora-Cloud-Base-Vagrant-libvirt-44-1.7.x86_64.vagrant.libvirt.box
-    memory: 1024
-    cpus: 1
+    image: fedora:44
+    pre_build_image: true
+    command: sleep infinity
 provisioner:
   name: ansible
+  options:
+    tags: dotfiles,fonts
   env:
     ANSIBLE_ROLES_PATH: "../../roles"
     ANSIBLE_CONFIG: "../../ansible.cfg"
     ANSIBLE_PLAYBOOK_DIR: "../.."
 verifier:
   name: ansible
-lint: ansible-lint --project-dir roles

@@ -14,8 +14,6 @@ irm https://raw.githubusercontent.com/e-gautier/dotfiles/master/.files.ps1 | iex
 ```bash
 # dependencies
 mise install
-sudo dnf install -y vagrant vagrant-libvirt
-sudo systemctl start libvirtd
 # run tests suite
 molecule create
 molecule converge
