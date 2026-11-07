@@ -327,6 +327,11 @@
   tags:
     - services
     - systemd-system
+- name: Source services facts
+  ansible.builtin.service_facts:
+  tags:
+    - services
+    - systemd-system
 - name: Disable systemd system services
   become: true
   ansible.builtin.systemd:
