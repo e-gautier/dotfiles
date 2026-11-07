@@ -54,8 +54,6 @@ C-b r
 ansible-playbook -K playbook.yml --tags vscodium
 ```
 ## Misc
-### SELinux
--
 ### Firefox: remove white loading flash
 In the profile folder do:
 ```

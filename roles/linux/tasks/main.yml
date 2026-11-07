@@ -48,6 +48,14 @@
   tags:
     - system
     - upower
+- name: SELinux enforcing
+  become: true
+  ansible.posix.selinux:
+    policy: targeted
+    state: enforcing
+  tags:
+    - system
+    - selinux
 - name: TLP config
   become: true
   ansible.builtin.copy:
