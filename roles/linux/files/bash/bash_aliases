@@ -44,18 +44,18 @@ function mkcd {
 # feh
 alias feh="feh --scale-down"
 
-# iptables related
+# nftables related
 openporttcp() {
-  sudo iptables -A INPUT -p tcp --dport $1 -j ACCEPT
+  sudo nft add element inet filter tcp_open "{ $1 }"
 }
 closeporttcp() {
-  sudo iptables -D INPUT -p tcp --dport $1 -j ACCEPT
+  sudo nft delete element inet filter tcp_open "{ $1 }"
 }
 openportudp() {
-  sudo iptables -A INPUT -p udp --dport $1 -j ACCEPT
+  sudo nft add element inet filter udp_open "{ $1 }"
 }
 closeportudp() {
-  sudo iptables -D INPUT -p udp --dport $1 -j ACCEPT
+  sudo nft delete element inet filter udp_open "{ $1 }"
 }
 
 # xorg related

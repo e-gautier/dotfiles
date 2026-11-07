@@ -1,6 +1,14 @@
 #!/usr/sbin/nft -f
 
 table inet filter {
+	set tcp_open {
+		type inet_service
+	}
+
+	set udp_open {
+		type inet_service
+	}
+
 	chain INPUT {
 		type filter hook input priority 0
 		policy drop
@@ -10,6 +18,18 @@ table inet filter {
 
 		# accept connection states established, related
 		ct state established,related accept
+		ct state invalid drop
+
+		# ipv6 neighbor discovery
+		icmpv6 type { nd-neighbor-solicit, nd-neighbor-advert, nd-router-advert, mld-listener-query, packet-too-big, destination-unreachable, time-exceeded, parameter-problem } accept
+
+		# dhcpv6 client
+		ip6 saddr fe80::/10 udp dport 546 accept
+
+		# openport* helpers
+		# ports added/removed at runtime via nft add/delete element
+		tcp dport @tcp_open accept
+		udp dport @udp_open accept
 
 		log prefix "[netfilter] INPUT (drop) " level debug
 	}
