@@ -164,19 +164,22 @@
     - packages
     - dnf
     - packages-misc
-- name: Install Pip packages
-  ansible.builtin.pip:
-    name: "{{ pip }}"
-    extra_args: --user
+- name: Setup mise
+  ansible.builtin.import_tasks: mise.yml
   tags:
     - packages
     - pip
-- name: Setup nvm
-  ansible.builtin.import_tasks: nvm.yml
+    - npm
+    - mise
+- name: Install Pip packages
+  ansible.builtin.command: mise exec -- pip install {{ pip | join(' ') }}
+  environment:
+    MISE_GLOBAL_CONFIG_FILE: "{{ role_path }}/files/mise/config.toml"
+  register: linux_output
+  changed_when: "'Successfully installed' in linux_output.stdout"
   tags:
     - packages
-    - npm
-    - nvm
+    - pip
 - name: Setup Nix
   ansible.builtin.import_tasks: nix.yml
   tags:
@@ -184,8 +187,9 @@
     - nix
 - name: Install npm packages
   ansible.builtin.shell:
-    cmd: . ~/.nvm/nvm.sh && { npm ls -g --depth=0 "{{ item }}" >/dev/null && echo present || npm install -g "{{ item }}"; }
-    executable: /bin/bash
+    cmd: mise exec -- npm ls -g --depth=0 "{{ item }}" >/dev/null && echo present || mise exec -- npm install -g "{{ item }}"
+  environment:
+    MISE_GLOBAL_CONFIG_FILE: "{{ role_path }}/files/mise/config.toml"
   loop: "{{ npm }}"
   register: linux_output
   changed_when: "'present' not in linux_output.stdout"

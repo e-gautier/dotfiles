@@ -4,7 +4,6 @@ homebrew:
   - pgcli # psql alternative
   - dust # du alternative
   - diff-so-fancy # diff interpreter
-  - pyenv # python version manager
   - fq # binary parser
   - mdcat # markdown reader
   - clipboard # clipboard manager

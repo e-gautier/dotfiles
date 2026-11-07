@@ -1,0 +1,19 @@
+---
+- name: Install mise repo
+  become: true
+  ansible.builtin.get_url:
+    url: https://mise.jdx.dev/rpm/mise.repo
+    dest: /etc/yum.repos.d/mise.repo
+    mode: "0644"
+    force: true
+- name: Install mise
+  become: true
+  ansible.builtin.package:
+    name: mise
+    state: present
+- name: Install mise tools
+  ansible.builtin.command: mise install
+  environment:
+    MISE_GLOBAL_CONFIG_FILE: "{{ role_path }}/files/mise/config.toml"
+  register: linux_output
+  changed_when: "'all tools are installed' not in linux_output.stderr"

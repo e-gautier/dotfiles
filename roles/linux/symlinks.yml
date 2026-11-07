@@ -40,3 +40,4 @@ links:
   ~/.config/waybar/style.css: waybar/style.css
   ~/.config/swaylock/config: swaylock/config
   ~/.pythonstartup: python/startup
+  ~/.config/mise/config.toml: mise/config.toml
