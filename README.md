@@ -1,24 +1,21 @@
 # .files
 ```
-sh <(curl -L https://git.io/fhAyY)
+sh <(curl -fsSL https://raw.githubusercontent.com/e-gautier/dotfiles/master/.files)
 ```
 Windows (Administrator Powershell prompt required):
 ```ps
-Invoke-Expression((New-Object System.Net.WebClient).DownloadString('https://git.io/fjd3F'))
+irm https://raw.githubusercontent.com/e-gautier/dotfiles/master/.files.ps1 | iex
 ```
 ## Requirements
 - python
 - git
 - curl
-## Dependencies
-- [Pathogen.vim](https://github.com/tpope/vim-pathogen)
 ## Tests
 ```bash
 # dependencies
-pip install ansible-dev-tools molecule-plugins[vagrant]
-dnf install -y vagrant vagrant-libvirt
-vagrant plugin install vagrant-libvirt
-systemctl start libvirtd
+mise install
+sudo dnf install -y vagrant vagrant-libvirt
+sudo systemctl start libvirtd
 # run tests suite
 molecule create
 molecule converge
@@ -31,14 +28,13 @@ ansible-playbook -K playbook.yml --tags dotfiles --check --diff
 ```
 ## Install a Vim plugin
 ```
-git submodule add PLUGIN_GIT_REPO vim/bundle/PLUGIN_NAME
+git submodule add PLUGIN_GIT_REPO roles/linux/files/vim/bundle/PLUGIN_NAME
 ```
 Where PLUGIN_GIT_REPO is the url of the git repository of a plugin and PLUGIN_NAME must be the same as the one in the git repository url.
-EG. `git submodule add https://github.com/tpope/vim-pathogen.git vim/bundle/vim-pathogen`
+EG. `git submodule add https://github.com/tpope/vim-fugitive.git roles/linux/files/vim/bundle/vim-fugitive`
 ## Remove a Vim plugin
-Remove the git module in `.gitmodules` and remove the vim plugin directory
 ```
-git rm vim/bundle/PLUGIN_NAME
+git rm roles/linux/files/vim/bundle/PLUGIN_NAME
 ```
 ## Update git submodules
 ```
@@ -55,7 +51,7 @@ C-b r
 ```
 ## Install VSCode extensions
 ```
-awk '{system("codium --install-extension "$1)}' ~/dotfiles/vscode/extensions
+ansible-playbook -K playbook.yml --tags vscodium
 ```
 ## Misc
 ### SELinux
@@ -80,11 +76,7 @@ cp roles/linux/files/auditd/audit.rules /etc/audit/rules.d/
 ```
 ### NFTables configuration
 ```
-cp nftables/inet-filter.nft /etc/nftables
-```
-Uncomment respectively in `/etc/sysconfig/nftables`.
-```
-systemctl enable --now nftables
+ansible-playbook -K playbook.yml --tags nftables
 ```
 ### UBlock Origin filters
 ```
