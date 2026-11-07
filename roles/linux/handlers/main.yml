@@ -12,3 +12,8 @@
   ansible.builtin.systemd:
     name: systemd-resolved
     state: restarted
+- name: Restart tlp
+  become: true
+  ansible.builtin.systemd:
+    name: tlp
+    state: restarted

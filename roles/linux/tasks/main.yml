@@ -48,6 +48,28 @@
   tags:
     - system
     - upower
+- name: TLP config
+  become: true
+  ansible.builtin.copy:
+    content: |
+      # battery thresholds
+      START_CHARGE_THRESH_BAT0=75
+      STOP_CHARGE_THRESH_BAT0=80
+
+      # cpu
+      CPU_BOOST_ON_AC=1
+      CPU_BOOST_ON_BAT=0
+      CPU_ENERGY_PERF_POLICY_ON_AC=performance
+      CPU_ENERGY_PERF_POLICY_ON_BAT=balance_power
+
+      # ultrabay
+      BAY_POWEROFF_ON_BAT=1
+    dest: /etc/tlp.d/01-thinkpad.conf
+    mode: "0644"
+  notify: Restart tlp
+  tags:
+    - system
+    - tlp
 - name: Install VSCodium repo
   become: true
   ansible.builtin.copy:

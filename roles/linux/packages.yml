@@ -22,7 +22,9 @@ packages:
     - dnf-plugin-system-upgrade # Fedora upgrades
     - dnf-automatic # automatic updates
     - exfatprogs # exfat support
-    - power-profiles-daemon # DBus-based power management
+    - tlp # laptop power management
+    - tlp-pd # power profiles daemon
+    - tlp-rdw # radio device wizard
     - bash-completion # bash programmable completion
     - sway # Wayland compositor
     - symlinks # broken links detector

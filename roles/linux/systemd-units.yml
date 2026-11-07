@@ -9,7 +9,8 @@ units:
     enabled:
       - systemd-timesyncd
       # - powertop
-      - power-profiles-daemon
+      - tlp
+      - tlp-pd
       - upower
     disabled:
       - rsyslog
