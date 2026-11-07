@@ -1,7 +1,8 @@
 [user]
   	name = Etienne GAUTIER
   	email = etienne.gautier@protonmail.com
-  	username = e-gautier
+[github]
+    user = e-gautier
 [core]
     editor = vim
     fileMode = false
@@ -25,15 +26,22 @@
     recommit = commit --reedit-message ORIG_HEAD
 [commit]
     gpgSign = true
-[winUpdater]
-    recentlySeenVersion = 2.22.0.windows.1
+[tag]
+    gpgSign = true
+[init]
+    defaultBranch = main
+[push]
+    autoSetupRemote = true
 [merge]
     tool = vimdiff
+    conflictStyle = zdiff3
 [diff]
     tool = vimdiff
+    algorithm = histogram
 [rebase]
     autoStash = true
     autoSquash = true
+    updateRefs = true
 [pull]
     rebase = true
 [rerere]
