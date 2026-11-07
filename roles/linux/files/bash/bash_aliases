@@ -58,8 +58,6 @@ closeportudp() {
   sudo nft delete element inet filter udp_open "{ $1 }"
 }
 
-# xorg related
-alias xrandrreset="xrandr -s 0"
 
 # I usually like to have a 2nd backup luks encrypted disk
 alias sdbdecrypt="sudo cryptsetup open /dev/sdb HDD; sudo mount -v /dev/mapper/HDD ~/HDD"

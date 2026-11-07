@@ -125,7 +125,7 @@ set $INPUT alsa_input.pci-0000_00_1b.0.analog-stereo
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume $OUTPUT +5% && pactl set-sink-mute $OUTPUT 0
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume $OUTPUT -5% && pactl set-sink-mute $OUTPUT 0
 bindsym XF86AudioMute exec pactl set-sink-mute $OUTPUT toggle
-bindsym XF86AudioMicMute exec pactl set-source-mute $INPUT toggle && polybar-msg hook input 1
+bindsym XF86AudioMicMute exec pactl set-source-mute $INPUT toggle
 
 bindsym XF86MonBrightnessDown exec brightnessctl -d intel_backlight set 5%-
 bindsym XF86MonBrightnessUp   exec brightnessctl -d intel_backlight set +5%
@@ -134,7 +134,7 @@ include /etc/sway/config.d/*
 
 exec waybar --config ~/.config/waybar/config.jsonc
 exec nm-applet
-exec usbguard-applet-qt
+exec usbguard-notifier
 exec copyq
 exec pasystray
 exec blueman-applet

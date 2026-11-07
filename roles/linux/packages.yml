@@ -142,7 +142,6 @@ packages:
     - wev # wayland events printer
     - wlr-randr # wayland screen manager
     - rofi # app launcher
-    - i3lock # X11 screen locker
     - pavucontrol # gtk pulse audio gui
     - wdisplays # wayland screen manager GUI
     - lxappearance # gtk theme manager
@@ -155,7 +154,6 @@ packages:
     - lm_sensors # hardware sensors
     - acpi # battery info
     - wtype # wayland keyboard/mouse simulation
-    - picom # X11 compositor
     - dunst # notifications
     - system-config-printer # printer configuration GUI
     - usbguard # USB device policy
@@ -168,7 +166,6 @@ packages:
     - alsa-utils # alsamixer
     - NetworkManager-wifi # NetworkManager wifi plugin
     - fuse # userspace FS
-    - polybar # X11 status bar
     - gucharmap # font preview
     - nomacs # image viewer
     - inkscape # vector-based image editor

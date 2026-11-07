@@ -21,15 +21,11 @@ links:
   ~/.config/procps/toprc: top/toprc
   ~/.fonts: fonts
   ~/.config/fontconfig/fonts.conf: fontconfig/fonts.conf
-  ~/.config/i3: i3
   ~/.config/rofi/config: rofi/config
   ~/.config/systemd/user/tmux.service: systemd/user/tmux.service
-  ~/.xinitrc: x/xinitrc
   ~/.config/dunst/dunstrc: dunst/dunstrc
   ~/.config/terminator/config: terminator/config
-  ~/.xscreensaver: xscreensaver/xscreensaver
   ~/.config/redshift: redshift/redshift
-  ~/.config/polybar/config.ini: polybar/config.ini
   ~/.editorconfig: editorconfig/editorconfig
   ~/.inputrc: input/inputrc
   ~/.local/share/dark-mode.d: darkman/dark-mode.d
