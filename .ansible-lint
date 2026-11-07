@@ -1,6 +1,5 @@
 skip_list:
     - latest[git]
-    - ignore-errors
     - risky-file-permissions
     - galaxy
     - var-naming[no-role-prefix]

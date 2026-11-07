@@ -279,7 +279,6 @@
     - cargo
 - name: Setup Flatpak
   ansible.builtin.import_tasks: flatpak.yml
-  ignore_errors: true
   tags:
     - packages
     - flatpak
@@ -340,13 +339,28 @@
     - item | lower not in linux_codium_extensions.stdout | lower
   changed_when: true
   tags: vscodium
-- name: Install snaps
-  community.general.snap:
-    name: "{{ snaps }}"
-  ignore_errors: true
+- name: Setup snaps
+  become: true
   tags:
     - packages
     - snaps
+  block:
+    - name: Enable snapd socket
+      ansible.builtin.systemd:
+        name: snapd.socket
+        state: started
+        enabled: true
+    - name: Link /snap for classic snaps
+      ansible.builtin.file:
+        src: /var/lib/snapd/snap
+        dest: /snap
+        state: link
+    - name: Wait for snapd seeding
+      ansible.builtin.command: snap wait system seed.loaded
+      changed_when: false
+    - name: Install snaps
+      community.general.snap:
+        name: "{{ snaps }}"
 - name: Setup powertop unit
   become: true
   ansible.builtin.template:
@@ -368,7 +382,6 @@
     enabled: true
     daemon_reload: true
   loop: "{{ units.user.enabled }}"
-  ignore_errors: true
   tags:
     - services
     - systemd-user
@@ -380,7 +393,6 @@
     enabled: true
     daemon_reload: true
   loop: "{{ units.system.enabled }}"
-  ignore_errors: true
   tags:
     - services
     - systemd-system
@@ -398,19 +410,21 @@
     daemon_reload: true
   when: item ~ ".service" in ansible_facts.services
   loop: "{{ units.system.disabled }}"
-  ignore_errors: true
   tags:
     - services
     - systemd-system
+- name: Source groups
+  ansible.builtin.getent:
+    database: group
+  tags:
+    - services
+    - groups
 - name: Put user in groups
   become: true
   ansible.builtin.user:
     name: "{{ ansible_facts['user_id'] }}"
-    groups:
-      - docker
-      - wireshark
+    groups: "{{ ['docker', 'wireshark'] | select('in', ansible_facts['getent_group']) }}"
     append: true
-  ignore_errors: true
   tags:
     - services
     - groups
