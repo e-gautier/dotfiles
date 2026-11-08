@@ -19,13 +19,13 @@
 -w /etc/sysctl.d/ -p wa -k auditkernel
 
 # mount operations
--a always,exit -F arch=b64 -S mount,umount2 -k auditmount
--a always,exit -F arch=b32 -S mount,umount,umount2 -k auditmount
+-a always,exit -F arch=b64 -S mount,umount2 -F auid>=1000 -F auid!=unset -k auditmount
+-a always,exit -F arch=b32 -S mount,umount,umount2 -F auid>=1000 -F auid!=unset -k auditmount
 
 # users, groups, passwords
 -w /etc/group -p wa -k auditgroup
 -w /etc/passwd -p wa -k auditpasswd
--w /etc/gshadow -p raw -k auditgroup
--w /etc/shadow -p raw -k auditpasswd
--w /etc/sudoers -p raw -k auditsudoers
--w /etc/sudoers.d/ -p raw -k auditsudoers
+-w /etc/gshadow -p wa -k auditgroup
+-w /etc/shadow -p wa -k auditpasswd
+-w /etc/sudoers -p wa -k auditsudoers
+-w /etc/sudoers.d/ -p wa -k auditsudoers
