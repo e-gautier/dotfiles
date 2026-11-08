@@ -1,5 +1,5 @@
 * {
-    font-family: "fixed:pixelsize=10;1";
+    font-family: "Noto Sans", sans-serif;
     font-size: 13px;
 }
 
@@ -59,10 +59,18 @@ label:focus {
     background-color: #e53935;
 }
 
-#keyboard-state>label.locked {
+#custom-caps.locked {
     color: #00ff00;
 }
 
-#custom-separator {
-    color: #f3f4f5;
+.modules-left > widget > *,
+.modules-right > widget > * {
+    padding-left: 5px;
+    border-left: 1px solid #616161;
+}
+
+.modules-left > widget:first-child > *,
+.modules-right > widget:first-child > * {
+    padding-left: 0;
+    border-left: none;
 }

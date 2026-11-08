@@ -1,53 +1,36 @@
 // -*- mode: jsonc -*-
 {
-    "id": "main",
     "position": "bottom",
     "height": 26,
     "spacing": 5,
-    "ipc": true,
     "reload_style_on_change": true,
     "modules-left": [
         "sway/workspaces",
-        "custom/separator",
         "sway/window",
-        "custom/separator",
         "sway/mode"
-    ],
-    "modules-center": [
     ],
     "modules-right": [
         "sway/language",
-        "keyboard-state",
-        "custom/separator",
+        "custom/caps",
         "pulseaudio",
-        "custom/separator",
         "backlight",
-        "custom/separator",
         "disk",
-        "custom/separator",
         "network",
-        "custom/separator",
         "memory",
-        "custom/separator",
         "custom/fan",
-        "custom/separator",
         "temperature",
-        "custom/separator",
         "load",
-        "custom/separator",
         "battery",
-        "custom/separator",
         "clock",
-        "custom/separator",
         "custom/screenshot",
-        "custom/separator",
         "tray"
     ],
-    "keyboard-state": {
-        "capslock": true,
-        "format": {
-            "capslock": "CAPS"
-        }
+    "custom/caps": {
+        "exec": "grep -qx 1 /sys/class/leds/*::capslock/brightness && echo '{\"class\": \"locked\"}' || echo '{}'",
+        "return-type": "json",
+        "format": "CAPS",
+        "signal": 8,
+        "interval": 5
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
@@ -78,11 +61,13 @@
         "format": "L:{load1}"
     },
     "temperature": {
-        "interval": 1
+        "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon",
+        "input-filename": "temp1_input",
+        "interval": 5
     },
     "custom/fan": {
-        "exec": "sensors | grep fan1 | awk '{print $2}'",
-        "interval": 1,
+        "exec": "cat /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon*/fan1_input",
+        "interval": 5,
         "format": "F:{}"
     },
     "memory": {
@@ -90,7 +75,9 @@
         "format": "M:{percentage}% S:{swapPercentage}%"
     },
     "network": {
-        "format": "{signalStrength}% {ifname}"
+        "format-wifi": "{signalStrength}% {ifname}",
+        "format-ethernet": "{ifname}",
+        "format-disconnected": "Net:off"
     },
     "disk": {
         "path": "/home",
@@ -110,9 +97,5 @@
         "tooltip-format": "left: area, right: screen",
         "on-click": "grimshot save area - | swappy -f -",
         "on-click-right": "grimshot save screen - | swappy -f -"
-    },
-    "custom/separator": {
-        "format": "|",
-        "interval": "once"
     }
 }

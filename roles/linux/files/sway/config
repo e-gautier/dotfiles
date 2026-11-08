@@ -113,13 +113,16 @@ input * {
     xkb_options caps:swapescape
     pointer_accel 0.4
 }
+# refresh waybar caps
+bindsym --release Caps_Lock exec pkill -SIGRTMIN+8 waybar
+
 input type:touchpad {
     natural_scroll enabled
 }
 
 # pulse audio
-set $OUTPUT alsa_output.pci-0000_00_1b.0.analog-stereo
-set $INPUT alsa_input.pci-0000_00_1b.0.analog-stereo
+set $OUTPUT @DEFAULT_SINK@
+set $INPUT @DEFAULT_SOURCE@
 
 # bind volume/mic caps
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume $OUTPUT +5% && pactl set-sink-mute $OUTPUT 0

@@ -175,6 +175,7 @@ packages:
     - darkman # dark/light theme manager
     - geoclue2 # geolocation service (used by darkman, among others)
     - waybar # sway bar
+    - google-noto-sans-vf-fonts # waybar font
     - ydotool # command line automation
     - wshowkeys # key display
     - kanshi # output profiles automation
