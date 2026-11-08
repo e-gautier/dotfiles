@@ -26,6 +26,10 @@ table inet filter {
 		# dhcpv6 client
 		ip6 saddr fe80::/10 udp dport 546 accept
 
+		# syncthing
+		tcp dport 22000 accept
+		udp dport { 21027, 22000 } accept
+
 		# openport* helpers
 		# ports added/removed at runtime via nft add/delete element
 		tcp dport @tcp_open accept
