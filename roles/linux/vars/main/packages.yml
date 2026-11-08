@@ -151,7 +151,7 @@ packages:
     - qt5-qtstyleplugins # qt theme manager
     - gtk-v4l # Video4Linux
     - yad # gtk dialog
-    - swaylock # sway lockscreen
+    - gtklock # wayland lockscreen
     - powertop # power consumption monitor
     - lm_sensors # hardware sensors
     - acpi # battery info

@@ -34,7 +34,8 @@ links:
   ~/.config/VSCodium/User: ../../../../Syncthing/VSCode-user # VScode user config
   ~/.config/waybar/config.jsonc: waybar/config.jsonc
   ~/.config/waybar/style.css: waybar/style.css
-  ~/.config/swaylock/config: swaylock/config
+  ~/.config/gtklock/config.ini: gtklock/config.ini
+  ~/.config/gtklock/style.css: gtklock/style.css
   ~/.pythonstartup: python/startup
   ~/.config/mise/config.toml: mise/config.toml
   ~/.config/swappy/config: swappy/config

@@ -1,0 +1,38 @@
+window {
+    background-color: #212121;
+    color: #f3f4f5;
+    font-family: "FantasqueSansM Nerd Font";
+}
+
+#date-label,
+#input-label {
+    color: #b3b9c0;
+}
+
+#input-field {
+    background-color: #2b2b2b;
+    color: #f3f4f5;
+    border: 1px solid #48466d;
+    border-radius: 4px;
+    box-shadow: none;
+    padding: 6px 10px;
+}
+
+#input-field:focus {
+    border-color: #b3b9c0;
+}
+
+#unlock-button {
+    background-image: none;
+    background-color: #48466d;
+    color: #f3f4f5;
+    border: none;
+    border-radius: 4px;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+#error-label,
+#warning-label {
+    color: #e53935;
+}
