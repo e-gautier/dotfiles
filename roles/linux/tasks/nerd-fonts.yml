@@ -4,6 +4,9 @@
     url: https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest
     return_content: true
   register: linux_nerdfonts_release
+  until: linux_nerdfonts_release is succeeded
+  retries: 3
+  delay: 5
   check_mode: false # read-only request
 - name: Create Nerd Fonts cache directory
   ansible.builtin.file:
@@ -21,6 +24,11 @@
     url: https://github.com/ryanoasis/nerd-fonts/releases/download/{{ linux_nerdfonts_release.json.tag_name }}/{{ item }}.tar.xz
     dest: ~/.cache/nerdfonts/{{ item }}-{{ linux_nerdfonts_release.json.tag_name }}.tar.xz
     mode: "0644"
+    timeout: 60
+  register: linux_nerdfonts_download
+  until: linux_nerdfonts_download is succeeded
+  retries: 3
+  delay: 5
   loop: "{{ nerdfonts }}"
 - name: Extract Nerd Fonts
   ansible.builtin.unarchive:
