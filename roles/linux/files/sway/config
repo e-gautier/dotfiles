@@ -1,4 +1,5 @@
-set $mod Mod4 # logo
+# logo
+set $mod Mod4
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -156,6 +157,10 @@ bindsym Control+Mod1+l exec loginctl lock-session
 # copyq
 for_window [app_id="com.github.hluk.copyq"] floating enable, resize set 500 400, move position mouse
 bindsym Ctrl+Shift+v exec copyq toggle
+# dunst
+bindsym Mod4+n exec dunstctl close
+bindsym Mod4+Shift+n exec dunstctl history-pop
+bindsym Mod4+Ctrl+n exec dunstctl context
 
 bindsym Print exec grimshot save area - | swappy -f -
 bindsym Shift+Print exec grimshot save screen - | swappy -f -
