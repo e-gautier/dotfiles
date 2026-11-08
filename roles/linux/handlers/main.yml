@@ -26,3 +26,8 @@
   ansible.builtin.systemd:
     name: systemd-journald
     state: restarted
+- name: Reload logind
+  become: true
+  ansible.builtin.systemd:
+    name: systemd-logind
+    state: reloaded

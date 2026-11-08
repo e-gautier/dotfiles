@@ -153,7 +153,6 @@ exec swayidle -w \
          resume 'swaymsg "output * power on"' \
          before-sleep 'pgrep -x gtklock || gtklock -d' \
          lock 'pgrep -x gtklock || gtklock -d'
-bindswitch --reload --locked lid:on exec loginctl lock-session
 bindsym Control+Mod1+l exec loginctl lock-session
 # copyq
 for_window [app_id="com.github.hluk.copyq"] floating enable, resize set 500 400, move position mouse

@@ -155,8 +155,9 @@
           HandleHibernateKey=hibernate
           HandleLidSwitch=suspend
           HandleLidSwitchExternalPower=suspend
-          HandleLidSwitchDocked=ignore
+          HandleLidSwitchDocked=lock
         mode: "0644"
+      notify: Reload logind
 - name: Setup DNS configuration
   ansible.builtin.import_tasks: dns.yml
   become: true
