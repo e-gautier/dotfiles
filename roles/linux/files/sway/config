@@ -142,7 +142,6 @@ exec copyq
 exec pasystray
 exec blueman-applet
 exec gammastep
-exec dunst
 exec udiskie -at
 
 exec swayidle -w \
