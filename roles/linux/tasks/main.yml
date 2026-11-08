@@ -298,7 +298,7 @@
   ansible.builtin.import_tasks: nftables.yml
   become: true
   tags:
-    - system
+    - never
     - nftables
 - name: Setup Nerdfonts
   ansible.builtin.import_tasks: nerd-fonts.yml
@@ -361,19 +361,6 @@
     - name: Install snaps
       community.general.snap:
         name: "{{ snaps }}"
-- name: Setup powertop unit
-  become: true
-  ansible.builtin.template:
-    src: unit.service.j2
-    dest: /etc/systemd/system/powertop.service
-  vars:
-    description: powertop autotune
-    type: oneshot
-    exec_start: /usr/sbin/powertop --auto-tune
-    wanted_by: multi-user.target
-  tags:
-    - services
-    - powertop
 - name: Enable systemd user services
   ansible.builtin.systemd:
     name: "{{ item }}"

@@ -225,7 +225,6 @@ packages:
     - audit # kernel auditing (auditd)
     - w3m # browser in terminal
     - lzip # alternative compressor
-    - rsyslog # syslog daemon
     - tuptime # uptime history
     - gettext # translator
     - fastfetch # neofetch alternative

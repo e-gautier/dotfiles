@@ -7,19 +7,11 @@ units:
       - darkman
   system:
     enabled:
-      - systemd-timesyncd
-      # - powertop
       - tlp
       - tlp-pd
       - upower
     disabled:
-      - rsyslog
       - pmcd
       - pmie
       - pmlogger
       - sshd
-      - atd
-      - sssd
-      - firewalld
-      - crond
-      - chronyd
