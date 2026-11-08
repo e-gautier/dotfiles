@@ -146,13 +146,15 @@ exec dunst
 exec udiskie -at
 
 exec swayidle -w \
-         timeout 3600 'swaylock' \
-         timeout 3610 'swaymsg "output * dpms off"' \
-         resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock' \
-         lock 'swaymsg "output * dpms off"'
-bindswitch --reload --locked lid:on exec swaylock
-bindsym Control+Mod1+l exec swaylock
+         timeout 10 'pgrep -x swaylock && swaymsg "output * power off"' \
+         resume 'swaymsg "output * power on"' \
+         timeout 3600 'pgrep -x swaylock || swaylock -f' \
+         timeout 3610 'swaymsg "output * power off"' \
+         resume 'swaymsg "output * power on"' \
+         before-sleep 'pgrep -x swaylock || swaylock -f' \
+         lock 'pgrep -x swaylock || swaylock -f'
+bindswitch --reload --locked lid:on exec loginctl lock-session
+bindsym Control+Mod1+l exec loginctl lock-session
 # copyq
 for_window [app_id="com.github.hluk.copyq"] floating enable, resize set 500 400, move position mouse
 bindsym Ctrl+Shift+v exec copyq toggle
