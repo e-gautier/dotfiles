@@ -38,3 +38,4 @@ links:
   ~/.pythonstartup: python/startup
   ~/.config/mise/config.toml: mise/config.toml
   ~/.config/swappy/config: swappy/config
+  ~/.config/copyq/copyq-commands.ini: copyq/copyq-commands.ini
