@@ -10,7 +10,7 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-font pango:Fantasque Sans Mono 9
+font pango:FantasqueSansM Nerd Font 9
 output * bg ~/Syncthing/wallpapers/i3/dark/wpp.png fill
 floating_modifier Mod4 normal
 hide_edge_borders smart
